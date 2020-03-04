@@ -65,6 +65,7 @@ namespace NBDv2.Data
 
                 IdentityResult result = userManager.CreateAsync(user, "password").Result;
                 //Not in any role
+                // Do not add the user to any role
             }
         }
     }
