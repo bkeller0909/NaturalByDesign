@@ -1,3 +1,7 @@
 ﻿Add-Migration -Context NBDContext
 Update-Database -Context NBDContext
 Update-Database -Context ApplicationDbContext
+
+If the database doesn't work: 
+drop-database
+update-database
