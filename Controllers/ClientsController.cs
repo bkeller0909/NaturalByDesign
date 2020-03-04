@@ -34,6 +34,7 @@ namespace NBDv2.Controllers
             }
 
             var client = await _context.Clients
+                .Include(c => c.City)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (client == null)
             {
@@ -78,6 +79,7 @@ namespace NBDv2.Controllers
             {
                 return NotFound();
             }
+            ViewData["CityID"] = new SelectList(_context.Cities, "ID", "Name", client.CityID);
             return View(client);
         }
 
@@ -86,7 +88,7 @@ namespace NBDv2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Phone,Address,Province,Postal,ConFirst,ConLast,ConPhone,ConPosition")] Client client)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Phone,Address,Province,Postal,ConFirst,ConLast,ConPhone,ConPosition,CityID")] Client client)
         {
             if (id != client.ID)
             {

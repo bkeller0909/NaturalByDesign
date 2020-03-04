@@ -86,6 +86,7 @@ namespace NBDv2.Controllers
                 return NotFound();
             }
             ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "ConFirst", project.ClientID);
+            ViewData["DesignerID"] = new SelectList(_context.Set<Employee>(), "Id", "FullName", project.DesignerID);
             return View(project);
         }
 
@@ -94,7 +95,7 @@ namespace NBDv2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Desc,EstCost,BidDate,EstStartDate,EstFinishDate,StartDate,FinishDate,Cost,BidCustApproved,BidManagementApproved,ClientID")] Project project)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Desc,EstCost,BidDate,EstStartDate,EstFinishDate,StartDate,FinishDate,Cost,BidCustApproved,BidManagementApproved,ClientID,DesignerID")] Project project)
         {
             if (id != project.ID)
             {
@@ -122,6 +123,7 @@ namespace NBDv2.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "ConFirst", project.ClientID);
+            ViewData["DesignerID"] = new SelectList(_context.Set<Employee>(), "Id", "FullName", project.DesignerID);
             return View(project);
         }
 
