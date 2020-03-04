@@ -14,25 +14,25 @@ namespace NBDv2.Data
         {
         }
         
-        public DbSet<Models.City> City { get; set; }
+        public DbSet<City> Cities { get; set; }
 
         public DbSet<Client> Clients { get; set; }
 
         public DbSet<Project> Projects { get; set; }
 
-        public DbSet<Models.Labour> Labours { get; set; }
+        public DbSet<Labour> Labours { get; set; }
 
         public DbSet<Models.Task> Tasks { get; set; }
 
-        public DbSet<Models.ProjectMaterials> ProjectMaterials { get; set; }
+        public DbSet<ProjectMaterials> ProjectMaterials { get; set; }
 
-        public DbSet<Models.Material> Materials { get; set; }
+        public DbSet<Material> Materials { get; set; }
 
-        public DbSet<Models.Inventory> Inventories { get; set; }
+        public DbSet<Inventory> Inventories { get; set; }
 
-        public DbSet<Models.ProjectEmployee> ProjectEmployees { get; set; }
+        public DbSet<ProjectEmployee> ProjectEmployees { get; set; }
 
-        public DbSet<Models.Employee> Employees { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

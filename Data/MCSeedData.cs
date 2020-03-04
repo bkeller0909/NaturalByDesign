@@ -18,9 +18,9 @@ namespace NBDv2.Data
                 // Look for any Patients.  Since we can't have patients without Doctors.
 
                 //Add some Medical Trials
-                if (!context.City.Any())
+                if (!context.Cities.Any())
                 {
-                    context.City.AddRange(
+                    context.Cities.AddRange(
                      new City
                      {
                          Name = "Niagara Falls"
@@ -42,40 +42,40 @@ namespace NBDv2.Data
                     {
                         Name = "Fake Inc",
                         Phone = 9055551234,
-                        Address = "",
+                        Address = "Placeholder",
                         Province = "Ontario",
-                        Postal = "",
+                        Postal = "Placeholder",
                         ConFirst = "Placeholder",
                         ConLast = "Placeholder",
-                        ConPhone = "9055551234",
-                        ConPosition = "",
-                        CityID = context.City.FirstOrDefault(c => c.Name == "St Catharines").ID
+                        ConPhone = 9055551234,
+                        ConPosition = "Placeholder",
+                        CityID = context.Cities.FirstOrDefault(c => c.Name == "St Catharines").ID
                     },
                     new Client
                     {
                         Name = "Master Contender Enterprise",
                         Phone = 9055551234,
-                        Address = "",
+                        Address = "Placeholder",
                         Province = "Ontario",
-                        Postal = "",
+                        Postal = "Placeholder",
                         ConFirst = "Placeholder",
                         ConLast = "Placeholder",
-                        ConPhone = "9055551234",
-                        ConPosition = "",
-                        CityID = context.City.FirstOrDefault(c => c.Name == "Niagara Falls").ID
+                        ConPhone = 9055551234,
+                        ConPosition = "Placeholder",
+                        CityID = context.Cities.FirstOrDefault(c => c.Name == "Niagara Falls").ID
                     },
                     new Client
                     {
                         Name = "Papadimitriou Inc",
                         Phone = 9055551234,
-                        Address = "",
+                        Address = "Placeholder",
                         Province = "Ontario",
-                        Postal = "",
+                        Postal = "Placeholder",
                         ConFirst = "Placeholder",
                         ConLast = "Placeholder",
-                        ConPhone = "9055551234",
-                        ConPosition = "",
-                        CityID = context.City.FirstOrDefault(c => c.Name == "NOTL").ID
+                        ConPhone = 9055551234,
+                        ConPosition = "Placeholder",
+                        CityID = context.Cities.FirstOrDefault(c => c.Name == "NOTL").ID
                     },
                     new Client
                     {
@@ -86,9 +86,9 @@ namespace NBDv2.Data
                         Postal = "L2R9N5",
                         ConFirst = "Amy",
                         ConLast = "Benson",
-                        ConPhone = "9056879900",
+                        ConPhone = 9056879900,
                         ConPosition = "Manager",
-                        CityID = context.City.FirstOrDefault(c => c.Name == "St Catharines").ID
+                        CityID = context.Cities.FirstOrDefault(c => c.Name == "St Catharines").ID
                     });
                     context.SaveChanges();
                 }
