@@ -46,13 +46,12 @@ namespace NBDv2.Models
 
         public double? Cost { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Customer Approved")]
         public bool BidCustApproved { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Management Approved")]
         public bool BidManagementApproved { get; set; }
 
-        [Display(Name = "")]
         public int ClientID { get; set; }
 
         public virtual Client Client { get; set; }
