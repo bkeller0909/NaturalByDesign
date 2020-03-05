@@ -38,6 +38,9 @@ namespace NBDv2.Models
         [Display(Name = "Estimated Finish Date")]
         public DateTime EstFinishDate { get; set; }
 
+        [Display(Name = "Phase")]
+        public string CurrentPhase { get; set; }
+
         [Display(Name = "Start Date")]
         public DateTime? StartDate { get; set; }
 

@@ -7,6 +7,11 @@ namespace NBDv2.Models
 {
     public class Inventory
     {
+        public Inventory()
+        {
+            ProjectMaterials = new HashSet<ProjectMaterials>();
+        }
+
         public int ID { get; set; }
 
         public double AvgNetPrice { get; set; }
@@ -22,5 +27,7 @@ namespace NBDv2.Models
         public int MaterialID { get; set; }
 
         public virtual Material Material { get; set; }
+
+        public ICollection<ProjectMaterials> ProjectMaterials { get; set; }
     }
 }

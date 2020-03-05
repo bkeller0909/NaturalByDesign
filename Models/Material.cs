@@ -9,7 +9,7 @@ namespace NBDv2.Models
     {
         public Material()
         {
-            ProjectMaterials = new HashSet<ProjectMaterials>();
+            Inventories = new HashSet<Inventory>();
         }
 
         public int ID { get; set; }
@@ -18,8 +18,6 @@ namespace NBDv2.Models
 
         public string Desc { get; set; }
 
-        public virtual Inventory Inventory { get; set; }
-
-        public ICollection<ProjectMaterials> ProjectMaterials { get; set; }
+        public ICollection<Inventory> Inventories { get; set; }
     }
 }

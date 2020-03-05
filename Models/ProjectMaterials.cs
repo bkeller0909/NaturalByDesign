@@ -11,9 +11,9 @@ namespace NBDv2.Models
 
         public Project Project { get; set; }
 
-        public int MaterialID { get; set; }
+        public int InventoryID { get; set; }
 
-        public Material Material { get; set; }
+        public Inventory Inventory { get; set; }
 
         public DateTime MatDelivery { get; set; }
 

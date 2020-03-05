@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NBDv2.Data;
 
 namespace NBDv2.Migrations
 {
     [DbContext(typeof(NBDContext))]
-    partial class NBDContextModelSnapshot : ModelSnapshot
+    [Migration("20200305175243_f")]
+    partial class f
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,13 +84,9 @@ namespace NBDv2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("EmployeeTypeId");
+                    b.Property<string>("FirstName");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired();
-
-                    b.Property<string>("LastName")
-                        .IsRequired();
+                    b.Property<string>("LastName");
 
                     b.HasKey("Id");
 
@@ -126,23 +124,17 @@ namespace NBDv2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("EstHours");
-
                     b.Property<DateTime>("EstStartDate");
-
-                    b.Property<int>("Hours");
 
                     b.Property<int>("ProjectID");
 
                     b.Property<DateTime>("StartDate");
 
-                    b.Property<int>("TaskID");
+                    b.Property<DateTime>("TimeSpent");
 
                     b.HasKey("ID");
 
                     b.HasIndex("ProjectID");
-
-                    b.HasIndex("TaskID");
 
                     b.ToTable("Labours");
                 });
@@ -252,7 +244,11 @@ namespace NBDv2.Migrations
 
                     b.Property<int>("Hours");
 
+                    b.Property<int>("LabourID");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("LabourID");
 
                     b.ToTable("Tasks");
                 });
@@ -279,11 +275,6 @@ namespace NBDv2.Migrations
                         .WithMany("Labour")
                         .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("NBDv2.Models.Task", "Task")
-                        .WithMany("Labours")
-                        .HasForeignKey("TaskID")
-                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("NBDv2.Models.Project", b =>
@@ -302,7 +293,7 @@ namespace NBDv2.Migrations
             modelBuilder.Entity("NBDv2.Models.ProjectEmployee", b =>
                 {
                     b.HasOne("NBDv2.Models.Employee", "Employee")
-                        .WithMany()
+                        .WithMany("ProjectEmployees")
                         .HasForeignKey("EmployeeID")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -323,6 +314,14 @@ namespace NBDv2.Migrations
                         .WithMany("ProjectMaterials")
                         .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("NBDv2.Models.Task", b =>
+                {
+                    b.HasOne("NBDv2.Models.Labour", "Labour")
+                        .WithMany("Tasks")
+                        .HasForeignKey("LabourID")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

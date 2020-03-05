@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,9 +15,10 @@ namespace NBDv2.Models
         public Employee()
         {
             Projects = new HashSet<Project>();
-            ProjectEmployees = new HashSet<ProjectEmployee>();
+            
         }
 
+        [Display(Name = "Full Name")]
         public string FullName
         {
             get
@@ -27,12 +29,20 @@ namespace NBDv2.Models
 
         public int Id { get; set; }
 
+        [Display(Name = "First Name")]
+        [Required(ErrorMessage ="Employee Must Have First Name")]
         public string FirstName { get; set; }
 
+        [Display(Name="Last Name")]
+        [Required(ErrorMessage = "Employee Must Have Last Name")]
         public string LastName { get; set; }
 
+        public int EmployeeTypeId { get; set; }
+
+        
+        
         public virtual ICollection<Project> Projects { get; set; }
 
-        public ICollection<ProjectEmployee> ProjectEmployees { get; set; }
+       // public ICollection<ProjectEmployee> ProjectEmployees { get; set; }
     }
 }

@@ -32,7 +32,11 @@ namespace NBDv2.Data
 
         public DbSet<ProjectEmployee> ProjectEmployees { get; set; }
 
+       
+
         public DbSet<Employee> Employees { get; set; }
+        
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -55,11 +59,11 @@ namespace NBDv2.Data
                 .WithOne(p => p.Project)
                 .HasForeignKey(p => p.ProjectID)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Labour>()
-                .HasMany<Models.Task>(l => l.Tasks)
-                .WithOne(t => t.Labour)
-                .HasForeignKey(p => p.LabourID)
+            
+            modelBuilder.Entity<Models.Task>()
+                .HasMany<Labour>(l => l.Labours)
+                .WithOne(t => t.Task)
+                .HasForeignKey(p => p.TaskID)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Employee>()
@@ -68,11 +72,13 @@ namespace NBDv2.Data
                 .HasForeignKey(p => p.DesignerID)
                 .OnDelete(DeleteBehavior.Restrict);
 
+
+
             modelBuilder.Entity<ProjectEmployee>()
             .HasKey(t => new { t.ProjectID, t.EmployeeID });
 
             modelBuilder.Entity<ProjectMaterials>()
-            .HasKey(t => new { t.ProjectID, t.MaterialID });
+            .HasKey(t => new { t.ProjectID, t.InventoryID });
 
 
         }
