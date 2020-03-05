@@ -29,6 +29,7 @@ namespace NBDv2
                     context.Database.Migrate();
                     MCSeedData.Initialize(services);
                     var identitycontext = services.GetRequiredService<ApplicationDbContext>(); // gets identity context
+                    identitycontext.Database.Migrate();
                     ApplicationSeedData.SeedAsync(identitycontext, services).Wait(); // call seed data and seed users
                 }
                 catch(Exception ex)

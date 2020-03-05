@@ -36,10 +36,6 @@ namespace NBDv2
             });
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            services.AddDbContext<NBDContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
@@ -81,6 +77,11 @@ namespace NBDv2
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddDbContext<NBDContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("NBDContext")));
 
             //To give access to IHttpContextAccessor for Audit Data with IAuditable
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
