@@ -2,92 +2,163 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using NBDv2.Data;
+using NBDv2.ViewModel;
 
 namespace NBDv2.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UserRolesController : Controller
     {
-        // GET: UserRoles
-        public ActionResult Index()
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public UserRolesController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
-            return View();
+            _context = context;
+            _userManager = userManager;
+            // serviceProvider.GetRequiredService<UserManager<IdentityRole>>();
+        }
+        // GET: User
+        public async Task<IActionResult> Index()
+        {
+            var users = await (from u in _context.Users
+                               .OrderBy(u => u.UserName)
+                               select new UserVM
+                               {
+                                   ID = u.Id,
+                                   UserName = u.UserName
+                               }).ToListAsync();
+            foreach (var u in users)
+            {
+                var user = await _userManager.FindByIdAsync(u.ID);
+                u.UserRoles = await _userManager.GetRolesAsync(user);
+            };
+            return View(users);
         }
 
-        // GET: UserRoles/Details/5
-        public ActionResult Details(int id)
+        // GET: Users/Edit/5
+        public async Task<IActionResult> Edit(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new BadRequestResult();
+            }
+            var _user = await _userManager.FindByIdAsync(id);//IdentityRole
+            if (_user == null)
+            {
+                return NotFound();
+            }
+            UserVM user = new UserVM
+            {
+                ID = _user.Id,
+                UserName = _user.UserName,
+                UserRoles = await _userManager.GetRolesAsync(_user)
+            };
+            PopulateAssignedRoleData(user);
+            return View(user);
         }
 
-        // GET: UserRoles/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: UserRoles/Create
+        // POST: Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Edit(string Id, string[] selectedRoles)
         {
+            var _user = await _userManager.FindByIdAsync(Id);//IdentityRole
+            UserVM user = new UserVM
+            {
+                ID = _user.Id,
+                UserName = _user.UserName,
+                UserRoles = await _userManager.GetRolesAsync(_user)
+            };
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                await UpdateUserRoles(selectedRoles, user);
+                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                ModelState.AddModelError(string.Empty,
+                                "Unable to save changes.");
+            }
+            PopulateAssignedRoleData(user);
+            return View(user);
+        }
+
+        private void PopulateAssignedRoleData(UserVM user)
+        {//Prepare checkboxes for all Roles
+            var allRoles = _context.Roles;
+            var currentRoles = user.UserRoles;
+            var viewModel = new List<RoleVM>();
+            foreach (var r in allRoles)
+            {
+                viewModel.Add(new RoleVM
+                {
+                    RoleID = r.Id,
+                    RoleName = r.Name,
+                    Assigned = currentRoles.Contains(r.Name)
+                });
+            }
+            ViewBag.Roles = viewModel;
+        }
+
+        private async Task UpdateUserRoles(string[] selectedRoles, UserVM userToUpdate)
+        {
+            var userRoles = userToUpdate.UserRoles;//Current roles use is in
+            var _user = await _userManager.FindByIdAsync(userToUpdate.ID);//IdentityUser
+
+            if (selectedRoles == null)
+            {
+                //No roles selected so just remove any currently assigned
+                foreach (var r in userRoles)
+                {
+                    await _userManager.RemoveFromRoleAsync(_user, r);
+                }
+            }
+            else
+            {
+                //At least one role checked so loop through all the roles
+                //and add or remove as required
+
+                //We need to do this next line because foreach loops don't always work well
+                //for data returned by EF when working async.  Pulling it into an IList<>
+                //first means we can safely loop over the colleciton making async calls and avoid
+                //the error 'New transaction is not allowed because there are other threads running in the session'
+                IList<IdentityRole> allRoles = _context.Roles.ToList<IdentityRole>();
+
+                foreach (var r in allRoles)
+                {
+                    if (selectedRoles.Contains(r.Name))
+                    {
+                        if (!userRoles.Contains(r.Name))
+                        {
+                            await _userManager.AddToRoleAsync(_user, r.Name);
+                        }
+                    }
+                    else
+                    {
+                        if (userRoles.Contains(r.Name))
+                        {
+                            await _userManager.RemoveFromRoleAsync(_user, r.Name);
+                        }
+                    }
+                }
             }
         }
 
-        // GET: UserRoles/Edit/5
-        public ActionResult Edit(int id)
+        protected override void Dispose(bool disposing)
         {
-            return View();
-        }
-
-        // POST: UserRoles/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
+            if (disposing)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
+                _context.Dispose();
+                _userManager.Dispose();
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: UserRoles/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: UserRoles/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            base.Dispose(disposing);
         }
     }
 }

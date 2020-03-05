@@ -15,8 +15,8 @@ namespace NBDv2.Models
 
         public int ID { get; set; }
 
-        [Display(Name = "Name")]
-        [Required(ErrorMessage = "Name Can't Be Left Blank")]
+        [Display(Name = "Company Name")]
+        [Required(ErrorMessage = "Company Name Can't Be Left Blank")]
         [StringLength(50, ErrorMessage = "Name Can't Be Larger Than 50 Characters")]
         public string Name { get; set; }
 
@@ -26,13 +26,13 @@ namespace NBDv2.Models
         [DisplayFormat(DataFormatString = "{0:(###) ###-####}", ApplyFormatInEditMode = false)]
         public Int64 Phone { get; set; }
 
-        [StringLength(50, ErrorMessage = "Name Can't Be Larger Than 50 Characters")]
+        [StringLength(50, ErrorMessage = "Address Can't Be Larger Than 50 Characters")]
         public string Address { get; set; }
 
-        [StringLength(50, ErrorMessage = "Name Can't Be Larger Than 50 Characters")]
+        [StringLength(50, ErrorMessage = "Province Can't Be Larger Than 50 Characters")]
         public string Province { get; set; }
 
-        [StringLength(15, ErrorMessage = "Postal Code Too Large")]
+        [StringLength(15, ErrorMessage = "Postal Code is too large")]
         [DataType(DataType.PostalCode)]
         public string Postal { get; set; }
 
@@ -46,6 +46,7 @@ namespace NBDv2.Models
         [StringLength(100, ErrorMessage = "Last name cannot be more than 100 characters long.")]
         public string ConLast { get; set; }
 
+        [Display(Name = "Phone Number")]
         [RegularExpression("^\\d{10}$", ErrorMessage = "Please enter a valid 10-digit phone number (no spaces).")]
         [DataType(DataType.PhoneNumber)]
         [DisplayFormat(DataFormatString = "{0:(###) ###-####}", ApplyFormatInEditMode = false)]
@@ -55,6 +56,7 @@ namespace NBDv2.Models
         [StringLength(30, ErrorMessage = "Position Must Be 30 Characters or Less")]
         public string ConPosition { get; set; }
 
+        [Display(Name = "City")]
         public int CityID { get; set; }
 
         public virtual City City { get; set; }
