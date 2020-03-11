@@ -82,5 +82,9 @@ namespace NBDv2.Data
 
 
         }
+        
+        
+
+        public DbSet<NBDv2.Models.ProdReport> ProdReport { get; set; }
     }
 }

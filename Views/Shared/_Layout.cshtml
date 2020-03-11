@@ -21,7 +21,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="color: white">Natural By Design</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="color: white"><img src="~/img/navlogo.png" alt="Natural By Design" style="width:auto;height:36px;"/></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -30,23 +30,21 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Bid" asp-action="Index">Bids</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="ProductionPlan" asp-action="Index">Production Plan</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="ProjectEmployee" asp-action="Index">Teams</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="ProductionPlan" asp-action="Index">Production Plan</a>
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -61,7 +59,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - Natural By Design - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - Natural By Design
         </div>
     </footer>
 
