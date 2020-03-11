@@ -10,11 +10,11 @@ using NBDv2.Models;
 
 namespace NBDv2.Controllers
 {
-    public class ProductionPlanController : Controller
+    public class ProductionPlan : Controller
     {
         private readonly NBDContext _context;
 
-        public ProductionPlanController(NBDContext context)
+        public ProductionPlan(NBDContext context)
         {
             _context = context;
         }
@@ -27,25 +27,26 @@ namespace NBDv2.Controllers
         }
 
         // GET: ProductionPlan/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var project = await _context.Projects
-        //        .Include(p => p.Client)
-        //        .Include(p => p.Designer)
-        //        .Include(p => p.ProjectEmployees).Include()
-        //        .FirstOrDefaultAsync(m => m.ID == id);
-        //    if (project == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var project = await _context.Projects
+                .Include(p => p.Client)
+                .Include(p => p.Designer)
+                .Include(p => p.ProjectEmployees)
+                .Include(p => p.ProjectMaterials)
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (project == null)
+            {
+                return NotFound();
+            }
 
-        //    return View(project);
-        //}
+            return View(project);
+        }
 
         // GET: ProductionPlan/Create
         public IActionResult Create()
