@@ -13,7 +13,9 @@ namespace NBDv2.Data
             : base(options)
         {
         }
-        
+
+        public DbSet<EmployeeType> EmployeeTypes { get; set; }
+
         public DbSet<City> Cities { get; set; }
 
         public DbSet<Client> Clients { get; set; }
@@ -31,8 +33,6 @@ namespace NBDv2.Data
         public DbSet<Inventory> Inventories { get; set; }
 
         public DbSet<ProjectEmployee> ProjectEmployees { get; set; }
-
-       
 
         public DbSet<Employee> Employees { get; set; }
         
@@ -54,16 +54,10 @@ namespace NBDv2.Data
                 .HasForeignKey(p => p.ClientID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Project>()
-                .HasMany<Labour>(c => c.Labour)
-                .WithOne(p => p.Project)
-                .HasForeignKey(p => p.ProjectID)
-                .OnDelete(DeleteBehavior.Restrict);
-            
-            modelBuilder.Entity<Models.Task>()
-                .HasMany<Labour>(l => l.Labours)
-                .WithOne(t => t.Task)
-                .HasForeignKey(p => p.TaskID)
+            modelBuilder.Entity<EmployeeType>()
+                .HasMany<Employee>(e => e.Employees)
+                .WithOne(p => p.EmployeeType)
+                .HasForeignKey(p => p.EmployeeTypeID)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Employee>()
@@ -72,10 +66,24 @@ namespace NBDv2.Data
                 .HasForeignKey(p => p.DesignerID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-
-
             modelBuilder.Entity<ProjectEmployee>()
-            .HasKey(t => new { t.ProjectID, t.EmployeeID });
+                .HasMany<Labour>(c => c.Labours)
+                .WithOne(p => p.Team)
+                .HasForeignKey(p => p.TeamID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Models.Task>()
+                .HasMany<Labour>(l => l.Labours)
+                .WithOne(t => t.Task)
+                .HasForeignKey(p => p.TaskID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            
+            
+
+
+
+
 
             modelBuilder.Entity<ProjectMaterials>()
             .HasKey(t => new { t.ProjectID, t.InventoryID });

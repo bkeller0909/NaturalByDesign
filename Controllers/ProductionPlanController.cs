@@ -37,9 +37,12 @@ namespace NBDv2.Controllers
             var project = await _context.Projects
                 .Include(p => p.Client)
                 .Include(p => p.Designer)
-                .Include(p => p.ProjectEmployees)
-                .Include(p => p.ProjectMaterials)
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .Include(p => p.ProjectEmployees).ThenInclude(p => p.Employee)
+                .Include(p => p.ProjectMaterials).ThenInclude(p => p.Inventory).ThenInclude(p => p.Material)
+                .Include(p => p.Labour).ThenInclude(p => p.Task)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(p => p.ID == id);
+
             if (project == null)
             {
                 return NotFound();
@@ -82,7 +85,13 @@ namespace NBDv2.Controllers
                 return NotFound();
             }
 
-            var project = await _context.Projects.FindAsync(id);
+            var project = await _context.Projects
+                .Include(p => p.Client)
+                .Include(p => p.Designer)
+                .Include(p => p.ProjectEmployees).ThenInclude(p => p.Employee)
+                .Include(p => p.ProjectMaterials).ThenInclude(p => p.Inventory)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(p => p.ID == id);
             if (project == null)
             {
                 return NotFound();

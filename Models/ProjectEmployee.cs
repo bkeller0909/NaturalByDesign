@@ -7,6 +7,8 @@ namespace NBDv2.Models
 {
     public class ProjectEmployee
     {
+        public int ID { get; set; }
+
         public int ProjectID { get; set; }
 
         public Project Project { get; set; }
@@ -14,5 +16,7 @@ namespace NBDv2.Models
         public int EmployeeID { get; set; }
 
         public Employee Employee { get; set; }
+
+        public ICollection<Labour> Labours { get; set; }
     }
 }

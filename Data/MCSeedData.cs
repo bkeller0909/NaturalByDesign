@@ -15,9 +15,6 @@ namespace NBDv2.Data
             using (var context = new NBDContext(
                 serviceProvider.GetRequiredService<DbContextOptions<NBDContext>>()))
             {
-                // Look for any Patients.  Since we can't have patients without Doctors.
-
-                //Add some Medical Trials
                 if (!context.Cities.Any())
                 {
                     context.Cities.AddRange(
@@ -94,73 +91,7 @@ namespace NBDv2.Data
                     context.SaveChanges();
                 }
 
-                if (!context.Employees.Any())
-                {
-                    context.Employees.AddRange(
-                        new Employee
-                        {
-                            FirstName = "Cheryl",
-                            LastName = "Poy",
-                            //EmployeeTypeId = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Botanist").ID
 
-                        },
-                        new Employee
-                        {
-                            FirstName = "Keri",
-                            LastName = "Yamaguchi",
-                            //EmployeeTypeId = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Design Manager").ID
-                        },
-                        new Employee
-                        {
-                            FirstName = "Tamara",
-                            LastName = "Bakken",
-                            //EmployeeTypeId = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Designer").ID
-                        },
-                        new Employee
-                        {
-                            FirstName = "Bob",
-                            LastName = "Reinhardt",
-                            //EmployeeTypeId = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Sales Associate").ID
-                        },
-                        new Employee
-                        {
-                            FirstName = "Sue",
-                            LastName = "Kaufman",
-                            //EmployeeTypeId = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Production Manager").ID
-                        },
-                        new Employee
-                        {
-                            FirstName = "Monica",
-                            LastName = "Goce",
-                            //EmployeeTypeId = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Production Worker").ID
-                        },
-                        new Employee
-                        {
-                            FirstName = "Bert",
-                            LastName = "Swenson",
-                            //EmployeeTypeId = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Production Worker").ID
-                        },
-                        new Employee
-                        {
-                            FirstName = "Stan",
-                            LastName = "Fenton",
-                            // EmployeeTypeId = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Sales and Finance Manager").ID
-                        },
-                        new Employee
-                        {
-                            FirstName = "Joe",
-                            LastName = "Smith",
-                            // EmployeeTypeId = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Equipment Operator").ID
-                        },
-                        new Employee
-                        {
-                            FirstName = "Jerry",
-                            LastName = "Jones",
-                            //EmployeeTypeId = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Production Worker").ID
-                        });
-                    context.SaveChanges();
-                }
-                /*
                 if (!context.EmployeeTypes.Any())
                 {
                     context.EmployeeTypes.AddRange(
@@ -168,49 +99,117 @@ namespace NBDv2.Data
                         {
                             Type = "Production Worker",
                             HourlyPay = 18.00,
-                            HourlyCharge = 30.00
+                            HourlyCost = 30.00
                         },
                         new EmployeeType
                         {
                             Type = "Designer",
                             HourlyPay = 40.00,
-                            HourlyCharge = 65.00
+                            HourlyCost = 65.00
                         },
                         new EmployeeType
                         {
                             Type = "Equipment Operator",
                             HourlyPay = 45.00,
-                            HourlyCharge = 65.00
+                            HourlyCost = 65.00
                         },
                         new EmployeeType
                         {
                             Type = "Botanist",
                             HourlyPay = 50.00,
-                            HourlyCharge = 75.00
+                            HourlyCost = 75.00
                         },
                         new EmployeeType
                         {
                             Type = "Design Manager",
-                            HourlyCharge = 100.00
+                            HourlyCost = 100.00
                         },
                         new EmployeeType
                         {
                             Type = "Production Manager",
-                            HourlyCharge = 150.00
+                            HourlyCost = 150.00
                         },
                         new EmployeeType
                         {
                             Type = "Sales Associate",
-                            HourlyCharge = 85.00
+                            HourlyCost = 85.00
                         },
                         new EmployeeType
                         {
                             Type = "Sales and Finance Manager",
-                            HourlyCharge = 75.00
+                            HourlyCost = 75.00
                         });
                     context.SaveChanges();
                 }
-                */
+
+
+                if (!context.Employees.Any())
+                {
+                    context.Employees.AddRange(
+                        new Employee
+                        {
+                            FirstName = "Cheryl",
+                            LastName = "Poy",
+                            EmployeeTypeID = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Botanist").ID
+                        },
+                        new Employee
+                        {
+                            FirstName = "Keri",
+                            LastName = "Yamaguchi",
+                            EmployeeTypeID = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Design Manager").ID
+                        },
+                        new Employee
+                        {
+                            FirstName = "Tamara",
+                            LastName = "Bakken",
+                            EmployeeTypeID = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Designer").ID
+                        },
+                        new Employee
+                        {
+                            FirstName = "Bob",
+                            LastName = "Reinhardt",
+                            EmployeeTypeID = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Sales Associate").ID
+                        },
+                        new Employee
+                        {
+                            FirstName = "Sue",
+                            LastName = "Kaufman",
+                            EmployeeTypeID = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Production Manager").ID
+                        },
+                        new Employee
+                        {
+                            FirstName = "Monica",
+                            LastName = "Goce",
+                            EmployeeTypeID = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Production Worker").ID
+                        },
+                        new Employee
+                        {
+                            FirstName = "Bert",
+                            LastName = "Swenson",
+                            EmployeeTypeID = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Production Worker").ID
+                        },
+                        new Employee
+                        {
+                            FirstName = "Stan",
+                            LastName = "Fenton",
+                            EmployeeTypeID = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Sales and Finance Manager").ID
+                        },
+                        new Employee
+                        {
+                            FirstName = "Joe",
+                            LastName = "Smith",
+                            EmployeeTypeID = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Equipment Operator").ID
+                        },
+                        new Employee
+                        {
+                            FirstName = "Jerry",
+                            LastName = "Jones",
+                            EmployeeTypeID = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Production Worker").ID
+                        });
+                    context.SaveChanges();
+                }
+                
+
 
                 if (!context.Projects.Any())
                 {
@@ -229,7 +228,7 @@ namespace NBDv2.Data
                             BidCustApproved = true,
                             BidManagementApproved = true,
                             ClientID = context.Clients.FirstOrDefault(c => c.Name == "LS Mall" && c.Province == "Ontario").ID,
-                            DesignerID = context.Employees.FirstOrDefault(d => d.FirstName == "Tamara" && d.LastName == "Bakken").Id
+                            DesignerID = context.Employees.FirstOrDefault(d => d.FirstName == "Tamara" && d.LastName == "Bakken").ID
                         },
                         new Project
                         {
@@ -245,7 +244,7 @@ namespace NBDv2.Data
                             BidCustApproved = true,
                             BidManagementApproved = true,
                             ClientID = context.Clients.FirstOrDefault(c => c.Name == "Papadimitriou Inc" && c.Province == "Ontario").ID,
-                            DesignerID = context.Employees.FirstOrDefault(d => d.FirstName == "Cheryl" && d.LastName == "Poy").Id
+                            DesignerID = context.Employees.FirstOrDefault(d => d.FirstName == "Cheryl" && d.LastName == "Poy").ID
 
                         },
                         new Project
@@ -262,7 +261,7 @@ namespace NBDv2.Data
                             BidCustApproved = true,
                             BidManagementApproved = false,
                             ClientID = context.Clients.FirstOrDefault(c => c.Name == "Master Contender Enterprise" && c.Province == "Ontario").ID,
-                            DesignerID = context.Employees.FirstOrDefault(d => d.FirstName == "Cheryl" && d.LastName == "Poy").Id
+                            DesignerID = context.Employees.FirstOrDefault(d => d.FirstName == "Cheryl" && d.LastName == "Poy").ID
 
                         },
                         new Project
@@ -279,11 +278,13 @@ namespace NBDv2.Data
                             BidCustApproved = false,
                             BidManagementApproved = true,
                             ClientID = context.Clients.FirstOrDefault(c => c.Name == "Fake Inc" && c.Province == "Ontario").ID,
-                            DesignerID = context.Employees.FirstOrDefault(d => d.FirstName == "Cheryl" && d.LastName == "Poy").Id
+                            DesignerID = context.Employees.FirstOrDefault(d => d.FirstName == "Cheryl" && d.LastName == "Poy").ID
 
                         });
                     context.SaveChanges();
                 }
+
+
 
                 if (!context.ProjectEmployees.Any())
                 {
@@ -291,25 +292,32 @@ namespace NBDv2.Data
                         new ProjectEmployee
                         {
                             ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
-                            EmployeeID = context.Employees.FirstOrDefault(e => e.FirstName == "Bob" && e.LastName == "Reinhardt").Id
+                            EmployeeID = context.Employees.FirstOrDefault(e => e.FirstName == "Bob" && e.LastName == "Reinhardt").ID
                         },
                         new ProjectEmployee
                         {
                             ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
-                            EmployeeID = context.Employees.FirstOrDefault(e => e.FirstName == "Sue" && e.LastName == "Kaufman").Id
+                            EmployeeID = context.Employees.FirstOrDefault(e => e.FirstName == "Sue" && e.LastName == "Kaufman").ID
                         },
                         new ProjectEmployee
                         {
                             ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
-                            EmployeeID = context.Employees.FirstOrDefault(e => e.FirstName == "Monica" && e.LastName == "Goce").Id
+                            EmployeeID = context.Employees.FirstOrDefault(e => e.FirstName == "Monica" && e.LastName == "Goce").ID
                         },
                         new ProjectEmployee
                         {
                             ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
-                            EmployeeID = context.Employees.FirstOrDefault(e => e.FirstName == "Bert" && e.LastName == "Swenson").Id
+                            EmployeeID = context.Employees.FirstOrDefault(e => e.FirstName == "Bert" && e.LastName == "Swenson").ID
+                        },
+                        new ProjectEmployee
+                        {
+                            ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
+                            EmployeeID = context.Employees.FirstOrDefault(e => e.FirstName == "Jerry" && e.LastName == "Jones").ID
                         });
                     context.SaveChanges();
                 }
+
+
 
                 if (!context.Tasks.Any())
                 {
@@ -325,9 +333,15 @@ namespace NBDv2.Data
                         new Models.Task
                         {
                             Desc = "Install Large Plants"
+                        },
+                        new Models.Task
+                        {
+                            Desc = "Situate Fountain & Pots"
                         });
                     context.SaveChanges();
                 }
+
+
 
                 if (!context.Labours.Any())
                 {
@@ -335,24 +349,32 @@ namespace NBDv2.Data
                         new Labour
                         {
                             EstHours = 12,
-                            ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken").ID,
                             TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Bid Process").ID
                         },
                         new Labour
                         {
                             EstHours = 6,
-                            ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Monica" && p.Employee.LastName == "Goce").ID,
                             TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Contour Surface").ID
                         },
                         new Labour
                         {
                             EstHours = 8,
-                            ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Bert" && p.Employee.LastName == "Swenson").ID,
                             TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Install Large Plants").ID
+                        },
+                        new Labour
+                        {
+                            EstHours = 8,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Jerry" && p.Employee.LastName == "Jones").ID,
+                            TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Situate Fountain & Pots").ID
                         }
                         );
                     context.SaveChanges();
                 }
+
+
 
                 if (!context.Materials.Any())
                 {
@@ -393,6 +415,8 @@ namespace NBDv2.Data
                         });
                     context.SaveChanges();
                 }
+
+
 
                 if (!context.Inventories.Any())
                 {
@@ -462,6 +486,8 @@ namespace NBDv2.Data
                         });
                     context.SaveChanges();
                 }
+
+
 
                 if (!context.ProjectMaterials.Any())
                 {
