@@ -12,7 +12,7 @@ using NBDv2.ViewModel;
 
 namespace NBDv2.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class UserRolesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,7 +22,7 @@ namespace NBDv2.Controllers
         {
             _context = context;
             _userManager = userManager;
-            // serviceProvider.GetRequiredService<UserManager<IdentityRole>>();
+            //serviceProvider.GetRequiredService<UserManager<IdentityRole>>();
         }
         // GET: User
         public async Task<IActionResult> Index()

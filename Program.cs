@@ -35,7 +35,7 @@ namespace NBDv2
                 catch(Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occured seeding data");
+                    logger.LogError(ex, "An error occured seeding the database");
                 }
 
                 
