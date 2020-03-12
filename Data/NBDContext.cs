@@ -80,15 +80,8 @@ namespace NBDv2.Data
                 .HasForeignKey(p => p.TaskID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            
-            
-
-
-
-
-
             modelBuilder.Entity<ProjectMaterials>()
-            .HasKey(t => new { t.ProjectID, t.InventoryID });
+                .HasKey(t => new { t.ProjectID, t.InventoryID });
 
 
         }
