@@ -2,6 +2,10 @@
 Update-Database -Context NBDContext
 Update-Database -Context ApplicationDbContext
 
+Updating Login and Roles seed data:
+add-migration (name) -context ApplicationDbContext
+update-database -context ApplicationDbContext
+
 If the database doesn't work: 
 drop-database
 update-database
