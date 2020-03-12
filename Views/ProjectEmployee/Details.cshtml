@@ -3,11 +3,11 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
-
+    <a asp-action="Index"><button class="btn btn-dark">< Back</button></a>
+    <hr />
+<h1>Team Details</h1>
+<hr />
 <div>
-    <h4>ProjectEmployee</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -25,6 +25,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.ID"><button class="btn btn-dark">Edit</button></a>
+
 </div>

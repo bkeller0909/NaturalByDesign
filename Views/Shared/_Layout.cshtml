@@ -32,7 +32,7 @@
                         @*<li class="nav-item">
             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
         </li>*@
-                        
+
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
                         </li>
@@ -40,7 +40,7 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Bid" asp-action="Index">Bids</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="ProductionPlan" asp-action="Index">Production Plan</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="ProductionPlan" asp-action="Index">Prod. Plans</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a>
@@ -50,8 +50,9 @@
                         </li>
                         @if (User.IsInRole("Admin"))
                         {
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" asp-area="" asp-controller="UserRoles" asp-action="Index">Security</a>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="UserRoles" asp-action="Index">Security</a>
+                            </li>
                         }
                     </ul>
                 </div>
