@@ -81,7 +81,7 @@ namespace NBDv2
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<NBDContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("NBDContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             //To give access to IHttpContextAccessor for Audit Data with IAuditable
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
