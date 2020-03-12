@@ -22,9 +22,9 @@ namespace NBDv2.Models
         [Display(Name = "Actual Hours")]
         public int Hours { get; set; }
 
-        public int ProjectID { get; set; }
+        public int TeamID { get; set; }
 
-        public virtual Project Project { get; set; }
+        public virtual ProjectEmployee Team { get; set; }
 
         public int TaskID { get; set; }
 

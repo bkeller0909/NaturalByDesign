@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    List<Inventory> Inventory = new List<Inventory>();
 }
 <a asp-action="Index"><button class="btn btn-dark">< Back</button></a>
 <hr />
@@ -10,6 +11,7 @@
 <div>
     <hr />
     <dl class="row">
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -35,70 +37,40 @@
             @Html.DisplayFor(model => model.BidDate)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EstStartDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EstStartDate)
-        </dd>
-        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.EstFinishDate)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.EstFinishDate)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CurrentPhase)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CurrentPhase)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FinishDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FinishDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cost)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cost)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BidCustApproved)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BidCustApproved)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BidManagementApproved)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BidManagementApproved)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.ConFirst)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Designer)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Designer.FirstName)
-        </dd>
+    </dl>
+
+
+
+    @*<dl>
+        @foreach (var c in Model.ProjectEmployees)
+        {
+
+            @c.Employee.FirstName
+            
+
+        }
+    </dl>*@
+
+<dl>
+    @foreach (var i in Model.ProjectMaterials)
+    {
 
         
-    </dl>
+    }
+
+
+</dl>
+
+   
+
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID"><button class="btn btn-dark">Edit</button></a> |
 
 </div>
+

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NBDv2.Data;
 
 namespace NBDv2.Migrations
 {
     [DbContext(typeof(NBDContext))]
-    partial class NBDContextModelSnapshot : ModelSnapshot
+    [Migration("20200311234741_h")]
+    partial class h
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,7 +84,7 @@ namespace NBDv2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("EmployeeTypeID");
+                    b.Property<int>("EmployeeTypeId");
 
                     b.Property<string>("FirstName")
                         .IsRequired();
@@ -92,7 +94,7 @@ namespace NBDv2.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("EmployeeTypeID");
+                    b.HasIndex("EmployeeTypeId");
 
                     b.ToTable("Employees");
                 });
@@ -153,6 +155,8 @@ namespace NBDv2.Migrations
 
                     b.Property<int>("Hours");
 
+                    b.Property<int?>("ProjectID");
+
                     b.Property<DateTime>("StartDate");
 
                     b.Property<int>("TaskID");
@@ -160,6 +164,8 @@ namespace NBDv2.Migrations
                     b.Property<int>("TeamID");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
 
                     b.HasIndex("TaskID");
 
@@ -296,7 +302,7 @@ namespace NBDv2.Migrations
                 {
                     b.HasOne("NBDv2.Models.EmployeeType", "EmployeeType")
                         .WithMany("Employees")
-                        .HasForeignKey("EmployeeTypeID")
+                        .HasForeignKey("EmployeeTypeId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
@@ -310,6 +316,10 @@ namespace NBDv2.Migrations
 
             modelBuilder.Entity("NBDv2.Models.Labour", b =>
                 {
+                    b.HasOne("NBDv2.Models.Project")
+                        .WithMany("Labour")
+                        .HasForeignKey("ProjectID");
+
                     b.HasOne("NBDv2.Models.Task", "Task")
                         .WithMany("Labours")
                         .HasForeignKey("TaskID")

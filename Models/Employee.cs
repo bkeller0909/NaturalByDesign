@@ -27,7 +27,7 @@ namespace NBDv2.Models
             }
         }
 
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Display(Name = "First Name")]
         [Required(ErrorMessage ="Employee Must Have First Name")]
@@ -36,13 +36,13 @@ namespace NBDv2.Models
         [Display(Name="Last Name")]
         [Required(ErrorMessage = "Employee Must Have Last Name")]
         public string LastName { get; set; }
-
-        public int EmployeeTypeId { get; set; }
-
         
-        
+        public int EmployeeTypeID { get; set; }
+
+        public virtual EmployeeType EmployeeType { get; set; }
+
         public virtual ICollection<Project> Projects { get; set; }
 
-       // public ICollection<ProjectEmployee> ProjectEmployees { get; set; }
+       
     }
 }

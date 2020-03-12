@@ -37,18 +37,20 @@ namespace NBDv2.Controllers
             var project = await _context.Projects
                 .Include(p => p.Client)
                 .Include(p => p.Designer)
-                .Include(p => p.ProjectEmployees)
-                .Include(p => p.ProjectMaterials)
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .Include(p => p.ProjectEmployees).ThenInclude(m => m.Employee).ThenInclude(e => e.EmployeeType)
+                .Include(p => p.ProjectEmployees).ThenInclude(m => m.Labours).ThenInclude(l => l.Task)
+                .Include(p => p.ProjectMaterials).ThenInclude(m => m.Inventory).ThenInclude(i => i.Material)
+                .Where(p => p.ID == id)
+                .ToListAsync();
+
             if (project == null)
             {
                 return NotFound();
             }
 
-            return View(project);
+            return View(project); 
         }
 
-        // GET: ProductionPlan/Create
         public IActionResult Create()
         {
             ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "ConFirst");
@@ -56,9 +58,6 @@ namespace NBDv2.Controllers
             return View();
         }
 
-        // POST: ProductionPlan/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Name,Desc,EstCost,BidDate,EstStartDate,EstFinishDate,CurrentPhase,StartDate,FinishDate,Cost,BidCustApproved,BidManagementApproved,ClientID,DesignerID")] Project project)
@@ -74,7 +73,6 @@ namespace NBDv2.Controllers
             return View(project);
         }
 
-        // GET: ProductionPlan/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,7 +80,13 @@ namespace NBDv2.Controllers
                 return NotFound();
             }
 
-            var project = await _context.Projects.FindAsync(id);
+            var project = await _context.Projects
+                .Include(p => p.Client)
+                .Include(p => p.Designer)
+                .Include(p => p.ProjectEmployees).ThenInclude(p => p.Employee)
+                .Include(p => p.ProjectMaterials).ThenInclude(p => p.Inventory)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(p => p.ID == id);
             if (project == null)
             {
                 return NotFound();
@@ -92,9 +96,6 @@ namespace NBDv2.Controllers
             return View(project);
         }
 
-        // POST: ProductionPlan/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Desc,EstCost,BidDate,EstStartDate,EstFinishDate,CurrentPhase,StartDate,FinishDate,Cost,BidCustApproved,BidManagementApproved,ClientID,DesignerID")] Project project)

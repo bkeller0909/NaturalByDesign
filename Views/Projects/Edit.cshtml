@@ -21,6 +21,26 @@
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
 
+<h4>Project</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <label class="control-label">Project Bid Information</label>
+            <div>
+
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Desc" class="control-label"></label>
+                    <input asp-for="Desc" class="form-control" />
+                    <span asp-validation-for="Desc" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="EstCost" class="control-label"></label>
                     <input asp-for="EstCost" class="form-control" />
@@ -42,24 +62,6 @@
                     <span asp-validation-for="EstFinishDate" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Cost" class="control-label"></label>
-                    <input asp-for="Cost" class="form-control" />
-                    <span asp-validation-for="Cost" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="ClientID" class="control-label"></label>
-                    <select asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
-                </div>
-
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label asp-for="Desc" class="control-label"></label>
-                    <textarea style="height:210px;" asp-for="Desc" class="form-control"></textarea>
-                    <span asp-validation-for="Desc" class="text-danger"></span>
-                </div>
-                <div class="form-group">
                     <label asp-for="StartDate" class="control-label"></label>
                     <input asp-for="StartDate" class="form-control" />
                     <span asp-validation-for="StartDate" class="text-danger"></span>
@@ -68,6 +70,11 @@
                     <label asp-for="FinishDate" class="control-label"></label>
                     <input asp-for="FinishDate" class="form-control" />
                     <span asp-validation-for="FinishDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cost" class="control-label"></label>
+                    <input asp-for="Cost" class="form-control" />
+                    <span asp-validation-for="Cost" class="text-danger"></span>
                 </div>
                 <div class="form-group form-check">
                     <label class="form-check-label">
@@ -79,14 +86,55 @@
                         <input class="form-check-input" asp-for="BidManagementApproved" /> @Html.DisplayNameFor(model => model.BidManagementApproved)
                     </label>
                 </div>
-
+                <div class="form-group">
+                    <label asp-for="ClientID" class="control-label"></label>
+                    <select asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
+                    <span asp-validation-for="ClientID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DesignerID" class="control-label"></label>
+                    <select asp-for="DesignerID" class="form-control" asp-items="ViewBag.DesignerID"></select>
+                    <span asp-validation-for="DesignerID" class="text-danger"></span>
+                </div>
             </div>
-        </div>
-        <div class="row">
+            <br />
+            <br />
+            <br />
+            <div>
+                <label class="control-label">Project Team</label>
+                <div class="form-group">
+                    <label asp-for="ClientID" class="control-label"></label>
+                    <select asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
+                    <span asp-validation-for="ClientID" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <div>
+                <label class="control-label">Material Requirements</label>
+                <div class="form-group">
+                    <label asp-for="ClientID" class="control-label"></label>
+                    <select asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
+                    <span asp-validation-for="ClientID" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <div>
+                <label class="control-label">Labor Requirements</label>
+                <div class="form-group">
+                    <label asp-for="ClientID" class="control-label"></label>
+                    <select asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
+                    <span asp-validation-for="ClientID" class="text-danger"></span>
+                </div>
+            </div>
             <div class="form-group">
-                <input type="submit" value="Confirm Changes" class="btn btn-success btn-block" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
-        </div>
+
+        </form>
     </div>
 
 
