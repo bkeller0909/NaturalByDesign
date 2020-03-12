@@ -18,6 +18,8 @@ namespace NBDv2.Models
 
         public string Desc { get; set; }
 
+        public string ResponsibilityType { get; set; }
+
         public virtual ICollection<Labour> Labours { get; set; }
     }
 }

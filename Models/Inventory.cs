@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,6 +12,15 @@ namespace NBDv2.Models
         public Inventory()
         {
             ProjectMaterials = new HashSet<ProjectMaterials>();
+        }
+
+        [Display(Name = "Full Name")]
+        public string Size
+        {
+            get
+            {
+                return SizeValue + " " + SizeUnit;
+            }
         }
 
         public int ID { get; set; }

@@ -324,19 +324,27 @@ namespace NBDv2.Data
                     context.Tasks.AddRange(
                         new Models.Task
                         {
-                            Desc = "Bid Process"
+                            Hours = 12,
+                            Desc = "Bid Process",
+                            ResponsibilityType = "Designer"
                         },
                         new Models.Task
                         {
-                            Desc = "Contour Surface"
+                            Hours = 6,
+                            Desc = "Contour Surface",
+                            ResponsibilityType = "Production Worker"
                         },
                         new Models.Task
                         {
-                            Desc = "Install Large Plants"
+                            Hours = 8,
+                            Desc = "Install Large Plants",
+                            ResponsibilityType = "Production Worker"
                         },
                         new Models.Task
                         {
-                            Desc = "Situate Fountain & Pots"
+                            Hours = 4,
+                            Desc = "Situate Fountain & Pots",
+                            ResponsibilityType = "Equipment Operator"
                         });
                     context.SaveChanges();
                 }

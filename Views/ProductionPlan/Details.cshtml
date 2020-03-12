@@ -10,6 +10,8 @@
 
 <div>
     <hr />
+
+    <label>Project Bid Information</label>
     <dl class="row">
 
         <dt class="col-sm-2">
@@ -44,29 +46,159 @@
         </dd>
     </dl>
 
+    <label>Project Team</label>
+    <dl>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Designer.FullName)
+        </dt>
 
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Designer.FullName)
+        </dd>
 
-    @*<dl>
-        @foreach (var c in Model.ProjectEmployees)
+        @foreach (var item in Model.ProjectEmployees)
         {
+            <dt class="col-sm-2">
+                @item.Employee.EmployeeType.Type
+            </dt>
+            <dd class="col-sm-10">
+                @item.Employee.FullName
+            </dd>
+        }
+    </dl>
 
-            @c.Employee.FirstName
+    <label>Material Requirements</label>
+    <table>
+        <tr>
+            <th>Plants:</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th></th>
+            <th>Quantity</th>
+            <th>Code/Desc</th>
+            <th>Size</th>
+            <th>Unit</th>
+            <th>Cost</th>
+            <th>Delevery</th>
+            <th>Install</th>
+        </tr>
+        @foreach (var item in Model.ProjectMaterials)
+        {
+            @if (item.Inventory.Material.Type == "Plant")
+            {
+                <tr>
+                    <td></td>
+                    <td>@item.Inventory.Quantity</td>
+                    <td>@item.Inventory.Material.Desc</td>
+                    <td>@item.Inventory.Size</td>
+                    <td>@item.Inventory.AvgNetPrice</td>
+                    <td>@item.Inventory.AvgNetPrice</td>
+                    <td>@item.MatDelivery</td>
+                    <td>@item.MatInstall</td>
+                </tr>
+            }
+        }
+        <tr>
+            <th>Pottery:</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.ProjectMaterials)
+        {
+            @if (item.Inventory.Material.Type == "Pottery")
+            {
+                <tr>
+                    <td></td>
+                    <td>@item.Inventory.Quantity</td>
+                    <td>@item.Inventory.Material.Desc</td>
+                    <td>@item.Inventory.Size</td>
+                    <td>@item.Inventory.AvgNetPrice</td>
+                    <td>@item.Inventory.AvgNetPrice</td>
+                    <td>@item.MatDelivery</td>
+                    <td>@item.MatInstall</td>
+                </tr>
+            }
+        }
+        <tr>
+            <th>Materials:</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.ProjectMaterials)
+        {
+            @if (item.Inventory.Material.Type == "Material")
+            {
+                <tr>
+                    <td></td>
+                    <td>@item.Inventory.Quantity</td>
+                    <td>@item.Inventory.Material.Desc</td>
+                    <td>@item.Inventory.Size</td>
+                    <td>@item.Inventory.AvgNetPrice</td>
+                    <td>@item.Inventory.AvgNetPrice</td>
+                    <td>@item.MatDelivery</td>
+                    <td>@item.MatInstall</td>
+                </tr>
+            }
+        }
+    </table>
+
+    <label>Labor Requirements</label>
+    <table>
+
+        <tr>
+
+            <th>Description</th>
+            <th>Hours</th>
+            <th>Cost/Hr</th>
+            <th>Total</th>
+            <th>Time</th>
+            <th>Tasks</th>
+        </tr>
+        @foreach (var item in Model.ProjectEmployees)
+        {
             
 
+              
+                @foreach (var c in item.Labours)
+                {
+                    <tr>
+                        <th>@item.Employee.EmployeeType.Type</th>
+                        <th>@c.Task.Hours</th>
+                        <th>@item.Employee.EmployeeType.HourlyCost</th>
+                        <th>@item.Employee.EmployeeType.HourlyCost</th>
+                        <th>@c.Task.Hours</th>
+                        <th>@c.Task.Desc</th>
+                    </tr>
+            
+                }
+    
         }
-    </dl>*@
 
-<dl>
-    @foreach (var i in Model.ProjectMaterials)
-    {
-
-        
-    }
+    </table>
 
 
-</dl>
 
-   
+    <dl>
+    </dl>
+
+
 
 </div>
 <div>

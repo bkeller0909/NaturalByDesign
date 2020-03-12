@@ -38,6 +38,8 @@ namespace NBDv2.Controllers
                 .Include(p => p.Client)
                 .Include(p => p.Designer)
                 .Include(p => p.ProjectMaterials).ThenInclude(m => m.Inventory).ThenInclude(i => i.Material)
+                .Include(p => p.ProjectEmployees).ThenInclude(m => m.Employee).ThenInclude(i => i.EmployeeType)
+                .Include(p => p.ProjectEmployees).ThenInclude(m => m.Labours).ThenInclude(i => i.Task)
                 .FirstOrDefaultAsync(m => m.ID == id);
 
             if (project == null)
@@ -162,5 +164,7 @@ namespace NBDv2.Controllers
         {
             return _context.Projects.Any(e => e.ID == id);
         }
+
+        
     }
 }
