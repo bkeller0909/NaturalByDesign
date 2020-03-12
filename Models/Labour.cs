@@ -24,7 +24,7 @@ namespace NBDv2.Models
 
         public int TeamID { get; set; }
 
-        public ProjectEmployee Team { get; set; }
+        public virtual ProjectEmployee Team { get; set; }
 
         public int TaskID { get; set; }
 

@@ -18,6 +18,6 @@ namespace NBDv2.Models
 
         public string Desc { get; set; }
 
-        public ICollection<Inventory> Inventories { get; set; }
+        public virtual ICollection<Inventory> Inventories { get; set; }
     }
 }

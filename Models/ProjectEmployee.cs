@@ -11,12 +11,12 @@ namespace NBDv2.Models
 
         public int ProjectID { get; set; }
 
-        public Project Project { get; set; }
+        public virtual Project Project { get; set; }
 
         public int EmployeeID { get; set; }
 
-        public Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
 
-        public ICollection<Labour> Labours { get; set; }
+        public virtual ICollection<Labour> Labours { get; set; }
     }
 }

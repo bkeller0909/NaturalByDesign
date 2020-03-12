@@ -26,15 +26,17 @@ namespace NBDv2.Data
 
         public DbSet<Models.Task> Tasks { get; set; }
 
-        public DbSet<ProjectMaterials> ProjectMaterials { get; set; }
-
         public DbSet<Material> Materials { get; set; }
 
         public DbSet<Inventory> Inventories { get; set; }
 
-        public DbSet<ProjectEmployee> ProjectEmployees { get; set; }
+        public DbSet<ProjectMaterials> ProjectMaterials { get; set; }
 
         public DbSet<Employee> Employees { get; set; }
+
+        public DbSet<ProjectEmployee> ProjectEmployees { get; set; }
+
+        
         
         
 

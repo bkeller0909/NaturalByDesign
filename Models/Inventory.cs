@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace NBDv2.Models
 {
-    public class Inventory
+    public class Inventory 
     {
         public Inventory()
         {
@@ -28,6 +29,7 @@ namespace NBDv2.Models
 
         public virtual Material Material { get; set; }
 
-        public ICollection<ProjectMaterials> ProjectMaterials { get; set; }
+        public virtual ICollection<ProjectMaterials> ProjectMaterials { get; set; }
+
     }
 }

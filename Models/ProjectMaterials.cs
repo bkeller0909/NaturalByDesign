@@ -19,11 +19,11 @@ namespace NBDv2.Models
 
         public int ProjectID { get; set; }
 
-        public Project Project { get; set; }
+        public virtual Project Project { get; set; }
 
         public int InventoryID { get; set; }
 
-        public Inventory Inventory { get; set; }
+        public virtual Inventory Inventory { get; set; }
 
         public DateTime MatDelivery { get; set; }
 
