@@ -4,11 +4,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <h1>Clients</h1>
+            </div>
+            <div class="col-sm text-right">
+                <a asp-action="Create"><button class="btn btn-success btn-lg">New Client</button></a>
+            </div>
+        </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+    </div>
+
 <table class="table">
     <thead>
         <tr>
@@ -31,7 +39,7 @@
                 @Html.DisplayFor(modelItem => item.Province)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> 
+                <a asp-action="Details" asp-route-id="@item.ID"><button class="btn btn-outline-success float-right">Details</button></a> 
             </td>
         </tr>
 }

@@ -3,8 +3,19 @@
 @{
     ViewData["Title"] = "Index";
 }
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <h1>Projects</h1>
+            </div>
+            <div class="col-sm text-right">
+                <a asp-action="Create"><button class="btn btn-success btn-lg">New Project</button></a>
+            </div>
+        </div>
+        
 
-<h1>Index</h1>
+    </div>
+
 
 <table class="table">
     <thead>
@@ -40,7 +51,7 @@
                 @Html.DisplayFor(modelItem => item.Designer.FullName)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> 
+                <a asp-action="Details" asp-route-id="@item.ID"><button class="btn btn-outline-success float-right">Details</button></a> 
             </td>
         </tr>
 }
