@@ -349,7 +349,7 @@ namespace NBDv2.Data
                         new Labour
                         {
                             EstHours = 12,
-                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken").ID,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Bob" && p.Employee.LastName == "Reinhardt").ID,
                             TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Bid Process").ID
                         },
                         new Labour
