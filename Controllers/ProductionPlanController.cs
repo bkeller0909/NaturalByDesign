@@ -37,11 +37,8 @@ namespace NBDv2.Controllers
             var project = await _context.Projects
                 .Include(p => p.Client)
                 .Include(p => p.Designer)
-                .Include(p => p.ProjectEmployees).ThenInclude(m => m.Employee).ThenInclude(e => e.EmployeeType)
-                .Include(p => p.ProjectEmployees).ThenInclude(m => m.Labours).ThenInclude(l => l.Task)
                 .Include(p => p.ProjectMaterials).ThenInclude(m => m.Inventory).ThenInclude(i => i.Material)
-                .Where(p => p.ID == id)
-                .ToListAsync();
+                .FirstOrDefaultAsync(m => m.ID == id);
 
             if (project == null)
             {
