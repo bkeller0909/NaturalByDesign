@@ -53,7 +53,7 @@ namespace NBDv2.Controllers
         public IActionResult Create()
         {
             ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "ConFirst");
-            ViewData["DesignerID"] = new SelectList(_context.Employees, "Id", "FirstName");
+            ViewData["DesignerID"] = new SelectList(_context.Employees, "ID", "FirstName");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace NBDv2.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "ConFirst", project.ClientID);
-            ViewData["DesignerID"] = new SelectList(_context.Employees, "Id", "FirstName", project.DesignerID);
+            ViewData["DesignerID"] = new SelectList(_context.Employees, "ID", "FirstName", project.DesignerID);
             return View(project);
         }
 
@@ -82,8 +82,9 @@ namespace NBDv2.Controllers
             var project = await _context.Projects
                 .Include(p => p.Client)
                 .Include(p => p.Designer)
-                .Include(p => p.ProjectEmployees).ThenInclude(p => p.Employee)
-                .Include(p => p.ProjectMaterials).ThenInclude(p => p.Inventory)
+                .Include(p => p.ProjectEmployees).ThenInclude(p => p.Employee).ThenInclude(p => p.EmployeeType)
+                .Include(p => p.ProjectEmployees).ThenInclude(m => m.Labours).ThenInclude(i => i.Task)
+                .Include(p => p.ProjectMaterials).ThenInclude(p => p.Inventory).ThenInclude(p => p.Material)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(p => p.ID == id);
             if (project == null)
@@ -91,7 +92,7 @@ namespace NBDv2.Controllers
                 return NotFound();
             }
             ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "ConFirst", project.ClientID);
-            ViewData["DesignerID"] = new SelectList(_context.Employees, "Id", "FirstName", project.DesignerID);
+            ViewData["DesignerID"] = new SelectList(_context.Employees, "ID", "FirstName", project.DesignerID);
             return View(project);
         }
 
@@ -125,7 +126,7 @@ namespace NBDv2.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "ConFirst", project.ClientID);
-            ViewData["DesignerID"] = new SelectList(_context.Employees, "Id", "FirstName", project.DesignerID);
+            ViewData["DesignerID"] = new SelectList(_context.Employees, "ID", "FirstName", project.DesignerID);
             return View(project);
         }
 

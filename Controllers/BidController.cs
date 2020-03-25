@@ -49,8 +49,8 @@ namespace NBDv2.Controllers
         // GET: Bid/Create
         public IActionResult Create()
         {
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "ConFirst");
-            ViewData["DesignerID"] = new SelectList(_context.Set<Employee>(), "Id", "Id");
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "Name");
+            ViewData["DesignerID"] = new SelectList(_context.Set<Employee>(), "ID", "FullName");
             return View();
         }
 
@@ -67,8 +67,8 @@ namespace NBDv2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "ConFirst", project.ClientID);
-            ViewData["DesignerID"] = new SelectList(_context.Set<Employee>(), "Id", "Id", project.DesignerID);
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "Name", project.ClientID);
+            ViewData["DesignerID"] = new SelectList(_context.Set<Employee>(), "ID", "FullName", project.DesignerID);
             return View(project);
         }
 
@@ -86,7 +86,7 @@ namespace NBDv2.Controllers
                 return NotFound();
             }
             ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "ConFirst", project.ClientID);
-            ViewData["DesignerID"] = new SelectList(_context.Set<Employee>(), "Id", "FullName", project.DesignerID);
+            ViewData["DesignerID"] = new SelectList(_context.Set<Employee>(), "ID", "FullName", project.DesignerID);
             return View(project);
         }
 
