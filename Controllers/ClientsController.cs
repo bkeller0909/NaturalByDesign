@@ -49,6 +49,7 @@ namespace NBDv2.Controllers
         // GET: Clients/Create
         public IActionResult Create()
         {
+            ViewData["CityID"] = new SelectList(_context.Cities, "ID", "Name");
             return View();
         }
 
@@ -57,7 +58,7 @@ namespace NBDv2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Phone,Address,Province,Postal,ConFirst,ConLast,ConPhone,ConPosition")] Client client)
+        public async Task<IActionResult> Create([Bind("ID,Name,Phone,Address,Province,Postal,ConFirst,ConLast,ConPhone,ConPosition,CityID")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +66,7 @@ namespace NBDv2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CityID"] = new SelectList(_context.Cities, "ID", "Name");
             return View(client);
         }
 
