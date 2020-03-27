@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Details";
 }
-    <a asp-action="Index"><button class="btn btn-dark">< Back</button></a>
+    <a asp-action="Index"><button class="btn btn-success btn-lg">< Back</button></a>
     <hr />
 <h1>Client Details</h1>
 
@@ -73,6 +73,5 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ID"><button class="btn btn-dark">Edit</button></a>
-    
+    <a asp-action="Edit" asp-route-id="@Model.ID"><button class="btn btn-outline-success float-right">Edit</button></a>
 </div>

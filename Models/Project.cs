@@ -10,7 +10,6 @@ namespace NBDv2.Models
     {
         public Project()
         {
-            
             ProjectEmployees = new HashSet<ProjectEmployee>();
             ProjectMaterials = new HashSet<ProjectMaterials>();
         }

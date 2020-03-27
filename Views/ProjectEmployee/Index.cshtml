@@ -34,9 +34,39 @@
                         @Html.DisplayFor(modelItem => item.Project.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Employee.FirstName)
+                        @{
+                            int empCount = item.Employees.Count;
+                            if (empCount > 0)
+                            {
+                                string firstEmp = item.Employees.FirstOrDefault().FullName;
+                                if (empCount > 1)
+                                {
+                                    string empList = "";
+                                    var c = item.Employees.ToList();
+                                    for (int i = 1; i < empCount; i++)
+                                    {
+                                        empList += c[i].FullName + " <br />";
+                                    }
+                                    <a class="" role="button" data-toggle="collapse" href="#collapseSum@(item.ID)" aria-expanded="false" aria-controls="collapseSum@(item.ID)">
+                                        @firstEmp... <span class="badge badge-info">@empCount</span>
+                                    </a>
+                                    <div class="collapse" id="collapseSum@(item.ID)">
+                                        @Html.Raw(empList)
+                                    </div>
+                                }
+                                else
+                                {
+                                    @firstEmp
+                                }
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.Employee.FullName)
+                            }
+                        }
                     </td>
                     <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID"><button class="btn btn-outline-success float-right">Edit</button></a>
                         <a asp-action="Details" asp-route-id="@item.ID"><button class="btn btn-outline-success float-right">Details</button></a>
                     </td>
                 </tr>

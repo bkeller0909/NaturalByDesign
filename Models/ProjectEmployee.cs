@@ -7,6 +7,11 @@ namespace NBDv2.Models
 {
     public class ProjectEmployee
     {
+        public ProjectEmployee()
+        {
+            this.Employees = new HashSet<Employee>();
+        }
+
         public int ID { get; set; }
 
         public int ProjectID { get; set; }
@@ -18,5 +23,7 @@ namespace NBDv2.Models
         public virtual Employee Employee { get; set; }
 
         public virtual ICollection<Labour> Labours { get; set; }
+
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }
