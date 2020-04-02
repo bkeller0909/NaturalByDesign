@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NBDv2.Data;
 
 namespace NBDv2.Migrations
 {
     [DbContext(typeof(NBDContext))]
-    partial class NBDContextModelSnapshot : ModelSnapshot
+    [Migration("20200313002827_BootstrapPopoverCollapse")]
+    partial class BootstrapPopoverCollapse
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,6 +113,8 @@ namespace NBDv2.Migrations
 
                     b.Property<double>("HourlyPay");
 
+                    b.Property<int>("MyProperty");
+
                     b.Property<string>("Type");
 
                     b.HasKey("ID");
@@ -168,21 +172,6 @@ namespace NBDv2.Migrations
                     b.HasIndex("TeamID");
 
                     b.ToTable("Labours");
-                });
-
-            modelBuilder.Entity("NBDv2.Models.LabourSummary", b =>
-                {
-                    b.Property<int>("ProjectID");
-
-                    b.Property<int>("EmployeeTypeID");
-
-                    b.Property<int>("Hours");
-
-                    b.HasKey("ProjectID", "EmployeeTypeID");
-
-                    b.HasIndex("EmployeeTypeID");
-
-                    b.ToTable("LabourSummaries");
                 });
 
             modelBuilder.Entity("NBDv2.Models.Material", b =>
@@ -342,19 +331,6 @@ namespace NBDv2.Migrations
                         .WithMany("Labours")
                         .HasForeignKey("TeamID")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("NBDv2.Models.LabourSummary", b =>
-                {
-                    b.HasOne("NBDv2.Models.EmployeeType", "EmployeeType")
-                        .WithMany("LabourSummaries")
-                        .HasForeignKey("EmployeeTypeID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("NBDv2.Models.Project", "Project")
-                        .WithMany("LabourSummaries")
-                        .HasForeignKey("ProjectID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("NBDv2.Models.Project", b =>
