@@ -8,6 +8,12 @@ namespace NBDv2.Models
 {
     public class ProjectMaterials
     {
+        public ProjectMaterials()
+        {
+            Inventory = new Inventory();
+            
+        }
+
         [Display(Name = "Ext. Cost")]
         public double MatTotalPrice
         {
@@ -19,11 +25,11 @@ namespace NBDv2.Models
 
         public int ProjectID { get; set; }
 
-        public virtual Project Project { get; set; }
+        public Project Project { get; set; }
 
         public int InventoryID { get; set; }
 
-        public virtual Inventory Inventory { get; set; }
+        public Inventory Inventory { get; set; }
 
         public DateTime MatDelivery { get; set; }
 

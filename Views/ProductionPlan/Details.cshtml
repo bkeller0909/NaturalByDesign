@@ -173,22 +173,22 @@
         </tr>
         @foreach (var item in Model.ProjectEmployees)
         {
-            
 
-              
-                @foreach (var c in item.Labours)
-                {
-                    <tr>
-                        <th>@item.Employee.EmployeeType.Type</th>
-                        <th>@c.Task.Hours</th>
-                        <th>@item.Employee.EmployeeType.HourlyCost</th>
-                        <th>@item.Employee.EmployeeType.HourlyCost</th>
-                        <th>@c.Task.Hours</th>
-                        <th>@c.Task.Desc</th>
-                    </tr>
-            
-                }
-    
+
+
+            @foreach (var c in item.Labours)
+            {
+                <tr>
+                    <th>@item.Employee.EmployeeType.Type</th>
+                    <th>@c.Task.Hours</th>
+                    <th>@item.Employee.EmployeeType.HourlyCost</th>
+                    <th>@item.Employee.EmployeeType.HourlyCost</th>
+                    <th>@c.Task.Hours</th>
+                    <th>@c.Task.Desc</th>
+                </tr>
+
+            }
+
         }
 
     </table>

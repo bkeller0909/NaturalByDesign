@@ -286,6 +286,33 @@ namespace NBDv2.Data
 
 
 
+                if (!context.LabourSummaries.Any())
+                {
+                    context.LabourSummaries.AddRange(
+                        new LabourSummary
+                        {
+                            ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
+                            EmployeeTypeID = context.EmployeeTypes.FirstOrDefault(e => e.Type == "Production Worker").ID,
+                            Hours = 30
+                        },
+                        new LabourSummary
+                        {
+                            ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
+                            EmployeeTypeID = context.EmployeeTypes.FirstOrDefault(e => e.Type == "Designer").ID,
+                            Hours = 10
+                        },
+                        new LabourSummary
+                        {
+                            ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
+                            EmployeeTypeID = context.EmployeeTypes.FirstOrDefault(e => e.Type == "Equipment Operator").ID,
+                            Hours = 10
+                        }
+                        );
+                    context.SaveChanges();
+                }
+
+
+
                 if (!context.ProjectEmployees.Any())
                 {
                     context.ProjectEmployees.AddRange(

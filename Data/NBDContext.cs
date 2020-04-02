@@ -22,6 +22,8 @@ namespace NBDv2.Data
 
         public DbSet<Project> Projects { get; set; }
 
+        public DbSet<LabourSummary> LabourSummaries { get; set; }
+
         public DbSet<Labour> Labours { get; set; }
 
         public DbSet<Models.Task> Tasks { get; set; }
@@ -83,7 +85,8 @@ namespace NBDv2.Data
             modelBuilder.Entity<ProjectMaterials>()
                 .HasKey(t => new { t.ProjectID, t.InventoryID });
 
-
+            modelBuilder.Entity<LabourSummary>()
+                .HasKey(t => new { t.ProjectID, t.EmployeeTypeID });
         }
     }
 }

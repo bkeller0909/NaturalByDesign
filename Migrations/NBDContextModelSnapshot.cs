@@ -107,8 +107,6 @@ namespace NBDv2.Migrations
 
                     b.Property<double>("HourlyPay");
 
-                    b.Property<int>("MyProperty");
-
                     b.Property<string>("Type");
 
                     b.HasKey("ID");
@@ -166,6 +164,21 @@ namespace NBDv2.Migrations
                     b.HasIndex("TeamID");
 
                     b.ToTable("Labours");
+                });
+
+            modelBuilder.Entity("NBDv2.Models.LabourSummary", b =>
+                {
+                    b.Property<int>("ProjectID");
+
+                    b.Property<int>("EmployeeTypeID");
+
+                    b.Property<int>("Hours");
+
+                    b.HasKey("ProjectID", "EmployeeTypeID");
+
+                    b.HasIndex("EmployeeTypeID");
+
+                    b.ToTable("LabourSummaries");
                 });
 
             modelBuilder.Entity("NBDv2.Models.Material", b =>
@@ -321,6 +334,19 @@ namespace NBDv2.Migrations
                         .WithMany("Labours")
                         .HasForeignKey("TeamID")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("NBDv2.Models.LabourSummary", b =>
+                {
+                    b.HasOne("NBDv2.Models.EmployeeType", "EmployeeType")
+                        .WithMany("LabourSummaries")
+                        .HasForeignKey("EmployeeTypeID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NBDv2.Models.Project", "Project")
+                        .WithMany("LabourSummaries")
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("NBDv2.Models.Project", b =>

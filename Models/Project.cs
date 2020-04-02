@@ -10,7 +10,7 @@ namespace NBDv2.Models
     {
         public Project()
         {
-            
+            LabourSummaries = new HashSet<LabourSummary>();
             ProjectEmployees = new HashSet<ProjectEmployee>();
             ProjectMaterials = new HashSet<ProjectMaterials>();
         }
@@ -67,5 +67,7 @@ namespace NBDv2.Models
         public virtual ICollection<ProjectMaterials> ProjectMaterials { get; set; }
 
         public virtual ICollection<ProjectEmployee> ProjectEmployees { get; set; }
+
+        public virtual ICollection<LabourSummary> LabourSummaries { get; set; }
     }
 }

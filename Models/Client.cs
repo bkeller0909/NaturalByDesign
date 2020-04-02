@@ -10,7 +10,7 @@ namespace NBDv2.Models
     {
         public Client()
         {
-            this.Projects = new HashSet<Project>();
+            Projects = new HashSet<Project>();
         }
 
         public int ID { get; set; }

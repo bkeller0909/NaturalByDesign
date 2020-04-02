@@ -8,7 +8,7 @@
     <a asp-action="Index"><button class="btn btn-dark">< Back</button></a>
 </div>
 <hr />
-<h1>Edit Project</h1>
+<h1>Edit Bid</h1>
 <hr />
 
 <form asp-action="Edit">
@@ -47,23 +47,6 @@
                     <input asp-for="EstFinishDate" class="form-control" />
                     <span asp-validation-for="EstFinishDate" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="StartDate" class="control-label"></label>
-                    <input asp-for="StartDate" class="form-control" />
-                    <span asp-validation-for="StartDate" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label asp-for="FinishDate" class="control-label"></label>
-                    <input asp-for="FinishDate" class="form-control" />
-                    <span asp-validation-for="FinishDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Cost" class="control-label"></label>
-                    <input asp-for="Cost" class="form-control" />
-                    <span asp-validation-for="Cost" class="text-danger"></span>
-                </div>
                 <div class="form-group form-check">
                     <label class="form-check-label">
                         <input class="form-check-input" asp-for="BidCustApproved" /> @Html.DisplayNameFor(model => model.BidCustApproved)
@@ -82,14 +65,132 @@
                     <label asp-for="DesignerID" class="control-label"></label>
                     <select asp-for="DesignerID" class="form-control" asp-items="ViewBag.DesignerID"></select>
                 </div>
+
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <label class="control-label">Materials</label>
+                    <div class="col-md-offset-1">
+                        <table>
+
+                            @{
+                                List<NBDv2.ViewModel.AssignedOptionVM> plantCheckboxes = ViewBag.Plants;
+                                foreach (var checkbox in plantCheckboxes)
+                                {
+
+                                    @:<tr>
+                                        @:<td>
+                                            <input type="checkbox"
+                                                   id="@checkbox.ID"
+                                                   name="selectedMatOptions"
+                                                   value="@checkbox.ID"
+                                                   @(Html.Raw(checkbox.Assigned ? "checked=\"checked\"" : "")) />
+
+                                            <input type="number"
+                                                   name="selectedMatQuantity"
+                                                   value="@checkbox.Quantity"
+                                                   id="num_@checkbox.ID"
+                                                   @(Html.Raw(checkbox.Assigned ? "" : "disabled=\"disabled\"")) />
+
+                                            @checkbox.DisplayText @:&nbsp;&nbsp;
+                                        @:</td>
+                                    @:</tr>
+                                }
+                            }
+                            @{
+                                List<NBDv2.ViewModel.AssignedOptionVM> potCheckBoxes = ViewBag.Pottery;
+                                foreach (var checkbox in potCheckBoxes)
+                                {
+
+                                    @:<tr>
+                                        @:<td>
+                                            <input type="checkbox"
+                                                   id="@checkbox.ID"
+                                                   name="selectedMatOptions"
+                                                   value="@checkbox.ID"
+                                                   @(Html.Raw(checkbox.Assigned ? "checked=\"checked\"" : "")) />
+
+                                            <input type="number"
+                                                   name="selectedMatQuantity"
+                                                   value="@checkbox.Quantity"
+                                                   id="num_@checkbox.ID"
+                                                   @(Html.Raw(checkbox.Assigned ? "" : "disabled=\"disabled\"")) />
+
+                                            @checkbox.DisplayText @:&nbsp;&nbsp;
+                                        @:</td>
+                                    @:</tr>
+                                }
+                            }
+                            @{
+                                List<NBDv2.ViewModel.AssignedOptionVM> matCheckBoxes = ViewBag.Materials;
+                                foreach (var checkbox in matCheckBoxes)
+                                {
+
+                                    @:<tr>
+                                        @:<td>
+                                            <input type="checkbox"
+                                                   id="@checkbox.ID"
+                                                   name="selectedMatOptions"
+                                                   value="@checkbox.ID"
+                                                   @(Html.Raw(checkbox.Assigned ? "checked=\"checked\"" : "")) />
+
+                                            <input type="number"
+                                                   name="selectedMatQuantity"
+                                                   value="@checkbox.Quantity"
+                                                   id="num_@checkbox.ID"
+                                                   @(Html.Raw(checkbox.Assigned ? "" : "disabled=\"disabled\"")) />
+
+                                            @checkbox.DisplayText @:&nbsp;&nbsp;
+                                        @:</td>
+                                    @:</tr>
+                                }
+                            }
+                        </table>
+                    </div>
                 </div>
+
+                <div class="form-group">
+                    <label class="control-label">Labour Summary</label>
+                    <div class="col-md-offset-1">
+                        <table>
+
+                            @{
+
+                                List<NBDv2.ViewModel.AssignedOptionVM> checkboxes = ViewBag.EmployeeTypes;
+                                foreach (var checkbox in checkboxes)
+                                {
+
+                                    @:<tr>
+                                        @:<td>
+                                            <input type="checkbox"
+                                                   name="selectedLabOptions"
+                                                   value="@checkbox.ID"
+                                                   @(Html.Raw(checkbox.Assigned ? "checked=\"checked\"" : "")) />
+
+                                            <input type="number"
+                                                   name="selectedLabQuantity"
+                                                   value="@checkbox.Quantity"
+                                                   id="@checkbox.ID"
+                                                   @(Html.Raw(checkbox.Assigned ? "" : "disabled=\"disabled\"")) />
+
+                                            @checkbox.DisplayText @:&nbsp;&nbsp;
+                                        @:</td>
+                                    @:</tr>
+                                }
+                            }
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </div>
     </div>
+
 </form>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/selectquantity.js"></script>
 }
