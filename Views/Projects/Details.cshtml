@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
     <div>
-        <a asp-action="Index"><button class="btn btn-dark">< Back</button></a>
+        <a asp-action="Index"><button class="btn btn-success">< Back</button></a>
     </div>
     <hr />
 <h1>Project Details</h1>
@@ -73,8 +73,4 @@
             @Html.DisplayFor(model => model.Designer.FullName)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ID"><button class="btn btn-dark">Edit</button></a> 
-    
 </div>

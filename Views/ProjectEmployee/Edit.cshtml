@@ -1,30 +1,37 @@
 ﻿@model NBDv2.Models.ProjectEmployee
 
 @{
-    ViewData["Title"] = "Edit";
+	ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+	<div>
+		<a asp-action="Index"><button class="btn btn-success">< Back</button></a>
+	</div>
 
-<h4>ProjectEmployee</h4>
+<h1>Edit Project Employees</h1>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ProjectID" />
-            <input type="hidden" asp-for="EmployeeID" />
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+	<div class="col-md-4">
+		<form asp-action="Edit">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<input type="hidden" asp-for="ID" />
+			<div class="form-group">
+				<label asp-for="Project" class="control-label"></label>
+				<input asp-for="Project" class="form-control" />
+				<span asp-validation-for="Project" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Employee" class="control-label"></label>
+				<input asp-for="Employee" class="form-control" />
+				<span asp-validation-for="Employee" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Save" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

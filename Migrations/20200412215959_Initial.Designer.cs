@@ -10,15 +10,15 @@ using NBDv2.Data;
 namespace NBDv2.Migrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20200327213630_Init")]
-    partial class Init
+    [Migration("20200412215959_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("MC")
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -92,9 +92,13 @@ namespace NBDv2.Migrations
                     b.Property<string>("LastName")
                         .IsRequired();
 
+                    b.Property<int?>("ProjectEmployeeID");
+
                     b.HasKey("ID");
 
                     b.HasIndex("EmployeeTypeID");
+
+                    b.HasIndex("ProjectEmployeeID");
 
                     b.ToTable("Employees");
                 });
@@ -315,6 +319,10 @@ namespace NBDv2.Migrations
                         .WithMany("Employees")
                         .HasForeignKey("EmployeeTypeID")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("NBDv2.Models.ProjectEmployee")
+                        .WithMany("Employees")
+                        .HasForeignKey("ProjectEmployeeID");
                 });
 
             modelBuilder.Entity("NBDv2.Models.Inventory", b =>

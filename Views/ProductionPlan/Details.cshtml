@@ -4,7 +4,9 @@
     ViewData["Title"] = "Details";
     List<Inventory> Inventory = new List<Inventory>();
 }
-<a asp-action="Index"><button class="btn btn-dark">< Back</button></a>
+	<div>
+		<a asp-action="Index"><button class="btn btn-success">< Back</button></a>
+	</div>
 <hr />
 <h1>Plan Details</h1>
 
@@ -190,19 +192,11 @@
             }
 
         }
-
     </table>
-
-
-
     <dl>
     </dl>
-
-
-
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID"><button class="btn btn-dark">Edit</button></a>
-
 </div>
 
