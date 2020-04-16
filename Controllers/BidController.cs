@@ -24,7 +24,7 @@ namespace NBDv2.Controllers
         // GET: Bid
         public async Task<IActionResult> Index()
         {
-            var NBDContext = _context.Projects.Include(p => p.Client).Include(p => p.Designer).Where(p => p.BidCustApproved == false || p.BidManagementApproved == false);
+            var NBDContext = _context.Projects.Include(p => p.Client).Include(p => p.Designer);
             return View(await NBDContext.ToListAsync());
         }
 
@@ -55,6 +55,7 @@ namespace NBDv2.Controllers
         {
             var project = new Project();
             project.LabourSummaries = new List<LabourSummary>();
+            project.CurrentPhase = "Bid";
             PopulateAssignedEmployeeTypes(project);
             PopulateAssignedMaterials(project);
             PopulateDropDownLists(project);
@@ -259,7 +260,7 @@ namespace NBDv2.Controllers
             var allEmployeeTypes = _context.EmployeeTypes;
             var pEmployeeTypes = new HashSet<int>(project.LabourSummaries.Select(b => b.EmployeeTypeID));
             var pEmployeeHours = new HashSet<LabourSummary>(project.LabourSummaries);
-            var checkBoxes = new List<AssignedOptionVM>();
+            var checkBoxes = new List<OptionVM>();
             
             foreach (var employeeType in allEmployeeTypes)
             {
@@ -270,7 +271,7 @@ namespace NBDv2.Controllers
                     hour = hours.Hours;
                 }
                 
-                checkBoxes.Add(new AssignedOptionVM
+                checkBoxes.Add(new OptionVM
                 {
                     ID = employeeType.ID,
                     DisplayText = employeeType.Type,
@@ -330,9 +331,9 @@ namespace NBDv2.Controllers
             var pottery = _context.Inventories.Include(i => i.Material).Where(i => i.Material.Type == "Pottery");
             var material = _context.Inventories.Include(i => i.Material).Where(i => i.Material.Type == "Material");
             var pInventory = new HashSet<int>(project.ProjectMaterials.Select(b => b.InventoryID));
-            var plantCheckBoxes = new List<AssignedOptionVM>();
-            var potteryCheckBoxes = new List<AssignedOptionVM>();
-            var matCheckBoxes = new List<AssignedOptionVM>();
+            var plantCheckBoxes = new List<OptionVM>();
+            var potteryCheckBoxes = new List<OptionVM>();
+            var matCheckBoxes = new List<OptionVM>();
             foreach (var plant in plants)
             {
                 int Qty = 0;
@@ -342,7 +343,7 @@ namespace NBDv2.Controllers
                     Qty = qty.MatEstQty;
                 }
 
-                plantCheckBoxes.Add(new AssignedOptionVM
+                plantCheckBoxes.Add(new OptionVM
                 {
                     ID = plant.ID,
                     DisplayText = plant.Material.Desc,
@@ -359,7 +360,7 @@ namespace NBDv2.Controllers
                     Qty = qty.MatEstQty;
                 }
 
-                potteryCheckBoxes.Add(new AssignedOptionVM
+                potteryCheckBoxes.Add(new OptionVM
                 {
                     ID = pot.ID,
                     DisplayText = pot.Material.Desc,
@@ -375,7 +376,7 @@ namespace NBDv2.Controllers
                     Qty = qty.MatEstQty;
                 }
 
-                matCheckBoxes.Add(new AssignedOptionVM
+                matCheckBoxes.Add(new OptionVM
                 {
                     ID = mat.ID,
                     DisplayText = mat.Material.Desc,

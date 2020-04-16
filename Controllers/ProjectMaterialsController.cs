@@ -10,23 +10,23 @@ using NBDv2.Models;
 
 namespace NBDv2.Controllers
 {
-    public class ProjectEmployeeController : Controller
+    public class ProjectMaterialsController : Controller
     {
         private readonly NBDContext _context;
 
-        public ProjectEmployeeController(NBDContext context)
+        public ProjectMaterialsController(NBDContext context)
         {
             _context = context;
         }
 
-        // GET: ProjectEmployee
+        // GET: ProjectMaterials
         public async Task<IActionResult> Index()
         {
-            var nBDContext = _context.ProjectEmployees.Include(p => p.Employee).Include(p => p.Project);
+            var nBDContext = _context.ProjectMaterials.Include(p => p.Inventory).Include(p => p.Project);
             return View(await nBDContext.ToListAsync());
         }
 
-        // GET: ProjectEmployee/Details/5
+        // GET: ProjectMaterials/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,45 +34,45 @@ namespace NBDv2.Controllers
                 return NotFound();
             }
 
-            var projectEmployee = await _context.ProjectEmployees
-                .Include(p => p.Employee)
+            var projectMaterials = await _context.ProjectMaterials
+                .Include(p => p.Inventory)
                 .Include(p => p.Project)
                 .FirstOrDefaultAsync(m => m.ProjectID == id);
-            if (projectEmployee == null)
+            if (projectMaterials == null)
             {
                 return NotFound();
             }
 
-            return View(projectEmployee);
+            return View(projectMaterials);
         }
 
-        // GET: ProjectEmployee/Create
+        // GET: ProjectMaterials/Create
         public IActionResult Create()
         {
-            ViewData["EmployeeID"] = new SelectList(_context.Employees, "Id", "FirstName");
-            ViewData["ProjectID"] = new SelectList(_context.Projects, "ID", "Name");
+            ViewData["InventoryID"] = new SelectList(_context.Inventories, "ID", "ID");
+            ViewData["ProjectID"] = new SelectList(_context.Projects, "ID", "Desc");
             return View();
         }
 
-        // POST: ProjectEmployee/Create
+        // POST: ProjectMaterials/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProjectID,EmployeeID")] ProjectEmployee projectEmployee)
+        public async Task<IActionResult> Create([Bind("ProjectID,InventoryID,MatDelivery,MatInstall,MatEstQty,MatActQty")] ProjectMaterials projectMaterials)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(projectEmployee);
+                _context.Add(projectMaterials);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeID"] = new SelectList(_context.Employees, "Id", "FirstName", projectEmployee.EmployeeID);
-            ViewData["ProjectID"] = new SelectList(_context.Projects, "ID", "Name", projectEmployee.ProjectID);
-            return View(projectEmployee);
+            ViewData["InventoryID"] = new SelectList(_context.Inventories, "ID", "ID", projectMaterials.InventoryID);
+            ViewData["ProjectID"] = new SelectList(_context.Projects, "ID", "Desc", projectMaterials.ProjectID);
+            return View(projectMaterials);
         }
 
-        // GET: ProjectEmployee/Edit/5
+        // GET: ProjectMaterials/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,24 +80,24 @@ namespace NBDv2.Controllers
                 return NotFound();
             }
 
-            var projectEmployee = await _context.ProjectEmployees.FindAsync(id);
-            if (projectEmployee == null)
+            var projectMaterials = await _context.ProjectMaterials.FindAsync(id);
+            if (projectMaterials == null)
             {
                 return NotFound();
             }
-            ViewData["EmployeeID"] = new SelectList(_context.Employees, "Id", "FirstName", projectEmployee.EmployeeID);
-            ViewData["ProjectID"] = new SelectList(_context.Projects, "ID", "Name", projectEmployee.ProjectID);
-            return View(projectEmployee);
+            ViewData["InventoryID"] = new SelectList(_context.Inventories, "ID", "ID", projectMaterials.InventoryID);
+            ViewData["ProjectID"] = new SelectList(_context.Projects, "ID", "Desc", projectMaterials.ProjectID);
+            return View(projectMaterials);
         }
 
-        // POST: ProjectEmployee/Edit/5
+        // POST: ProjectMaterials/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProjectID,EmployeeID")] ProjectEmployee projectEmployee)
+        public async Task<IActionResult> Edit(int id, [Bind("ProjectID,InventoryID,MatDelivery,MatInstall,MatEstQty,MatActQty")] ProjectMaterials projectMaterials)
         {
-            if (id != projectEmployee.ProjectID)
+            if (id != projectMaterials.ProjectID)
             {
                 return NotFound();
             }
@@ -106,12 +106,12 @@ namespace NBDv2.Controllers
             {
                 try
                 {
-                    _context.Update(projectEmployee);
+                    _context.Update(projectMaterials);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProjectEmployeeExists(projectEmployee.ProjectID))
+                    if (!ProjectMaterialsExists(projectMaterials.ProjectID))
                     {
                         return NotFound();
                     }
@@ -122,12 +122,12 @@ namespace NBDv2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeID"] = new SelectList(_context.Employees, "Id", "FirstName", projectEmployee.EmployeeID);
-            ViewData["ProjectID"] = new SelectList(_context.Projects, "ID", "Name", projectEmployee.ProjectID);
-            return View(projectEmployee);
+            ViewData["InventoryID"] = new SelectList(_context.Inventories, "ID", "ID", projectMaterials.InventoryID);
+            ViewData["ProjectID"] = new SelectList(_context.Projects, "ID", "Desc", projectMaterials.ProjectID);
+            return View(projectMaterials);
         }
 
-        // GET: ProjectEmployee/Delete/5
+        // GET: ProjectMaterials/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,32 +135,32 @@ namespace NBDv2.Controllers
                 return NotFound();
             }
 
-            var projectEmployee = await _context.ProjectEmployees
-                .Include(p => p.Employee)
+            var projectMaterials = await _context.ProjectMaterials
+                .Include(p => p.Inventory)
                 .Include(p => p.Project)
                 .FirstOrDefaultAsync(m => m.ProjectID == id);
-            if (projectEmployee == null)
+            if (projectMaterials == null)
             {
                 return NotFound();
             }
 
-            return View(projectEmployee);
+            return View(projectMaterials);
         }
 
-        // POST: ProjectEmployee/Delete/5
+        // POST: ProjectMaterials/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var projectEmployee = await _context.ProjectEmployees.FindAsync(id);
-            _context.ProjectEmployees.Remove(projectEmployee);
+            var projectMaterials = await _context.ProjectMaterials.FindAsync(id);
+            _context.ProjectMaterials.Remove(projectMaterials);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProjectEmployeeExists(int id)
+        private bool ProjectMaterialsExists(int id)
         {
-            return _context.ProjectEmployees.Any(e => e.ProjectID == id);
+            return _context.ProjectMaterials.Any(e => e.ProjectID == id);
         }
     }
 }

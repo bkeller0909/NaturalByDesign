@@ -1,0 +1,31 @@
+﻿@model IEnumerable<NBDv2.Models.Labour>
+
+<h4>Labour:</h4>
+<div class="border-secondary rounded" style="border:solid">
+    <table class="table">
+        <tr>
+            <th>Worker</th>
+            <th>Hours</th>
+            <th>Cost/Hr</th>
+            <th>Ext. Cost</th>
+            <th>Task</th>
+
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            @foreach (var e in item.Team.Employees)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => e.FullName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                    <td>@Html.DisplayFor(modelItem => e.EmployeeType.HourlyPay)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ExtPrice)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Task.Desc)</td>
+                </tr>
+            }
+        }
+
+    </table>
+</div>

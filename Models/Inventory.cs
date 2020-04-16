@@ -25,8 +25,10 @@ namespace NBDv2.Models
 
         public int ID { get; set; }
 
+        [DataType(DataType.Currency)]
         public double AvgNetPrice { get; set; }
 
+        [DataType(DataType.Currency)]
         public double ListPrice { get; set; }
 
         public int SizeValue { get; set; }

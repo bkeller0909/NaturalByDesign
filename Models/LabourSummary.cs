@@ -14,6 +14,7 @@ namespace NBDv2.Models
         }
 
         [Display(Name = "Extended Price")]
+        [DataType(DataType.Currency)]
         public double ExtPrice
         {
             get

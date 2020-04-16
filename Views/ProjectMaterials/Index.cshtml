@@ -1,0 +1,65 @@
+﻿@model IEnumerable<NBDv2.Models.ProjectMaterials>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Project)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inventory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatDelivery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatInstall)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatEstQty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatActQty)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.Desc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inventory.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatDelivery)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatInstall)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatEstQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatActQty)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

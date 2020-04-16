@@ -1,0 +1,25 @@
+﻿@model IEnumerable<NBDv2.Models.ProjectMaterials>
+
+<h4>Materials Used</h4>
+<div class="border-secondary rounded" style="border:solid">
+    <table class="table">
+        <tr>
+            <th>Code</th>
+            <th>Quantity</th>
+            <th>Unit Cost</th>
+            <th>Ext. Cost</th>
+           
+        </tr>
+        
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Inventory.Material.Desc)</td>
+                <td>@Html.DisplayFor(modelItem => item.MatActQty)</td>
+                <td>@Html.DisplayFor(modelItem => item.Inventory.AvgNetPrice)</td>
+                <td>@Html.DisplayFor(modelItem => item.MatTotalPrice)</td>
+            </tr>
+        }
+    </table>
+</div>
+

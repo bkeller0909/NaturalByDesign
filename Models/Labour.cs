@@ -8,12 +8,25 @@ namespace NBDv2.Models
 {
     public class Labour
     {
+        [Display(Name = "Ext. Cost")]
+        [DataType(DataType.Currency)]
+        public double ExtPrice
+        {
+            get
+            {
+                return Hours * Team.Employee.EmployeeType.HourlyPay;
+            }
+        }
         public int ID { get; set; }
 
         [Display(Name = "Estimated Start")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EstStartDate { get; set; }
 
         [Display(Name = "Actual Start")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
         [Display(Name = "Estimated Hours")]

@@ -5,7 +5,7 @@
 }
 
 <div>
-    <a asp-action="Index"><button class="btn btn-dark">< Back</button></a>
+    <a asp-action="Index" class="btn btn-dark">< Back</a>
 </div>
 <hr />
 <h1>Edit Bid</h1>
@@ -72,22 +72,22 @@
                         <table>
 
                             @{
-                                List<NBDv2.ViewModel.AssignedOptionVM> plantCheckboxes = ViewBag.Plants;
+                                List<NBDv2.ViewModel.OptionVM> plantCheckboxes = ViewBag.Plants;
                                 foreach (var checkbox in plantCheckboxes)
                                 {
 
                                     @:<tr>
                                         @:<td>
                                             <input type="checkbox"
-                                                   id="@checkbox.ID"
+                                                   id="@checkbox.ID@checkbox.ID"
                                                    name="selectedMatOptions"
                                                    value="@checkbox.ID"
                                                    @(Html.Raw(checkbox.Assigned ? "checked=\"checked\"" : "")) />
 
                                             <input type="number"
+                                                   id="num_@checkbox.ID@checkbox.ID"
                                                    name="selectedMatQuantity"
                                                    value="@checkbox.Quantity"
-                                                   id="num_@checkbox.ID"
                                                    @(Html.Raw(checkbox.Assigned ? "" : "disabled=\"disabled\"")) />
 
                                             @checkbox.DisplayText @:&nbsp;&nbsp;
@@ -96,22 +96,22 @@
                                 }
                             }
                             @{
-                                List<NBDv2.ViewModel.AssignedOptionVM> potCheckBoxes = ViewBag.Pottery;
+                                List<NBDv2.ViewModel.OptionVM> potCheckBoxes = ViewBag.Pottery;
                                 foreach (var checkbox in potCheckBoxes)
                                 {
 
                                     @:<tr>
                                         @:<td>
                                             <input type="checkbox"
-                                                   id="@checkbox.ID"
+                                                   id="@checkbox.ID@checkbox.ID"
                                                    name="selectedMatOptions"
                                                    value="@checkbox.ID"
                                                    @(Html.Raw(checkbox.Assigned ? "checked=\"checked\"" : "")) />
 
                                             <input type="number"
+                                                   id="num_@checkbox.ID@checkbox.ID"
                                                    name="selectedMatQuantity"
                                                    value="@checkbox.Quantity"
-                                                   id="num_@checkbox.ID"
                                                    @(Html.Raw(checkbox.Assigned ? "" : "disabled=\"disabled\"")) />
 
                                             @checkbox.DisplayText @:&nbsp;&nbsp;
@@ -120,22 +120,22 @@
                                 }
                             }
                             @{
-                                List<NBDv2.ViewModel.AssignedOptionVM> matCheckBoxes = ViewBag.Materials;
+                                List<NBDv2.ViewModel.OptionVM> matCheckBoxes = ViewBag.Materials;
                                 foreach (var checkbox in matCheckBoxes)
                                 {
 
                                     @:<tr>
                                         @:<td>
                                             <input type="checkbox"
-                                                   id="@checkbox.ID"
+                                                   id="@checkbox.ID@checkbox.ID"
                                                    name="selectedMatOptions"
                                                    value="@checkbox.ID"
                                                    @(Html.Raw(checkbox.Assigned ? "checked=\"checked\"" : "")) />
 
                                             <input type="number"
+                                                   id="num_@checkbox.ID@checkbox.ID"
                                                    name="selectedMatQuantity"
                                                    value="@checkbox.Quantity"
-                                                   id="num_@checkbox.ID"
                                                    @(Html.Raw(checkbox.Assigned ? "" : "disabled=\"disabled\"")) />
 
                                             @checkbox.DisplayText @:&nbsp;&nbsp;
@@ -154,24 +154,23 @@
 
                             @{
 
-                                List<NBDv2.ViewModel.AssignedOptionVM> checkboxes = ViewBag.EmployeeTypes;
-                                foreach (var checkbox in checkboxes)
+                                List<NBDv2.ViewModel.OptionVM> inputs = ViewBag.EmployeeTypes;
+                                foreach (var input in inputs)
                                 {
 
                                     @:<tr>
                                         @:<td>
                                             <input type="checkbox"
                                                    name="selectedLabOptions"
-                                                   value="@checkbox.ID"
-                                                   @(Html.Raw(checkbox.Assigned ? "checked=\"checked\"" : "")) />
-
+                                                   id="@input.ID"
+                                                   value="@input.ID"
+                                                   @(Html.Raw(input.Assigned ? "checked=\"checked\"" : "")) />
                                             <input type="number"
+                                                   id="num_@input.ID"
                                                    name="selectedLabQuantity"
-                                                   value="@checkbox.Quantity"
-                                                   id="@checkbox.ID"
-                                                   @(Html.Raw(checkbox.Assigned ? "" : "disabled=\"disabled\"")) />
-
-                                            @checkbox.DisplayText @:&nbsp;&nbsp;
+                                                   value="@input.Quantity"
+                                                   @(Html.Raw(input.Assigned ? "" : "disabled=\"disabled\"")) />
+                                            @input.DisplayText @:&nbsp; &nbsp;
                                         @:</td>
                                     @:</tr>
                                 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,8 +18,12 @@ namespace NBDv2.Models
 
         public string Type { get; set; }
 
+        [Display(Name = "Hourly Pay")]
+        [DataType(DataType.Currency)]
         public double HourlyPay { get; set; }
 
+        [Display(Name = "Hourly Cost")]
+        [DataType(DataType.Currency)]
         public double HourlyCost { get; set; }
 
         public virtual ICollection<Employee> Employees { get; set; }

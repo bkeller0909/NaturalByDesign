@@ -1,0 +1,35 @@
+﻿@model IEnumerable<NBDv2.Models.ProjectEmployee>
+
+@{
+    ViewData["Title"] = "Team";
+    NBDv2.Models.Project project = (NBDv2.Models.Project)ViewBag.Project;
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Add" asp-route-ProjectID="@project.ID">Add Employee</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee.FullName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.FullName)
+                </td>
+                <td>
+                    <a asp-action="Remove" asp-route-id="@item.ID">Remove Employee</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

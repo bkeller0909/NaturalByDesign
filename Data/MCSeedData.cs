@@ -204,7 +204,7 @@ namespace NBDv2.Data
                         {
                             FirstName = "Jerry",
                             LastName = "Jones",
-                            EmployeeTypeID = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Production Worker").ID
+                            EmployeeTypeID = context.EmployeeTypes.FirstOrDefault(t => t.Type == "Equipment Operator").ID
                         });
                     context.SaveChanges();
                 }
@@ -319,7 +319,7 @@ namespace NBDv2.Data
                         new ProjectEmployee
                         {
                             ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
-                            EmployeeID = context.Employees.FirstOrDefault(e => e.FirstName == "Bob" && e.LastName == "Reinhardt").ID
+                            EmployeeID = context.Employees.FirstOrDefault(e => e.FirstName == "Tamara" && e.LastName == "Bakken").ID
                         },
                         new ProjectEmployee
                         {
@@ -372,6 +372,30 @@ namespace NBDv2.Data
                             Hours = 4,
                             Desc = "Situate Fountain & Pots",
                             ResponsibilityType = "Equipment Operator"
+                        },
+                        new Models.Task
+                        {
+                            Hours = 12,
+                            Desc = "Complete final blueprint",
+                            ResponsibilityType = "Designer"
+                        },
+                        new Models.Task
+                        {
+                            Hours = 6,
+                            Desc = "Oversee installation of fountain & pots",
+                            ResponsibilityType = "Designer"
+                        },
+                        new Models.Task
+                        {
+                            Hours = 8,
+                            Desc = "Inspect contouring",
+                            ResponsibilityType = "Designer"
+                        },
+                        new Models.Task
+                        {
+                            Hours = 4,
+                            Desc = "Inspect finished site",
+                            ResponsibilityType = "Designer"
                         });
                     context.SaveChanges();
                 }
@@ -384,7 +408,7 @@ namespace NBDv2.Data
                         new Labour
                         {
                             EstHours = 12,
-                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Bob" && p.Employee.LastName == "Reinhardt").ID,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken").ID,
                             TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Bid Process").ID
                         },
                         new Labour
@@ -401,11 +425,34 @@ namespace NBDv2.Data
                         },
                         new Labour
                         {
-                            EstHours = 8,
+                            EstHours = 4,
                             TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Jerry" && p.Employee.LastName == "Jones").ID,
                             TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Situate Fountain & Pots").ID
-                        }
-                        );
+                        },
+                        new Labour
+                        {
+                            EstHours = 5,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken").ID,
+                            TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Complete final blueprint").ID
+                        },
+                        new Labour
+                        {
+                            EstHours = 3,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken").ID,
+                            TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Oversee installation of fountain & pots").ID
+                        },
+                        new Labour
+                        {
+                            EstHours = 1,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken").ID,
+                            TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Inspect contouring").ID
+                        },
+                        new Labour
+                        {
+                            EstHours = 1,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken").ID,
+                            TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Inspect finished site").ID
+                        });
                     context.SaveChanges();
                 }
 
@@ -559,7 +606,7 @@ namespace NBDv2.Data
                             ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
                             InventoryID = context.Inventories.FirstOrDefault(i => i.Material.Desc == "GFN48").ID,
                             MatDelivery = new DateTime(2010, 10, 10),
-                            MatInstall = new DateTime(2010, 10, 10),
+                            MatInstall = new DateTime(2010, 01, 01),
                             MatEstQty = 10,
                             MatActQty = 10
                         },
@@ -568,7 +615,7 @@ namespace NBDv2.Data
                             ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
                             InventoryID = context.Inventories.FirstOrDefault(i => i.Material.Desc == "GP50").ID,
                             MatDelivery = new DateTime(2010, 10, 10),
-                            MatInstall = new DateTime(2010, 10, 10),
+                            MatInstall = new DateTime(2010, 01, 01),
                             MatEstQty = 10,
                             MatActQty = 10
                         },
@@ -577,7 +624,7 @@ namespace NBDv2.Data
                             ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
                             InventoryID = context.Inventories.FirstOrDefault(i => i.Material.Desc == "CBRK5").ID,
                             MatDelivery = new DateTime(2010, 10, 10),
-                            MatInstall = new DateTime(2010, 10, 10),
+                            MatInstall = new DateTime(2010, 01, 01),
                             MatEstQty = 10,
                             MatActQty = 10
                         },
@@ -586,7 +633,7 @@ namespace NBDv2.Data
                             ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
                             InventoryID = context.Inventories.FirstOrDefault(i => i.Material.Desc == "TSOIL").ID,
                             MatDelivery = new DateTime(2010, 10, 10),
-                            MatInstall = new DateTime(2010, 10, 10),
+                            MatInstall = new DateTime(2010, 01, 01),
                             MatEstQty = 10,
                             MatActQty = 10
                         });

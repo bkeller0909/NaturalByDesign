@@ -23,30 +23,46 @@ namespace NBDv2.Models
         public string Name { get; set; }
 
         [Display(Name = "Description")]
+        [Required(ErrorMessage = "Project Must Have Description")]
         [StringLength(100, ErrorMessage = "Must Be 100 Characters or Less")]
         public string Desc { get; set; }
 
         [Display(Name = "Estimated Cost")]
+        [DataType(DataType.Currency)]
+        [Required(ErrorMessage = "Bid Must Have Estimated Cost")]
         public double EstCost { get; set; }
 
         [Display(Name = "Bid Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime BidDate { get; set; }
 
         [Display(Name = "Estimated Start Date")]
+        [Required(ErrorMessage = "Bid Must Have Estimated Start Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EstStartDate { get; set; }
 
         [Display(Name = "Estimated Finish Date")]
+        [Required(ErrorMessage = "Bid Must Have Estimated Finish Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EstFinishDate { get; set; }
 
         [Display(Name = "Phase")]
         public string CurrentPhase { get; set; }
 
         [Display(Name = "Start Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? StartDate { get; set; }
 
         [Display(Name = "Finish Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? FinishDate { get; set; }
 
+        [DataType(DataType.Currency)]
         public double? Cost { get; set; }
 
         [Display(Name = "Customer Approved")]
@@ -62,7 +78,6 @@ namespace NBDv2.Models
         public int DesignerID { get; set; }
 
         public virtual Employee Designer { get; set; }
-
 
         public virtual ICollection<ProjectMaterials> ProjectMaterials { get; set; }
 

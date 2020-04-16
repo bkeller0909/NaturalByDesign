@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 <div>
-    <a asp-action="Index"><button class="btn btn-dark">< Back</button></a>
+    <a asp-action="Index" class="btn btn-dark">< Back</a>
 </div>
 <hr />
 <h1>New Bid</h1>
@@ -75,7 +75,7 @@
                         <table>
 
                             @{
-                                List<NBDv2.ViewModel.AssignedOptionVM> plantCheckboxes = ViewBag.Plants;
+                                List<NBDv2.ViewModel.OptionVM> plantCheckboxes = ViewBag.Plants;
                                 foreach (var checkbox in plantCheckboxes)
                                 {
 
@@ -99,7 +99,7 @@
                                 }
                             }
                             @{
-                                List<NBDv2.ViewModel.AssignedOptionVM> potCheckBoxes = ViewBag.Pottery;
+                                List<NBDv2.ViewModel.OptionVM> potCheckBoxes = ViewBag.Pottery;
                                 foreach (var checkbox in potCheckBoxes)
                                 {
 
@@ -123,7 +123,7 @@
                                 }
                             }
                             @{
-                                List<NBDv2.ViewModel.AssignedOptionVM> matCheckBoxes = ViewBag.Materials;
+                                List<NBDv2.ViewModel.OptionVM> matCheckBoxes = ViewBag.Materials;
                                 foreach (var checkbox in matCheckBoxes)
                                 {
 
@@ -156,7 +156,7 @@
                         <table>
 
                             @{
-                                List<NBDv2.ViewModel.AssignedOptionVM> inputs = ViewBag.EmployeeTypes;
+                                List<NBDv2.ViewModel.OptionVM> inputs = ViewBag.EmployeeTypes;
                                 foreach (var input in inputs)
                                 {
                                     @:<tr>

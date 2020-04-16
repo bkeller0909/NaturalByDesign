@@ -10,8 +10,8 @@ using NBDv2.Data;
 namespace NBDv2.Migrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20200327213630_Init")]
-    partial class Init
+    [Migration("20200403000106_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -92,9 +92,13 @@ namespace NBDv2.Migrations
                     b.Property<string>("LastName")
                         .IsRequired();
 
+                    b.Property<int?>("ProjectEmployeeID");
+
                     b.HasKey("ID");
 
                     b.HasIndex("EmployeeTypeID");
+
+                    b.HasIndex("ProjectEmployeeID");
 
                     b.ToTable("Employees");
                 });
@@ -217,6 +221,7 @@ namespace NBDv2.Migrations
                     b.Property<string>("CurrentPhase");
 
                     b.Property<string>("Desc")
+                        .IsRequired()
                         .HasMaxLength(100);
 
                     b.Property<int>("DesignerID");
@@ -290,11 +295,13 @@ namespace NBDv2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Desc");
+                    b.Property<string>("Desc")
+                        .IsRequired();
 
                     b.Property<int>("Hours");
 
-                    b.Property<string>("ResponsibilityType");
+                    b.Property<string>("ResponsibilityType")
+                        .IsRequired();
 
                     b.HasKey("ID");
 
@@ -315,6 +322,10 @@ namespace NBDv2.Migrations
                         .WithMany("Employees")
                         .HasForeignKey("EmployeeTypeID")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("NBDv2.Models.ProjectEmployee")
+                        .WithMany("Employees")
+                        .HasForeignKey("ProjectEmployeeID");
                 });
 
             modelBuilder.Entity("NBDv2.Models.Inventory", b =>

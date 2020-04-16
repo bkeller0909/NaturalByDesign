@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
     List<Inventory> Inventory = new List<Inventory>();
 }
-<a asp-action="Index"><button class="btn btn-dark">< Back</button></a>
+<a asp-action="Index" class="btn btn-dark">< Back</a>
 <hr />
 <h1>Plan Details</h1>
 
@@ -12,186 +12,197 @@
     <hr />
 
     <label>Project Bid Information</label>
-    <dl class="row">
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Desc)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Desc)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EstCost)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EstCost)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BidDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BidDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EstFinishDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EstFinishDate)
-        </dd>
-    </dl>
+    <div class="border-secondary rounded" style="border:solid">
+        <dl class="row" style="justify-content:center">
+            <dt class="col-lg-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-lg-2">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-lg-2">
+                @Html.DisplayNameFor(model => model.Desc)
+            </dt>
+            <dd class="col-lg-2">
+                @Html.DisplayFor(model => model.Desc)
+            </dd>
+        </dl>
+        <dl class="row" style="justify-content:center">
+            <dt class="col-lg-2">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            @if (Model.FinishDate != null)
+            {
+                <dd class="col-lg-2">
+                    @Html.DisplayFor(model => model.StartDate)
+                </dd>
+            }
+            else
+            {
+                <dd class="col-lg-2">
+                    @Html.DisplayFor(model => model.EstStartDate)
+                </dd>
+            }
+        </dl>
+        <dl class="row" style="justify-content:center">
+            <dt class="col-lg-2">
+                @Html.DisplayNameFor(model => model.FinishDate)
+            </dt>
+            @if (Model.FinishDate != null)
+            {
+                <dd class="col-lg-2">
+                    @Html.DisplayFor(model => model.FinishDate)
+                </dd>
+            }
+            else
+            {
+                <dd class="col-lg-2">
+                    @Html.DisplayFor(model => model.EstFinishDate)
+                </dd>
+            }
+            <dt class="col-lg-2">
+                @Html.DisplayNameFor(model => model.EstCost)
+            </dt>
+            <dd class="col-lg-2">
+                @Html.DisplayFor(model => model.EstCost)
+            </dd>
+        </dl>
+    </div>
 
     <label>Project Team</label>
-    <dl>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Designer.FullName)
-        </dt>
-
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Designer.FullName)
-        </dd>
-
-        @foreach (var item in Model.ProjectEmployees)
-        {
+    <div class="border-secondary rounded" style="border:solid">
+        <dl>
             <dt class="col-sm-2">
-                @item.Employee.EmployeeType.Type
+                @Html.DisplayNameFor(model => model.Designer.FullName)
             </dt>
+
             <dd class="col-sm-10">
-                @item.Employee.FullName
+                @Html.DisplayFor(model => model.Designer.FullName)
             </dd>
-        }
-    </dl>
 
-    <label>Material Requirements</label>
-    <table class="table">
-        <tr>
-            <th>Plants:</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr>
-            <th></th>
-            <th>Quantity</th>
-            <th>Code/Desc</th>
-            <th>Size</th>
-            <th>Unit</th>
-            <th>Cost</th>
-            <th>Delevery</th>
-            <th>Install</th>
-        </tr>
-        @foreach (var item in Model.ProjectMaterials)
-        {
-            @if (item.Inventory.Material.Type == "Plant")
+            @foreach (var item in Model.ProjectEmployees)
+            {
+                <dt class="col-sm-2">
+                    @item.Employee.EmployeeType.Type
+                </dt>
+                <dd class="col-sm-10">
+                    @item.Employee.FullName
+                </dd>
+            }
+        </dl>
+    </div>
+
+    <h4>Material Requirements</h4>
+    <div class="border-secondary rounded" style="border:solid">
+        <table class="table">
+            <tr>
+                <th colspan="8">Plants:</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>Quantity</th>
+                <th>Code/Desc</th>
+                <th>Size</th>
+                <th>Unit</th>
+                <th>Extended</th>
+                <th>Delivery</th>
+                <th>Install</th>
+            </tr>
+            @foreach (var item in Model.ProjectMaterials)
+            {
+                @if (item.Inventory.Material.Type == "Plant")
+                {
+                    <tr>
+                        <td></td>
+                        <td>@Html.DisplayFor(modelItem => item.Inventory.Quantity)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Inventory.Material.Desc)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Inventory.Size)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Inventory.AvgNetPrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MatTotalPrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MatDelivery)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MatInstall)</td>
+                    </tr>
+                }
+            }
+            <tr>
+                <th colspan="8">Pottery:</th>
+
+            </tr>
+            @foreach (var item in Model.ProjectMaterials)
+            {
+                @if (item.Inventory.Material.Type == "Pottery")
+                {
+                    <tr>
+                        <td></td>
+                        <td>@Html.DisplayFor(modelItem => item.Inventory.Quantity)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Inventory.Material.Desc)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Inventory.Size)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Inventory.AvgNetPrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MatTotalPrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MatDelivery)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MatInstall)</td>
+                    </tr>
+                }
+            }
+            <tr>
+                <th colspan="8">Materials:</th>
+            </tr>
+            @foreach (var item in Model.ProjectMaterials)
+            {
+                @if (item.Inventory.Material.Type == "Material")
+                {
+                    <tr>
+                        <td></td>
+                        <td>@Html.DisplayFor(modelItem => item.Inventory.Quantity)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Inventory.Material.Desc)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Inventory.Size)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Inventory.AvgNetPrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MatTotalPrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MatDelivery)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MatInstall)</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+
+    <h4>Labour Requirements</h4>
+    <div class="border-secondary rounded" style="border:solid">
+        <table class="table">
+
+            <tr>
+
+                <th>Description</th>
+                <th>Hours</th>
+                <th>Cost/Hr</th>
+                <th>Total</th>
+                <th>Time</th>
+                <th>Tasks</th>
+            </tr>
+            @foreach (var item in Model.ProjectEmployees)
             {
                 <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Employee.EmployeeType.Type)</td>
                     <td></td>
-                    <td>@item.Inventory.Quantity</td>
-                    <td>@item.Inventory.Material.Desc</td>
-                    <td>@item.Inventory.Size</td>
-                    <td>@item.Inventory.AvgNetPrice</td>
-                    <td>@item.Inventory.AvgNetPrice</td>
-                    <td>@item.MatDelivery</td>
-                    <td>@item.MatInstall</td>
-                </tr>
-            }
-        }
-        <tr>
-            <th>Pottery:</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model.ProjectMaterials)
-        {
-            @if (item.Inventory.Material.Type == "Pottery")
-            {
-                <tr>
                     <td></td>
-                    <td>@item.Inventory.Quantity</td>
-                    <td>@item.Inventory.Material.Desc</td>
-                    <td>@item.Inventory.Size</td>
-                    <td>@item.Inventory.AvgNetPrice</td>
-                    <td>@item.Inventory.AvgNetPrice</td>
-                    <td>@item.MatDelivery</td>
-                    <td>@item.MatInstall</td>
-                </tr>
-            }
-        }
-        <tr>
-            <th>Materials:</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model.ProjectMaterials)
-        {
-            @if (item.Inventory.Material.Type == "Material")
-            {
-                <tr>
                     <td></td>
-                    <td>@item.Inventory.Quantity</td>
-                    <td>@item.Inventory.Material.Desc</td>
-                    <td>@item.Inventory.Size</td>
-                    <td>@item.Inventory.AvgNetPrice</td>
-                    <td>@item.Inventory.AvgNetPrice</td>
-                    <td>@item.MatDelivery</td>
-                    <td>@item.MatInstall</td>
+                    <td></td>
+                    <td></td>
                 </tr>
+                @foreach (var c in item.Labours)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Employee.FirstName)</td>
+                        <td>@Html.DisplayFor(modelItem => c.Hours)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Employee.EmployeeType.HourlyPay)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Employee.EmployeeType.HourlyCost)</td>
+                        <td>@Html.DisplayFor(modelItem => c.Task.Hours)</td>
+                        <td>@Html.DisplayFor(modelItem => c.Task.Desc)</td>
+                    </tr>
+                }
             }
-        }
-    </table>
-
-    <label>Labor Requirements</label>
-    <table class="table">
-
-        <tr>
-
-            <th>Description</th>
-            <th>Hours</th>
-            <th>Cost/Hr</th>
-            <th>Total</th>
-            <th>Time</th>
-            <th>Tasks</th>
-        </tr>
-        @foreach (var item in Model.ProjectEmployees)
-        {
-
-
-
-            @foreach (var c in item.Labours)
-            {
-                <tr>
-                    <th>@item.Employee.EmployeeType.Type</th>
-                    <th>@c.Task.Hours</th>
-                    <th>@item.Employee.EmployeeType.HourlyCost</th>
-                    <th>@item.Employee.EmployeeType.HourlyCost</th>
-                    <th>@c.Task.Hours</th>
-                    <th>@c.Task.Desc</th>
-                </tr>
-
-            }
-
-        }
-
-    </table>
+        </table>
+    </div>
 
 
 

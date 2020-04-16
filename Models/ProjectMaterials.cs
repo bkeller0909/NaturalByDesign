@@ -15,6 +15,7 @@ namespace NBDv2.Models
         }
 
         [Display(Name = "Ext. Cost")]
+        [DataType(DataType.Currency)]
         public double MatTotalPrice
         {
             get
@@ -31,12 +32,20 @@ namespace NBDv2.Models
 
         public Inventory Inventory { get; set; }
 
+        [Display(Name = "Material Delivery")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime MatDelivery { get; set; }
 
+        [Display(Name = "Material Install")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime MatInstall { get; set; }
 
+        [Display(Name = "Material Estimated Quantity")]
         public int MatEstQty { get; set; }
 
+        [Display(Name = "Material Actual Quantity")]
         public int MatActQty { get; set; }
     }
 }

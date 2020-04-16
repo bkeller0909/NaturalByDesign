@@ -16,7 +16,7 @@ namespace NBDv2.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("MC")
-                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -219,6 +219,7 @@ namespace NBDv2.Migrations
                     b.Property<string>("CurrentPhase");
 
                     b.Property<string>("Desc")
+                        .IsRequired()
                         .HasMaxLength(100);
 
                     b.Property<int>("DesignerID");
@@ -292,11 +293,13 @@ namespace NBDv2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Desc");
+                    b.Property<string>("Desc")
+                        .IsRequired();
 
                     b.Property<int>("Hours");
 
-                    b.Property<string>("ResponsibilityType");
+                    b.Property<string>("ResponsibilityType")
+                        .IsRequired();
 
                     b.HasKey("ID");
 
