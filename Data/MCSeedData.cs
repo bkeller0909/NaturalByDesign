@@ -91,7 +91,6 @@ namespace NBDv2.Data
                     context.SaveChanges();
                 }
 
-
                 if (!context.EmployeeTypes.Any())
                 {
                     context.EmployeeTypes.AddRange(
@@ -141,7 +140,6 @@ namespace NBDv2.Data
                         });
                     context.SaveChanges();
                 }
-
 
                 if (!context.Employees.Any())
                 {
@@ -209,8 +207,6 @@ namespace NBDv2.Data
                     context.SaveChanges();
                 }
                 
-
-
                 if (!context.Projects.Any())
                 {
                     context.Projects.AddRange(
@@ -284,8 +280,6 @@ namespace NBDv2.Data
                     context.SaveChanges();
                 }
 
-
-
                 if (!context.LabourSummaries.Any())
                 {
                     context.LabourSummaries.AddRange(
@@ -310,8 +304,6 @@ namespace NBDv2.Data
                         );
                     context.SaveChanges();
                 }
-
-
 
                 if (!context.ProjectEmployees.Any())
                 {
@@ -343,8 +335,6 @@ namespace NBDv2.Data
                         });
                     context.SaveChanges();
                 }
-
-
 
                 if (!context.Tasks.Any())
                 {
@@ -400,8 +390,6 @@ namespace NBDv2.Data
                     context.SaveChanges();
                 }
 
-
-
                 if (!context.Labours.Any())
                 {
                     context.Labours.AddRange(
@@ -456,8 +444,6 @@ namespace NBDv2.Data
                     context.SaveChanges();
                 }
 
-
-
                 if (!context.Materials.Any())
                 {
                     context.Materials.AddRange(
@@ -497,8 +483,6 @@ namespace NBDv2.Data
                         });
                     context.SaveChanges();
                 }
-
-
 
                 if (!context.Inventories.Any())
                 {
@@ -568,8 +552,6 @@ namespace NBDv2.Data
                         });
                     context.SaveChanges();
                 }
-
-
 
                 if (!context.ProjectMaterials.Any())
                 {

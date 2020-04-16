@@ -45,9 +45,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Designer.FullName)
             </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.ID"><button class="btn btn-outline-success float-right">Details</button></a> 
-            </td>
+			<td>
+				<a asp-action="Details" asp-route-id="@item.ID"><button class="btn btn-outline-success float-right">Details</button></a>
+				<a asp-action="Edit" asp-route-id="@item.ID"><button class="btn btn-outline-success float-right">Edit</button></a>
+			</td>
         </tr>
 }
     </tbody>
