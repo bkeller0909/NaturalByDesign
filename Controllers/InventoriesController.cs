@@ -24,6 +24,8 @@ namespace NBDv2.Controllers
         {
             var nBDContext = _context.Inventories.Include(i => i.Material);
             return View(await nBDContext.ToListAsync());
+
+            
         }
 
         // GET: Inventories/Details/5
