@@ -621,6 +621,75 @@ namespace NBDv2.Data
                         });
                     context.SaveChanges();
                 }
+
+                if (!context.BidReport.Any())
+                {
+                    context.BidReport.AddRange(
+                        new BidReport
+                        {
+                            ProjectID = context.Projects.FirstOrDefault(p => p.Name == "Astor").ID,
+                            EstBid = 13000,
+                            ActlHours = 6,
+                            EstHours = 20,
+                            ActlCosts = 240,
+                            EstCost = 800,
+                            HoursRemaining = 14,
+                            CostsRemaining = 660 
+                        },
+                    new BidReport
+                    {
+                        ProjectID = context.Projects.FirstOrDefault(p => p.Name == "Fremont").ID,
+                        EstBid = 16250,
+                        ActlHours = 9,
+                        EstHours = 25,
+                        ActlCosts = 360,
+                        EstCost = 1000,
+                        HoursRemaining = 16,
+                        CostsRemaining = 640
+                    },
+                    new BidReport
+                    {
+                        ProjectID = context.Projects.FirstOrDefault(p => p.Name == "SJSU").ID,
+                        EstBid = 5000,
+                        ActlHours = 9,
+                        EstHours = 8,
+                        ActlCosts = 360,
+                        EstCost = 320,
+                        HoursRemaining = 1,
+                        CostsRemaining = 40
+                    });
+                }
+
+                if (!context.ProductionReports.Any())
+                {
+                    context.ProductionReports.AddRange(
+                        new ProductionReport
+                        {
+                            ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
+                            BidCost = 7651,
+                            EstCost = 5110,
+                            TotalCost = 5265,
+                            ActualMtlCost = 3255,
+                            EstMtlCost = 3240,
+                            ActualLabourProdCost = 1008,
+                            EstLabourProdCost = 990,
+                            ActualDesignCost = 880,
+                            EstDesignCost = 880
+                        },
+                    new ProductionReport
+                    {
+                        ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
+                        BidCost = 7651,
+                        EstCost = 5110,
+                        TotalCost = 5265,
+                        ActualMtlCost = 3255,
+                        EstMtlCost = 3240,
+                        ActualLabourProdCost = 1008,
+                        EstLabourProdCost = 990,
+                        ActualDesignCost = 880,
+                        EstDesignCost = 880
+                    });
+                }
             }
         }
     }
