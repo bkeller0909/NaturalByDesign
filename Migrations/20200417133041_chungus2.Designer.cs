@@ -10,17 +10,73 @@ using NBDv2.Data;
 namespace NBDv2.Migrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20200412215959_Initial")]
-    partial class Initial
+    [Migration("20200417133041_chungus2")]
+    partial class chungus2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("MC")
-                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("NBDv2.Models.Bid", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("Amount");
+
+                    b.Property<string>("BlueprintCode")
+                        .IsRequired()
+                        .HasMaxLength(12);
+
+                    b.Property<DateTime>("EstEnd");
+
+                    b.Property<DateTime>("EstStart");
+
+                    b.Property<string>("Location");
+
+                    b.Property<int>("ProjectID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("Bids");
+                });
+
+            modelBuilder.Entity("NBDv2.Models.BidReport", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Costs");
+
+                    b.Property<int>("CostsRemaining");
+
+                    b.Property<int>("EstBID");
+
+                    b.Property<int>("EstCost");
+
+                    b.Property<int>("EstHours");
+
+                    b.Property<int>("Hours");
+
+                    b.Property<int>("HoursRemaining");
+
+                    b.Property<int>("ProjectID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("BidReport");
+                });
 
             modelBuilder.Entity("NBDv2.Models.City", b =>
                 {
@@ -145,6 +201,17 @@ namespace NBDv2.Migrations
                     b.ToTable("Inventories");
                 });
 
+            modelBuilder.Entity("NBDv2.Models.InventoryBid", b =>
+                {
+                    b.Property<int>("BidID");
+
+                    b.Property<int>("ItemID");
+
+                    b.HasKey("BidID", "ItemID");
+
+                    b.ToTable("InvBids");
+                });
+
             modelBuilder.Entity("NBDv2.Models.Labour", b =>
                 {
                     b.Property<int>("ID")
@@ -221,6 +288,7 @@ namespace NBDv2.Migrations
                     b.Property<string>("CurrentPhase");
 
                     b.Property<string>("Desc")
+                        .IsRequired()
                         .HasMaxLength(100);
 
                     b.Property<int>("DesignerID");
@@ -294,15 +362,33 @@ namespace NBDv2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Desc");
+                    b.Property<string>("Desc")
+                        .IsRequired();
 
                     b.Property<int>("Hours");
 
-                    b.Property<string>("ResponsibilityType");
+                    b.Property<string>("ResponsibilityType")
+                        .IsRequired();
 
                     b.HasKey("ID");
 
                     b.ToTable("Tasks");
+                });
+
+            modelBuilder.Entity("NBDv2.Models.Bid", b =>
+                {
+                    b.HasOne("NBDv2.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("NBDv2.Models.BidReport", b =>
+                {
+                    b.HasOne("NBDv2.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("NBDv2.Models.Client", b =>
@@ -330,6 +416,14 @@ namespace NBDv2.Migrations
                     b.HasOne("NBDv2.Models.Material", "Material")
                         .WithMany("Inventories")
                         .HasForeignKey("MaterialID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("NBDv2.Models.InventoryBid", b =>
+                {
+                    b.HasOne("NBDv2.Models.Bid", "Bid")
+                        .WithMany("InvBids")
+                        .HasForeignKey("BidID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

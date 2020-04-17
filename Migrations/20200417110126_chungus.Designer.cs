@@ -10,8 +10,8 @@ using NBDv2.Data;
 namespace NBDv2.Migrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20200403000106_init")]
-    partial class init
+    [Migration("20200417110126_chungus")]
+    partial class chungus
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

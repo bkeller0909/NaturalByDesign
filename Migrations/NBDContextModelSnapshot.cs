@@ -20,6 +20,62 @@ namespace NBDv2.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("NBDv2.Models.Bid", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("Amount");
+
+                    b.Property<string>("BlueprintCode")
+                        .IsRequired()
+                        .HasMaxLength(12);
+
+                    b.Property<DateTime>("EstEnd");
+
+                    b.Property<DateTime>("EstStart");
+
+                    b.Property<string>("Location");
+
+                    b.Property<int>("ProjectID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("Bids");
+                });
+
+            modelBuilder.Entity("NBDv2.Models.BidReport", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Costs");
+
+                    b.Property<int>("CostsRemaining");
+
+                    b.Property<int>("EstBID");
+
+                    b.Property<int>("EstCost");
+
+                    b.Property<int>("EstHours");
+
+                    b.Property<int>("Hours");
+
+                    b.Property<int>("HoursRemaining");
+
+                    b.Property<int>("ProjectID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("BidReport");
+                });
+
             modelBuilder.Entity("NBDv2.Models.City", b =>
                 {
                     b.Property<int>("ID")
@@ -141,6 +197,17 @@ namespace NBDv2.Migrations
                     b.HasIndex("MaterialID");
 
                     b.ToTable("Inventories");
+                });
+
+            modelBuilder.Entity("NBDv2.Models.InventoryBid", b =>
+                {
+                    b.Property<int>("BidID");
+
+                    b.Property<int>("ItemID");
+
+                    b.HasKey("BidID", "ItemID");
+
+                    b.ToTable("InvBids");
                 });
 
             modelBuilder.Entity("NBDv2.Models.Labour", b =>
@@ -306,6 +373,22 @@ namespace NBDv2.Migrations
                     b.ToTable("Tasks");
                 });
 
+            modelBuilder.Entity("NBDv2.Models.Bid", b =>
+                {
+                    b.HasOne("NBDv2.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("NBDv2.Models.BidReport", b =>
+                {
+                    b.HasOne("NBDv2.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("NBDv2.Models.Client", b =>
                 {
                     b.HasOne("NBDv2.Models.City", "City")
@@ -331,6 +414,14 @@ namespace NBDv2.Migrations
                     b.HasOne("NBDv2.Models.Material", "Material")
                         .WithMany("Inventories")
                         .HasForeignKey("MaterialID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("NBDv2.Models.InventoryBid", b =>
+                {
+                    b.HasOne("NBDv2.Models.Bid", "Bid")
+                        .WithMany("InvBids")
+                        .HasForeignKey("BidID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

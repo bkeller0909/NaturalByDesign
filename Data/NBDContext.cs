@@ -22,6 +22,10 @@ namespace NBDv2.Data
 
         public DbSet<Project> Projects { get; set; }
 
+        public DbSet<Bid> Bids { get; set; } // database set for the bids
+
+        public DbSet<InventoryBid> InvBids { get; set; } // database set for the inventory bid
+
         public DbSet<LabourSummary> LabourSummaries { get; set; }
 
         public DbSet<Labour> Labours { get; set; }
@@ -70,6 +74,10 @@ namespace NBDv2.Data
                 .HasForeignKey(p => p.DesignerID)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // model builder for inventory bid
+            modelBuilder.Entity<InventoryBid>()
+                .HasKey(b => new { b.BidID, b.ItemID });
+
             modelBuilder.Entity<ProjectEmployee>()
                 .HasMany<Labour>(c => c.Labours)
                 .WithOne(p => p.Team)
@@ -88,5 +96,11 @@ namespace NBDv2.Data
             modelBuilder.Entity<LabourSummary>()
                 .HasKey(t => new { t.ProjectID, t.EmployeeTypeID });
         }
+
+        
+        
+        
+
+        public DbSet<NBDv2.Models.BidReport> BidReport { get; set; }
     }
 }
