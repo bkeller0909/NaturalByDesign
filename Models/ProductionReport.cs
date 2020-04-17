@@ -14,7 +14,7 @@ namespace NBDv2.Models
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "You must enter a amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
-        public int Cost { get; set; }
+        public int ActualCost { get; set; }
 
         [Display(Name = "Estimated Bid Cost")]
         [DataType(DataType.Currency)]
@@ -32,19 +32,19 @@ namespace NBDv2.Models
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "You must enter a amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
-        public int Mtl { get; set; }
+        public int ActualMtlCost { get; set; }
 
         [Display(Name = "Estimated Bid Cost")]
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "You must enter a amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
-        public int EstMtl { get; set; }
+        public int EstMtlCost { get; set; }
 
         [Display(Name = "Estimated Bid Cost")]
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "You must enter a amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
-        public int LabourProdCost { get; set; }
+        public int ActualLabourProdCost { get; set; }
 
         [Display(Name = "Estimated Bid Cost")]
         [DataType(DataType.Currency)]
@@ -56,7 +56,7 @@ namespace NBDv2.Models
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "You must enter a amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
-        public int DesignCost { get; set; }
+        public int ActualDesignCost { get; set; }
 
         [Display(Name = "Estimated Bid Cost")]
         [DataType(DataType.Currency)]
@@ -65,7 +65,7 @@ namespace NBDv2.Models
         public int EstDesignCost { get; set; }
 
         public int ProjectID { get; set; }
-
+        
         public virtual Project Project { get; set; }
     }
 }

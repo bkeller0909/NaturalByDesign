@@ -24,6 +24,8 @@ namespace NBDv2.Data
 
         public DbSet<Bid> Bids { get; set; } // database set for the bids
 
+        public DbSet<BidReport> BidReport { get; set; } // bidreport database set
+
         public DbSet<InventoryBid> InvBids { get; set; } // database set for the inventory bid
 
         public DbSet<LabourSummary> LabourSummaries { get; set; }
@@ -42,9 +44,9 @@ namespace NBDv2.Data
 
         public DbSet<ProjectEmployee> ProjectEmployees { get; set; }
 
-        
-        
-        
+        public DbSet<ProductionReport> ProductionReports { get; set; } // dbset for production report
+
+        public DbSet<ProductionWorkReport> ProductionWorkReports { get; set; } // dbsets for production work report
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -96,11 +98,5 @@ namespace NBDv2.Data
             modelBuilder.Entity<LabourSummary>()
                 .HasKey(t => new { t.ProjectID, t.EmployeeTypeID });
         }
-
-        
-        
-        
-
-        public DbSet<NBDv2.Models.BidReport> BidReport { get; set; }
     }
 }

@@ -13,16 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.EstBID)
+                @Html.DisplayNameFor(model => model.EstBid)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Hours)
+                @Html.DisplayNameFor(model => model.ActlHours)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EstHours)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Costs)
+                @Html.DisplayNameFor(model => model.ActlCosts)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EstCost)
@@ -43,16 +43,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.EstBID)
+                @Html.DisplayFor(modelItem => item.EstBid)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Hours)
+                @Html.DisplayFor(modelItem => item.ActlHours)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EstHours)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Costs)
+                @Html.DisplayFor(modelItem => item.ActlCosts)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EstCost)

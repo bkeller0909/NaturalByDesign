@@ -10,23 +10,23 @@ using NBDv2.Models;
 
 namespace NBDv2.Controllers
 {
-    public class BidReportsController : Controller
+    public class ProductionWorkReportsController : Controller
     {
         private readonly NBDContext _context;
 
-        public BidReportsController(NBDContext context)
+        public ProductionWorkReportsController(NBDContext context)
         {
             _context = context;
         }
 
-        // GET: BidReports
+        // GET: ProductionWorkReports
         public async Task<IActionResult> Index()
         {
-            var nBDContext = _context.BidReport.Include(b => b.Project);
+            var nBDContext = _context.ProductionWorkReports.Include(p => p.Project);
             return View(await nBDContext.ToListAsync());
         }
 
-        // GET: BidReports/Details/5
+        // GET: ProductionWorkReports/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +34,42 @@ namespace NBDv2.Controllers
                 return NotFound();
             }
 
-            var bidReport = await _context.BidReport
-                .Include(b => b.Project)
+            var productionWorkReport = await _context.ProductionWorkReports
+                .Include(p => p.Project)
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (bidReport == null)
+            if (productionWorkReport == null)
             {
                 return NotFound();
             }
 
-            return View(bidReport);
+            return View(productionWorkReport);
         }
 
-        // GET: BidReports/Create
+        // GET: ProductionWorkReports/Create
         public IActionResult Create()
         {
             ViewData["ProjectID"] = new SelectList(_context.Projects, "ID", "Desc");
             return View();
         }
 
-        // POST: BidReports/Create
+        // POST: ProductionWorkReports/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,EstBid,ActlHours,EstHours,ActlCosts,EstCost,HoursRemaining,CostsRemaining,ProjectID")] BidReport bidReport)
+        public async Task<IActionResult> Create([Bind("ID,Submitter,SubmissionDate,ProjectID")] ProductionWorkReport productionWorkReport)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(bidReport);
+                _context.Add(productionWorkReport);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjectID"] = new SelectList(_context.Projects, "ID", "Desc", bidReport.ProjectID);
-            return View(bidReport);
+            ViewData["ProjectID"] = new SelectList(_context.Projects, "ID", "Desc", productionWorkReport.ProjectID);
+            return View(productionWorkReport);
         }
 
-        // GET: BidReports/Edit/5
+        // GET: ProductionWorkReports/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +77,23 @@ namespace NBDv2.Controllers
                 return NotFound();
             }
 
-            var bidReport = await _context.BidReport.FindAsync(id);
-            if (bidReport == null)
+            var productionWorkReport = await _context.ProductionWorkReports.FindAsync(id);
+            if (productionWorkReport == null)
             {
                 return NotFound();
             }
-            ViewData["ProjectID"] = new SelectList(_context.Projects, "ID", "Desc", bidReport.ProjectID);
-            return View(bidReport);
+            ViewData["ProjectID"] = new SelectList(_context.Projects, "ID", "Desc", productionWorkReport.ProjectID);
+            return View(productionWorkReport);
         }
 
-        // POST: BidReports/Edit/5
+        // POST: ProductionWorkReports/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,EstBid,ActlHours,EstHours,ActlCosts,EstCost,HoursRemaining,CostsRemaining,ProjectID")] BidReport bidReport)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Submitter,SubmissionDate,ProjectID")] ProductionWorkReport productionWorkReport)
         {
-            if (id != bidReport.ID)
+            if (id != productionWorkReport.ID)
             {
                 return NotFound();
             }
@@ -102,12 +102,12 @@ namespace NBDv2.Controllers
             {
                 try
                 {
-                    _context.Update(bidReport);
+                    _context.Update(productionWorkReport);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BidReportExists(bidReport.ID))
+                    if (!ProductionWorkReportExists(productionWorkReport.ID))
                     {
                         return NotFound();
                     }
@@ -118,11 +118,11 @@ namespace NBDv2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjectID"] = new SelectList(_context.Projects, "ID", "Desc", bidReport.ProjectID);
-            return View(bidReport);
+            ViewData["ProjectID"] = new SelectList(_context.Projects, "ID", "Desc", productionWorkReport.ProjectID);
+            return View(productionWorkReport);
         }
 
-        // GET: BidReports/Delete/5
+        // GET: ProductionWorkReports/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,31 +130,31 @@ namespace NBDv2.Controllers
                 return NotFound();
             }
 
-            var bidReport = await _context.BidReport
-                .Include(b => b.Project)
+            var productionWorkReport = await _context.ProductionWorkReports
+                .Include(p => p.Project)
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (bidReport == null)
+            if (productionWorkReport == null)
             {
                 return NotFound();
             }
 
-            return View(bidReport);
+            return View(productionWorkReport);
         }
 
-        // POST: BidReports/Delete/5
+        // POST: ProductionWorkReports/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var bidReport = await _context.BidReport.FindAsync(id);
-            _context.BidReport.Remove(bidReport);
+            var productionWorkReport = await _context.ProductionWorkReports.FindAsync(id);
+            _context.ProductionWorkReports.Remove(productionWorkReport);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BidReportExists(int id)
+        private bool ProductionWorkReportExists(int id)
         {
-            return _context.BidReport.Any(e => e.ID == id);
+            return _context.ProductionWorkReports.Any(e => e.ID == id);
         }
     }
 }

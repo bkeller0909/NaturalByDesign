@@ -1,0 +1,77 @@
+﻿@model NBDv2.Models.ProductionReport
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>ProductionReport</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ActualCost" class="control-label"></label>
+                <input asp-for="ActualCost" class="form-control" />
+                <span asp-validation-for="ActualCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstCost" class="control-label"></label>
+                <input asp-for="EstCost" class="form-control" />
+                <span asp-validation-for="EstCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalCost" class="control-label"></label>
+                <input asp-for="TotalCost" class="form-control" />
+                <span asp-validation-for="TotalCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActualMtlCost" class="control-label"></label>
+                <input asp-for="ActualMtlCost" class="form-control" />
+                <span asp-validation-for="ActualMtlCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstMtlCost" class="control-label"></label>
+                <input asp-for="EstMtlCost" class="form-control" />
+                <span asp-validation-for="EstMtlCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActualLabourProdCost" class="control-label"></label>
+                <input asp-for="ActualLabourProdCost" class="form-control" />
+                <span asp-validation-for="ActualLabourProdCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstLabourProdCost" class="control-label"></label>
+                <input asp-for="EstLabourProdCost" class="form-control" />
+                <span asp-validation-for="EstLabourProdCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActualDesignCost" class="control-label"></label>
+                <input asp-for="ActualDesignCost" class="form-control" />
+                <span asp-validation-for="ActualDesignCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstDesignCost" class="control-label"></label>
+                <input asp-for="EstDesignCost" class="form-control" />
+                <span asp-validation-for="EstDesignCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectID" class="control-label"></label>
+                <select asp-for="ProjectID" class ="form-control" asp-items="ViewBag.ProjectID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

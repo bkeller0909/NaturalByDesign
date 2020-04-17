@@ -14,13 +14,13 @@ namespace NBDv2.Models
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "You must enter a amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
-        public int EstBID { get; set; }
+        public int EstBid { get; set; }
 
         [Display(Name = "Estimated Hours")]
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "You must enter a amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
-        public int Hours { get; set; }
+        public int ActlHours { get; set; }
 
         [Display(Name = "Current Hours")]
         [DataType(DataType.Currency)]
@@ -32,7 +32,7 @@ namespace NBDv2.Models
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "You must enter a amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
-        public int Costs { get; set; }
+        public int ActlCosts { get; set; }
 
         [Display(Name = "Total Estimated Cost")]
         [DataType(DataType.Currency)]

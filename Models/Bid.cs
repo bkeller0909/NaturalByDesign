@@ -10,9 +10,7 @@ namespace NBDv2.Models
     {
         public Bid()
         {
-            //BidLBs = new HashSet<BidLB>();
             InvBids = new HashSet<InventoryBid>();
-            //LabourUnits = new HashSet<LabourUnit>();
         }
 
         public int ID { get; set; }
@@ -42,15 +40,10 @@ namespace NBDv2.Models
         public double Amount { get; set; }
 
         [Display(Name = "Location")]
-        //[Required(ErrorMessage = "You must enter a location")]
         [RegularExpression("^[A-Za-z\\s\\d]+$", ErrorMessage = "Please enter valid amount.")]
         public string Location { get; set; }
 
         public ICollection<InventoryBid> InvBids { get; set; }
-
-        //public virtual ICollection<BidLB>  BidLBs { get; set; }
-
-        //public virtual ICollection<LabourUnit> LabourUnits { get; set; }
 
         public int ProjectID { get; set; }
 
