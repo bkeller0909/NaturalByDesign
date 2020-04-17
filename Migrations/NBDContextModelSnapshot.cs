@@ -146,13 +146,9 @@ namespace NBDv2.Migrations
                     b.Property<string>("LastName")
                         .IsRequired();
 
-                    b.Property<int?>("ProjectEmployeeID");
-
                     b.HasKey("ID");
 
                     b.HasIndex("EmployeeTypeID");
-
-                    b.HasIndex("ProjectEmployeeID");
 
                     b.ToTable("Employees");
                 });
@@ -273,13 +269,13 @@ namespace NBDv2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ActualCost");
-
                     b.Property<int>("ActualDesignCost");
 
                     b.Property<int>("ActualLabourProdCost");
 
                     b.Property<int>("ActualMtlCost");
+
+                    b.Property<int>("BidCost");
 
                     b.Property<int>("EstCost");
 
@@ -457,10 +453,6 @@ namespace NBDv2.Migrations
                         .WithMany("Employees")
                         .HasForeignKey("EmployeeTypeID")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("NBDv2.Models.ProjectEmployee")
-                        .WithMany("Employees")
-                        .HasForeignKey("ProjectEmployeeID");
                 });
 
             modelBuilder.Entity("NBDv2.Models.Inventory", b =>
@@ -537,7 +529,7 @@ namespace NBDv2.Migrations
             modelBuilder.Entity("NBDv2.Models.ProjectEmployee", b =>
                 {
                     b.HasOne("NBDv2.Models.Employee", "Employee")
-                        .WithMany()
+                        .WithMany("ProjectEmployees")
                         .HasForeignKey("EmployeeID")
                         .OnDelete(DeleteBehavior.Cascade);
 

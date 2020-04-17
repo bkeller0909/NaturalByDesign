@@ -10,8 +10,8 @@ using NBDv2.Data;
 namespace NBDv2.Migrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20200417133041_chungus2")]
-    partial class chungus2
+    [Migration("20200417220025_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,17 +55,17 @@ namespace NBDv2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Costs");
+                    b.Property<int>("ActlCosts");
+
+                    b.Property<int>("ActlHours");
 
                     b.Property<int>("CostsRemaining");
 
-                    b.Property<int>("EstBID");
+                    b.Property<int>("EstBid");
 
                     b.Property<int>("EstCost");
 
                     b.Property<int>("EstHours");
-
-                    b.Property<int>("Hours");
 
                     b.Property<int>("HoursRemaining");
 
@@ -148,13 +148,9 @@ namespace NBDv2.Migrations
                     b.Property<string>("LastName")
                         .IsRequired();
 
-                    b.Property<int?>("ProjectEmployeeID");
-
                     b.HasKey("ID");
 
                     b.HasIndex("EmployeeTypeID");
-
-                    b.HasIndex("ProjectEmployeeID");
 
                     b.ToTable("Employees");
                 });
@@ -267,6 +263,60 @@ namespace NBDv2.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Materials");
+                });
+
+            modelBuilder.Entity("NBDv2.Models.ProductionReport", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ActualDesignCost");
+
+                    b.Property<int>("ActualLabourProdCost");
+
+                    b.Property<int>("ActualMtlCost");
+
+                    b.Property<int>("BidCost");
+
+                    b.Property<int>("EstCost");
+
+                    b.Property<int>("EstDesignCost");
+
+                    b.Property<int>("EstLabourProdCost");
+
+                    b.Property<int>("EstMtlCost");
+
+                    b.Property<int>("ProjectID");
+
+                    b.Property<int>("TotalCost");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("ProductionReports");
+                });
+
+            modelBuilder.Entity("NBDv2.Models.ProductionWorkReport", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProjectID");
+
+                    b.Property<DateTime>("SubmissionDate");
+
+                    b.Property<string>("Submitter")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("ProductionWorkReports");
                 });
 
             modelBuilder.Entity("NBDv2.Models.Project", b =>
@@ -405,10 +455,6 @@ namespace NBDv2.Migrations
                         .WithMany("Employees")
                         .HasForeignKey("EmployeeTypeID")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("NBDv2.Models.ProjectEmployee")
-                        .WithMany("Employees")
-                        .HasForeignKey("ProjectEmployeeID");
                 });
 
             modelBuilder.Entity("NBDv2.Models.Inventory", b =>
@@ -453,6 +499,22 @@ namespace NBDv2.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("NBDv2.Models.ProductionReport", b =>
+                {
+                    b.HasOne("NBDv2.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("NBDv2.Models.ProductionWorkReport", b =>
+                {
+                    b.HasOne("NBDv2.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("NBDv2.Models.Project", b =>
                 {
                     b.HasOne("NBDv2.Models.Client", "Client")
@@ -469,7 +531,7 @@ namespace NBDv2.Migrations
             modelBuilder.Entity("NBDv2.Models.ProjectEmployee", b =>
                 {
                     b.HasOne("NBDv2.Models.Employee", "Employee")
-                        .WithMany()
+                        .WithMany("ProjectEmployees")
                         .HasForeignKey("EmployeeID")
                         .OnDelete(DeleteBehavior.Cascade);
 

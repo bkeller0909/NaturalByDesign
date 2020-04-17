@@ -10,7 +10,7 @@
                 <h1>Production Plans</h1>
             </div>
             <div class="col-sm text-right">
-                <a asp-action="Create"><button class="btn btn-success btn-lg">New Plan</button></a>
+                <a asp-action="Create" class="btn btn-success btn-lg">New Plan</a>
             </div>
         </div>
 
@@ -43,8 +43,7 @@
                 </td>
 
 				<td>
-					<a asp-action="Details" asp-route-id="@item.ID"><button class="btn btn-outline-success float-right">Details</button></a>
-					<a asp-action="Edit" asp-route-id="@item.ID"><button class="btn btn-outline-success float-right">Edit</button></a>
+					<a asp-action="Details" asp-route-id="@item.ID" class="btn btn-outline-success float-right">Details</a>
 				</td>
             </tr>
         }

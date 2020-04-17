@@ -10,7 +10,7 @@
                 <h1>Clients</h1>
             </div>
             <div class="col-sm text-right">
-                <a asp-action="Create"><button class="btn btn-success btn-lg">New Client</button></a>
+                <a asp-action="Create" class="btn btn-success btn-lg">New Client</a>
             </div>
         </div>
 
@@ -39,8 +39,8 @@
                 @Html.DisplayFor(modelItem => item.Province)
             </td>
 			<td>
-				<a asp-action="Details" asp-route-id="@item.ID"><button class="btn btn-outline-success float-right">Details</button></a>
-				<a asp-action="Edit" asp-route-id="@item.ID"><button class="btn btn-outline-success float-right">Edit</button></a>
+				<a asp-action="Details" asp-route-id="@item.ID" class="btn btn-outline-success float-right">Details</a>
+				<a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-outline-success float-right">Edit</a>
 			</td>
         </tr>
 }

@@ -396,49 +396,49 @@ namespace NBDv2.Data
                         new Labour
                         {
                             EstHours = 12,
-                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken").ID,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken" && p.Project.Name == "LS Mall").ID,
                             TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Bid Process").ID
                         },
                         new Labour
                         {
                             EstHours = 6,
-                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Monica" && p.Employee.LastName == "Goce").ID,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Monica" && p.Employee.LastName == "Goce" && p.Project.Name == "LS Mall").ID,
                             TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Contour Surface").ID
                         },
                         new Labour
                         {
                             EstHours = 8,
-                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Bert" && p.Employee.LastName == "Swenson").ID,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Bert" && p.Employee.LastName == "Swenson" && p.Project.Name == "LS Mall").ID,
                             TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Install Large Plants").ID
                         },
                         new Labour
                         {
                             EstHours = 4,
-                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Jerry" && p.Employee.LastName == "Jones").ID,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Jerry" && p.Employee.LastName == "Jones" && p.Project.Name == "LS Mall").ID,
                             TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Situate Fountain & Pots").ID
                         },
                         new Labour
                         {
                             EstHours = 5,
-                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken").ID,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken" && p.Project.Name == "LS Mall").ID,
                             TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Complete final blueprint").ID
                         },
                         new Labour
                         {
                             EstHours = 3,
-                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken").ID,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken" && p.Project.Name == "LS Mall").ID,
                             TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Oversee installation of fountain & pots").ID
                         },
                         new Labour
                         {
                             EstHours = 1,
-                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken").ID,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken" && p.Project.Name == "LS Mall").ID,
                             TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Inspect contouring").ID
                         },
                         new Labour
                         {
                             EstHours = 1,
-                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken").ID,
+                            TeamID = context.ProjectEmployees.FirstOrDefault(p => p.Employee.FirstName == "Tamara" && p.Employee.LastName == "Bakken" && p.Project.Name == "LS Mall").ID,
                             TaskID = context.Tasks.FirstOrDefault(t => t.Desc == "Inspect finished site").ID
                         });
                     context.SaveChanges();
@@ -622,43 +622,43 @@ namespace NBDv2.Data
                     context.SaveChanges();
                 }
 
-                if (!context.BidReport.Any())
-                {
-                    context.BidReport.AddRange(
-                        new BidReport
-                        {
-                            ProjectID = context.Projects.FirstOrDefault(p => p.Name == "Astor").ID,
-                            EstBid = 13000,
-                            ActlHours = 6,
-                            EstHours = 20,
-                            ActlCosts = 240,
-                            EstCost = 800,
-                            HoursRemaining = 14,
-                            CostsRemaining = 660 
-                        },
-                    new BidReport
-                    {
-                        ProjectID = context.Projects.FirstOrDefault(p => p.Name == "Fremont").ID,
-                        EstBid = 16250,
-                        ActlHours = 9,
-                        EstHours = 25,
-                        ActlCosts = 360,
-                        EstCost = 1000,
-                        HoursRemaining = 16,
-                        CostsRemaining = 640
-                    },
-                    new BidReport
-                    {
-                        ProjectID = context.Projects.FirstOrDefault(p => p.Name == "SJSU").ID,
-                        EstBid = 5000,
-                        ActlHours = 9,
-                        EstHours = 8,
-                        ActlCosts = 360,
-                        EstCost = 320,
-                        HoursRemaining = 1,
-                        CostsRemaining = 40
-                    });
-                }
+                //if (!context.BidReport.Any())
+                //{
+                //    context.BidReport.AddRange(
+                //        new BidReport
+                //        {
+                //            ProjectID = context.Projects.FirstOrDefault(p => p.Name == "Astor").ID,
+                //            EstBid = 13000,
+                //            ActlHours = 6,
+                //            EstHours = 20,
+                //            ActlCosts = 240,
+                //            EstCost = 800,
+                //            HoursRemaining = 14,
+                //            CostsRemaining = 660 
+                //        },
+                //    new BidReport
+                //    {
+                //        ProjectID = context.Projects.FirstOrDefault(p => p.Name == "Fremont").ID,
+                //        EstBid = 16250,
+                //        ActlHours = 9,
+                //        EstHours = 25,
+                //        ActlCosts = 360,
+                //        EstCost = 1000,
+                //        HoursRemaining = 16,
+                //        CostsRemaining = 640
+                //    },
+                //    new BidReport
+                //    {
+                //        ProjectID = context.Projects.FirstOrDefault(p => p.Name == "SJSU").ID,
+                //        EstBid = 5000,
+                //        ActlHours = 9,
+                //        EstHours = 8,
+                //        ActlCosts = 360,
+                //        EstCost = 320,
+                //        HoursRemaining = 1,
+                //        CostsRemaining = 40
+                //    });
+                //}
 
                 if (!context.ProductionReports.Any())
                 {

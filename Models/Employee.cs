@@ -15,7 +15,7 @@ namespace NBDv2.Models
         public Employee()
         {
             Projects = new HashSet<Project>();
-            
+            ProjectEmployees = new HashSet<ProjectEmployee>();
         }
 
         [Display(Name = "Full Name")]
@@ -43,6 +43,7 @@ namespace NBDv2.Models
 
         public virtual ICollection<Project> Projects { get; set; }
 
-       
+        public virtual ICollection<ProjectEmployee> ProjectEmployees { get; set; }
+
     }
 }

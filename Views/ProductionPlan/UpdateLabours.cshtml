@@ -1,0 +1,53 @@
+﻿@model NBDv2.Models.Project
+
+@{
+    ViewData["Title"] = "UpdateLabours";
+}
+
+<h1>UpdateLabours</h1>
+
+<h4>Project</h4>
+<hr />
+<div class="container">
+    
+    <form asp-action="UpdateLabours">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @{
+            List<NBDv2.ViewModel.OptionVM> potCheckBoxes = ViewBag.project;
+            foreach (var checkbox in potCheckBoxes)
+            {
+
+                @:<tr>
+                    @:<td>
+                        <input type=""
+                               id="@checkbox.ID@checkbox.ID"
+                               name="selectedMatOptions"
+                               value="@checkbox.ID"
+                               @(Html.Raw(checkbox.Assigned ? "checked=\"checked\"" : "")) />
+
+                        <input type="number"
+                               id="num_@checkbox.ID@checkbox.ID"
+                               name="selectedMatQuantity"
+                               value="@checkbox.Quantity"
+                               @(Html.Raw(checkbox.Assigned ? "" : "disabled=\"disabled\"")) />
+
+                        @checkbox.DisplayText @:&nbsp;&nbsp;
+                    @:</td>
+                @:</tr>
+            }
+        }
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-success" />
+        </div>
+    </form>
+    </div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

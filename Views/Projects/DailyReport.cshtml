@@ -1,4 +1,4 @@
-﻿@model NBDv2.Models.Project
+﻿@model NBDv2.ViewModel.ProdReportVM
 
 
 @{
@@ -7,36 +7,81 @@
 
 <h1>DailyReport</h1>
 <form asp-action="DailyReport">
-    <label class="control-label">Select by Date:</label>
-    @Html.DropDownList("Dates", null, new { @value = ViewData["Date"] })
-    <button value="submit"></button>
+    <div class="form-group">
+        <label class="control-label">Select by Date:</label>
+        <div class="form-row">
+            <div class="col-md-6">
+                @Html.DropDownList("FilterDate", null, new { @value = "filterDate", @class = "form-control" })
+            </div>
+            <div class="col-md-6">
+                <button value="submit" class="btn btn-success btn-lg">Select</button>
+            </div>
+        </div>
+    </div>
 </form>
-<div id="materials">
-</div>
-<div id="labours">
-    @Html.RenderPartialAsync("/Projects/_ListOfMaterials.cshtml", Model, ViewBag.Date)
-</div>
 
-
+<hr />
+<hr />
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <div id="materials">
+        <h4>Materials Used</h4>
+        <div class="border-secondary rounded" style="border:solid">
+            @if (Model.Materials != null)
+            {
+                <table class="table">
+                    <tr>
+                        <th>Code</th>
+                        <th>Quantity</th>
+                        <th>Unit Cost</th>
+                        <th>Ext. Cost</th>
+
+                    </tr>
+
+                    @foreach (var item in Model.Materials)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Inventory.Material.Desc)</td>
+                            <td>@Html.DisplayFor(modelItem => item.MatActQty)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Inventory.AvgNetPrice)</td>
+                            <td>@Html.DisplayFor(modelItem => item.MatTotalPrice)</td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <h5>No Materials Used Today</h5>
+            }
+        </div>
+    </div>
+
+
+
+    <div id="labours">
+        <h4>Materials Used</h4>
+        <div class="border-secondary rounded" style="border:solid">
+            @if (Model.Labour == null)
+            {
+                <table>
+                    @foreach (var item in Model.Labour)
+                    {
+                       
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Team.Employee.FullName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Team.Employee.EmployeeType.HourlyPay)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ExtPrice)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Task.Desc)</td>
+                            </tr>
+                        
+                    }
+                </table>
+            }
+            else
+            {
+                <h5>No Assignments Completed Today</h5>
+            }
+        </div>
+    </div>
 </div>
 
-@section Scripts {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#materials').load('/Projects/ProdReportMaterials/@Model.ID');
-            $()
-        })
-
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var id =
-            $('#labours').load('/Projects/ProdReportLabours/@Model.ID');
-            $()
-        })
-
-    </script>
-}

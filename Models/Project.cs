@@ -79,6 +79,7 @@ namespace NBDv2.Models
 
         public virtual Employee Designer { get; set; }
 
+        [Display(Name ="Production")]
         public virtual ICollection<ProjectMaterials> ProjectMaterials { get; set; }
 
         public virtual ICollection<ProjectEmployee> ProjectEmployees { get; set; }

@@ -42,6 +42,5 @@ namespace NBDv2.Models
         public virtual Material Material { get; set; }
 
         public virtual ICollection<ProjectMaterials> ProjectMaterials { get; set; }
-
     }
 }

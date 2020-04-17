@@ -1,0 +1,99 @@
+﻿@model NBDv2.Models.Project
+
+@{
+    ViewData["Title"] = "UpdateMaterials";
+}
+
+<h1>Update Production Plan</h1>
+
+<h4>Update Materials</h4>
+<hr />
+<div class="form-group">
+    <div class="col-md-offset-1">
+        <table>
+
+            @{
+                List<NBDv2.ViewModel.OptionVM> plantCheckboxes = ViewBag.Plants;
+                foreach (var checkbox in plantCheckboxes)
+                {
+
+                    @:<tr>
+                        @:<td>
+                            <input type="checkbox"
+                                   id="@checkbox.ID@checkbox.ID"
+                                   name="selectedMatOptions"
+                                   value="@checkbox.ID"
+                                   @(Html.Raw(checkbox.Assigned ? "checked=\"checked\"" : "")) />
+
+                            <input type="number"
+                                   id="num_@checkbox.ID@checkbox.ID"
+                                   name="selectedMatQuantity"
+                                   value="@checkbox.Quantity"
+                                   @(Html.Raw(checkbox.Assigned ? "" : "disabled=\"disabled\"")) />
+
+                            @checkbox.DisplayText @:&nbsp;&nbsp;
+                        @:</td>
+                    @:</tr>
+                }
+            }
+            @{
+                List<NBDv2.ViewModel.OptionVM> potCheckBoxes = ViewBag.Pottery;
+                foreach (var checkbox in potCheckBoxes)
+                {
+
+                    @:<tr>
+                        @:<td>
+                            <input type="checkbox"
+                                   id="@checkbox.ID@checkbox.ID"
+                                   name="selectedMatOptions"
+                                   value="@checkbox.ID"
+                                   @(Html.Raw(checkbox.Assigned ? "checked=\"checked\"" : "")) />
+
+                            <input type="number"
+                                   id="num_@checkbox.ID@checkbox.ID"
+                                   name="selectedMatQuantity"
+                                   value="@checkbox.Quantity"
+                                   @(Html.Raw(checkbox.Assigned ? "" : "disabled=\"disabled\"")) />
+
+                            @checkbox.DisplayText @:&nbsp;&nbsp;
+                        @:</td>
+                    @:</tr>
+                }
+            }
+            @{
+                List<NBDv2.ViewModel.OptionVM> matCheckBoxes = ViewBag.Materials;
+                foreach (var checkbox in matCheckBoxes)
+                {
+
+                    @:<tr>
+                        @:<td>
+                            <input type="checkbox"
+                                   id="@checkbox.ID@checkbox.ID"
+                                   name="selectedMatOptions"
+                                   value="@checkbox.ID"
+                                   @(Html.Raw(checkbox.Assigned ? "checked=\"checked\"" : "")) />
+
+                            <input type="number"
+                                   id="num_@checkbox.ID@checkbox.ID"
+                                   name="selectedMatQuantity"
+                                   value="@checkbox.Quantity"
+                                   @(Html.Raw(checkbox.Assigned ? "" : "disabled=\"disabled\"")) />
+
+                            @checkbox.DisplayText @:&nbsp;&nbsp;
+                        @:</td>
+                    @:</tr>
+                }
+            }
+        </table>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Details" asp-route-id="@Model.ID">Back To Production Plan</a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script src="~/js/SelectQuantity.js"></script>
+}
