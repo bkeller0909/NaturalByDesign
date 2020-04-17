@@ -57,7 +57,7 @@ namespace NBDv2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,ActualCost,EstCost,TotalCost,ActualMtlCost,EstMtlCost,ActualLabourProdCost,EstLabourProdCost,ActualDesignCost,EstDesignCost,ProjectID")] ProductionReport productionReport)
+        public async Task<IActionResult> Create([Bind("ID,BidCost,EstCost,TotalCost,ActualMtlCost,EstMtlCost,ActualLabourProdCost,EstLabourProdCost,ActualDesignCost,EstDesignCost,ProjectID")] ProductionReport productionReport)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace NBDv2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,ActualCost,EstCost,TotalCost,ActualMtlCost,EstMtlCost,ActualLabourProdCost,EstLabourProdCost,ActualDesignCost,EstDesignCost,ProjectID")] ProductionReport productionReport)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,BidCost,EstCost,TotalCost,ActualMtlCost,EstMtlCost,ActualLabourProdCost,EstLabourProdCost,ActualDesignCost,EstDesignCost,ProjectID")] ProductionReport productionReport)
         {
             if (id != productionReport.ID)
             {

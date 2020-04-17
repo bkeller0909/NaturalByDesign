@@ -10,31 +10,31 @@ namespace NBDv2.Models
     {
         public int ID { get; set; }
 
-        [Display(Name = "Estimated Bid Cost")]
+        [Display(Name = "Estimated Bid")]
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "You must enter a amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int EstBid { get; set; }
 
-        [Display(Name = "Estimated Hours")]
+        [Display(Name = "Actual Design Hours")]
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "You must enter a amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int ActlHours { get; set; }
 
-        [Display(Name = "Current Hours")]
+        [Display(Name = "Estimated Design Hours")]
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "You must enter a amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int EstHours { get; set; }
 
-        [Display(Name = "CurrentCost")]
+        [Display(Name = "Actual Design Cost")]
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "You must enter a amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int ActlCosts { get; set; }
 
-        [Display(Name = "Total Estimated Cost")]
+        [Display(Name = "Estimated Design Cost")]
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "You must enter a amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
@@ -46,7 +46,7 @@ namespace NBDv2.Models
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int HoursRemaining { get; set; }
 
-        [Display(Name = "Costs Remaining")]
+        [Display(Name = "Remaining Costs")]
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "You must enter a amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
