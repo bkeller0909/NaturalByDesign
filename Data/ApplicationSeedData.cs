@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+// Created by Brandon
+
 namespace NBDv2.Data
 {
     public static class ApplicationSeedData
@@ -13,7 +15,7 @@ namespace NBDv2.Data
         {
             //Create Roles
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            string[] roleNames = { "Admin", "Supervisor", "Security"};
+            string[] roleNames = { "Admin", "Designer", "Design Manager", "Work Manager", "Worker", "Security"};
             IdentityResult roleResult;
             foreach (var roleName in roleNames)
             {
@@ -56,19 +58,34 @@ namespace NBDv2.Data
                     userManager.AddToRoleAsync(user, "Security").Wait();
                 }
             }
-            if (userManager.FindByEmailAsync("super1@outlook.com").Result == null)
+            if (userManager.FindByEmailAsync("designer1@outlook.com").Result == null)
             {
                 IdentityUser user = new IdentityUser
                 {
-                    UserName = "super1@outlook.com",
-                    Email = "super1@outlook.com"
+                    UserName = "designer1@outlook.com",
+                    Email = "designer1@outlook.com"
                 };
 
                 IdentityResult result = userManager.CreateAsync(user, "password").Result;
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user, "Supervisor").Wait();
+                    userManager.AddToRoleAsync(user, "Designer").Wait();
+                }
+            }
+            if (userManager.FindByEmailAsync("worker1@outlook.com").Result == null)
+            {
+                IdentityUser user = new IdentityUser
+                {
+                    UserName = "worker1@outlook.com",
+                    Email = "worker1@outlook.com"
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "password").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "Worker").Wait();
                 }
             }
             if (userManager.FindByEmailAsync("user1@outlook.com").Result == null)

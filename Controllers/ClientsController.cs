@@ -11,7 +11,7 @@ using NBDv2.Models;
 
 namespace NBDv2.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]
     public class ClientsController : Controller
     {
         private readonly NBDContext _context;

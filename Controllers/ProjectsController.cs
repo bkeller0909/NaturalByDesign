@@ -14,7 +14,7 @@ using NBDv2.ViewModel;
 
 namespace NBDv2.Controllers
 {
-    //[Authorize(Roles = "Admin, Supervisor")]
+    [Authorize(Roles = "Admin, Designer, Design Manager, Worker, Work Manager")]
     public class ProjectsController : Controller
     {
         private readonly NBDContext _context;

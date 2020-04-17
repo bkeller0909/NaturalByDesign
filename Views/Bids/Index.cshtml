@@ -4,16 +4,21 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <h1>Bids</h1>
+            </div>
+            <div class="col-sm text-right">
+                <a asp-action="Create"><button class="btn btn-success btn-lg">New Bid</button></a>
+            </div>
+        </div>
+    </div>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BlueprintCode)
+                @Html.DisplayNameFor(model => model.BidID)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EstStart)
@@ -37,7 +42,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.BlueprintCode)
+                @Html.DisplayFor(modelItem => item.BidID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EstStart)
