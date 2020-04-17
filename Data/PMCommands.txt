@@ -1,6 +1,5 @@
 ﻿Add-Migration -Context NBDContext
 Update-Database -Context NBDContext
-Update-Database -Context ApplicationDbContext
 
 Updating Login and Roles seed data:
 add-migration (name) -context ApplicationDbContext

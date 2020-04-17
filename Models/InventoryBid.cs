@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+// Created by Brandon
+
 namespace NBDv2.Models
 {
     public class InventoryBid
@@ -12,7 +14,5 @@ namespace NBDv2.Models
         public virtual Bid Bid { get; set; }
 
         public int ItemID { get; set; }
-
-        //public virtual Item Item { get; set; }
     }
 }

@@ -678,16 +678,16 @@ namespace NBDv2.Data
                         },
                     new ProductionReport
                     {
-                        ProjectID = context.Projects.FirstOrDefault(p => p.Name == "LS Mall").ID,
-                        BidCost = 7651,
-                        EstCost = 5110,
-                        TotalCost = 5265,
-                        ActualMtlCost = 3255,
-                        EstMtlCost = 3240,
-                        ActualLabourProdCost = 1008,
-                        EstLabourProdCost = 990,
-                        ActualDesignCost = 880,
-                        EstDesignCost = 880
+                        ProjectID = context.Projects.FirstOrDefault(p => p.Name == "IBM").ID,
+                        BidCost = 11500,
+                        EstCost = 6290,
+                        TotalCost = 5705,
+                        ActualMtlCost = 3525,
+                        EstMtlCost = 3850,
+                        ActualLabourProdCost = 1260,
+                        EstLabourProdCost = 1440,
+                        ActualDesignCost = 920,
+                        EstDesignCost = 1000
                     });
                 }
             }

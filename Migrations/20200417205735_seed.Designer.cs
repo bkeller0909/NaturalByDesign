@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NBDv2.Data;
 
 namespace NBDv2.Migrations
 {
     [DbContext(typeof(NBDContext))]
-    partial class NBDContextModelSnapshot : ModelSnapshot
+    [Migration("20200417205735_seed")]
+    partial class seed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,7 +30,7 @@ namespace NBDv2.Migrations
 
                     b.Property<double>("Amount");
 
-                    b.Property<string>("BidID")
+                    b.Property<string>("BlueprintCode")
                         .IsRequired()
                         .HasMaxLength(12);
 
@@ -148,15 +150,11 @@ namespace NBDv2.Migrations
 
                     b.Property<int?>("ProjectEmployeeID");
 
-                    b.Property<int?>("TeamID");
-
                     b.HasKey("ID");
 
                     b.HasIndex("EmployeeTypeID");
 
                     b.HasIndex("ProjectEmployeeID");
-
-                    b.HasIndex("TeamID");
 
                     b.ToTable("Employees");
                 });
@@ -431,31 +429,6 @@ namespace NBDv2.Migrations
                     b.ToTable("Tasks");
                 });
 
-            modelBuilder.Entity("NBDv2.Models.Team", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("DepartmentDescription")
-                        .IsRequired()
-                        .HasMaxLength(250);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.Property<int>("ProductionID");
-
-                    b.Property<int?>("ProjectsID");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ProjectsID");
-
-                    b.ToTable("Teams");
-                });
-
             modelBuilder.Entity("NBDv2.Models.Bid", b =>
                 {
                     b.HasOne("NBDv2.Models.Project", "Project")
@@ -490,10 +463,6 @@ namespace NBDv2.Migrations
                     b.HasOne("NBDv2.Models.ProjectEmployee")
                         .WithMany("Employees")
                         .HasForeignKey("ProjectEmployeeID");
-
-                    b.HasOne("NBDv2.Models.Team")
-                        .WithMany("Employees")
-                        .HasForeignKey("TeamID");
                 });
 
             modelBuilder.Entity("NBDv2.Models.Inventory", b =>
@@ -591,13 +560,6 @@ namespace NBDv2.Migrations
                         .WithMany("ProjectMaterials")
                         .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("NBDv2.Models.Team", b =>
-                {
-                    b.HasOne("NBDv2.Models.Project", "Projects")
-                        .WithMany()
-                        .HasForeignKey("ProjectsID");
                 });
 #pragma warning restore 612, 618
         }

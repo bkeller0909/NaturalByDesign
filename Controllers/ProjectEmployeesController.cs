@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using NBDv2.ViewModel;
 
 namespace NBDv2.Controllers
 {
+    [Authorize(Roles = "Admin, Designer, Design Manager, Worker, Work Manager")]
     public class ProjectEmployeesController : Controller
     {
         private readonly NBDContext _context;

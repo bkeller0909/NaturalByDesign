@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using NBDv2.Models;
 
 namespace NBDv2.Controllers
 {
+    [Authorize(Roles = "Admin, Designer")]
     public class BidsController : Controller
     {
         private readonly NBDContext _context;
@@ -57,7 +59,7 @@ namespace NBDv2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,BlueprintCode,EstStart,EstEnd,Amount,Location,ProjectID")] Bid bid)
+        public async Task<IActionResult> Create([Bind("ID,BidID,EstStart,EstEnd,Amount,Location,ProjectID")] Bid bid)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +93,7 @@ namespace NBDv2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,BlueprintCode,EstStart,EstEnd,Amount,Location,ProjectID")] Bid bid)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,BidID,EstStart,EstEnd,Amount,Location,ProjectID")] Bid bid)
         {
             if (id != bid.ID)
             {

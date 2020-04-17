@@ -10,8 +10,8 @@ using NBDv2.Data;
 namespace NBDv2.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200312192114_login")]
-    partial class login
+    [Migration("20200417225151_loginv2")]
+    partial class loginv2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

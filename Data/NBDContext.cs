@@ -48,6 +48,8 @@ namespace NBDv2.Data
 
         public DbSet<ProductionWorkReport> ProductionWorkReports { get; set; } // dbsets for production work report
 
+        public DbSet<Team> Teams { get; set; } // dbset for teams
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("MC");

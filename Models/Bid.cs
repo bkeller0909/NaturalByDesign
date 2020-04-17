@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
+// Created by Brandon
+
 namespace NBDv2.Models
 {
     public class Bid
@@ -15,11 +17,11 @@ namespace NBDv2.Models
 
         public int ID { get; set; }
 
-        [Display(Name = "Blueprint Code")]
-        [Required(ErrorMessage = "You must enter a blueprint Code")]
+        [Display(Name = "Bid")]
+        [Required(ErrorMessage = "You must enter a ID")]
         [RegularExpression("^[A-Z\\d]{12}$", ErrorMessage = "Please enter all Capital letters.")]
         [StringLength(12, ErrorMessage = "Blueprint Code must be 12 Characters long")]
-        public string BlueprintCode { get; set; }
+        public string BidID { get; set; }
 
         [Display(Name = "Estimated Start Date")]
         [DataType(DataType.Date)]
