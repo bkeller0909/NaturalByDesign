@@ -25,18 +25,24 @@ namespace NBDv2.Models
 
         public int ID { get; set; }
 
+        [Display(Name = "Avg. Net Price")]
         [DataType(DataType.Currency)]
         public double AvgNetPrice { get; set; }
 
+        [Display(Name = "List Price")]
         [DataType(DataType.Currency)]
         public double ListPrice { get; set; }
 
+        [Display(Name = "Size Value")]
         public int SizeValue { get; set; }
 
+        [Display(Name = "Size Unit")]
         public string SizeUnit { get; set; }
 
+        [Display(Name = "Quantity")]
         public int Quantity { get; set; }
 
+        [Display(Name = "Material ID")]
         public int MaterialID { get; set; }
 
         public virtual Material Material { get; set; }
