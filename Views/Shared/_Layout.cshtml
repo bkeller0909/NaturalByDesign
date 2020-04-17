@@ -48,6 +48,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Reports@**@
+                            </a>
+                            <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
+                                <a class="nav-link" asp-area="" asp-controller="BidReports" asp-action="Index">Bid Reports</a>
+                            </div>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="ProjectEmployee" asp-action="Index">Teams</a>
                         </li>
