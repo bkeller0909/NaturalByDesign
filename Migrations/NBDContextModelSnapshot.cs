@@ -132,6 +132,64 @@ namespace NBDv2.Migrations
                     b.ToTable("Clients");
                 });
 
+            modelBuilder.Entity("NBDv2.Models.DesignBudget", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CurrentHours");
+
+                    b.Property<int>("EstHours");
+
+                    b.Property<int>("HoursTotal");
+
+                    b.Property<int>("ProjectID");
+
+                    b.Property<DateTime>("SubmissionDate");
+
+                    b.Property<string>("Submitter")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("DesignBudget");
+                });
+
+            modelBuilder.Entity("NBDv2.Models.DesignDay", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Hours");
+
+                    b.Property<int>("ProjectID");
+
+                    b.Property<string>("Stage")
+                        .IsRequired()
+                        .HasMaxLength(1);
+
+                    b.Property<DateTime>("SubmissionDate");
+
+                    b.Property<string>("Submitter")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Task")
+                        .IsRequired()
+                        .HasMaxLength(250);
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("DesignDay");
+                });
+
             modelBuilder.Entity("NBDv2.Models.Employee", b =>
                 {
                     b.Property<int>("ID")
@@ -474,6 +532,22 @@ namespace NBDv2.Migrations
                         .WithMany("Clients")
                         .HasForeignKey("CityID")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("NBDv2.Models.DesignBudget", b =>
+                {
+                    b.HasOne("NBDv2.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("NBDv2.Models.DesignDay", b =>
+                {
+                    b.HasOne("NBDv2.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("NBDv2.Models.Employee", b =>
