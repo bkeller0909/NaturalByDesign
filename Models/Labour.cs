@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,15 +9,19 @@ namespace NBDv2.Models
 {
     public class Labour
     {
+
+        
+
         [Display(Name = "Ext. Cost")]
         [DataType(DataType.Currency)]
-        public double ExtPrice
+        public double? ExtPrice
         {
             get
             {
                 return Hours * Team.Employee.EmployeeType.HourlyPay;
             }
         }
+
         public int ID { get; set; }
 
         [Display(Name = "Estimated Start")]

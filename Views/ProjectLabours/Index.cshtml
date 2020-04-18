@@ -22,15 +22,13 @@
             <dd class="col-md-8">
                 @Html.DisplayFor(model => project.Desc)
             </dd>
-            <dt class="col-md-4">
-                First/Middle
-            </dt>
-            <dd class="col-md-8">
+           
+            <dt class="col-md-8">
                 @Html.DisplayFor(model => project.Designer.FullName)
-            </dd>
-            <dt class="col-md-4">
-                Age (@Html.DisplayNameFor(model => project.Designer.FullName))
             </dt>
+            <dd" class="col-md-4">
+                @Html.DisplayNameFor(model => project.Designer.FullName)
+            </dd">
         </dl>
     </div>
     <div class="col-md-6">
@@ -57,6 +55,19 @@
     </div>
 </div>
 
+<form asp-action="ProjectLabours">
+    <div class="form-group">
+        <label class="control-label">Select by Employee:</label>
+        <div class="form-row">
+            <div class="col-md-6">
+                @Html.DropDownList("TeamID", null, "All Employees", htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="col-md-6">
+                <button value="submit" class="btn btn-success btn-lg">Filter</button>
+            </div>
+        </div>
+    </div>
+</form>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -76,14 +87,13 @@
                 @Html.DisplayNameFor(model => model.EstHours)
             </th>
             <th>
-                <a asp-action="Add" asp-route-PatientID="@project.ID" class="btn btn-outline-success">
-                    <span class="btn btn-sm btn-outline-primary">Update;</span>
-                </a>
+                <a asp-action="Add" asp-route-ProjectID="@project.ID" class="btn btn-outline-success" >Update</a>
             </th>
         </tr>
     </thead>
     <tbody>
-        @Html.DropDownList("TeamID", null, "All Employees", htmlAttributes: new { @class = "form-control" });
+        
+        
         @foreach (var item in Model)
         {
             <tr>
@@ -100,12 +110,8 @@
                     @Html.DisplayFor(modelItem => item.EstHours)
                 </td>
                 <td>
-                    <a asp-action="Update" asp-route-PatientID="@project.ID" asp-route-LabourID="@item.ID" class="btn btn-outline-success">
-                        <span class="btn btn-sm btn-outline-primary">Update;</span>
-                    </a>
-                    <a asp-action="Remove" asp-route-PatientID="@project.ID" asp-route-LabourID="@item.ID" class="btn btn-outline-success">
-                        <span class="btn btn-sm btn-outline-primary">Remove;</span>
-                    </a>
+                    <a asp-action="Update" asp-route-ProjectID="@project.ID" asp-route-LabourID="@item.ID" class="btn btn-outline-success">Update</a>
+                    <a asp-action="Remove" asp-route-ProjectID="@project.ID" asp-route-LabourID="@item.ID" class="btn btn-outline-success">Remove</a>
                 </td>
             </tr>
         }

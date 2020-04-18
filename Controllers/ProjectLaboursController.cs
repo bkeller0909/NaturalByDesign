@@ -20,7 +20,7 @@ namespace NBDv2.Controllers
         }
 
         // GET: ProjectLabours
-        public async Task<IActionResult> Index(int? ProjectID)
+        public async Task<IActionResult> Index(int? ProjectID, int? teamID)
         {
             if(!ProjectID.HasValue)
             {
@@ -33,10 +33,10 @@ namespace NBDv2.Controllers
                           where l.Team.ProjectID == ProjectID
                           select l;
 
-            //if(teamID.HasValue)
-            //{
-            //    labours = labours.Where(l => l.Team.ID == teamID);
-            //}
+            if (teamID.HasValue)
+            {
+                labours = labours.Where(l => l.Team.ID == teamID);
+            }
 
             Project project = _context.Projects
                 .Include(p => p.Designer)
@@ -54,10 +54,13 @@ namespace NBDv2.Controllers
         {
             if(ProjectID == null)
             {
-
+                return RedirectToAction("Index", "ProjectLabours");
             }
+            
+            Labour a = new Labour();
+            PopulateDDl(ProjectID.Value);
 
-            return View();
+            return View(a);
         }
 
         // POST: ProjectLabours/Create
@@ -65,8 +68,9 @@ namespace NBDv2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add([Bind("ID,EstStartDate,StartDate,EstHours,Hours,TeamID,TaskID")] Labour labour)
+        public async Task<IActionResult> Add([Bind("ID,EstStartDate,EstHours,TeamID,TaskID")] Labour labour)
         {
+            
             if (ModelState.IsValid)
             {
                 _context.Add(labour);
@@ -74,18 +78,22 @@ namespace NBDv2.Controllers
                 return RedirectToAction(nameof(Index));
             }
             //PopulateDDl(labour);
+
             return View(labour);
         }
 
         // GET: ProjectLabours/Edit/5
-        public async Task<IActionResult> Update(int? ProjectID, int?LabourID)
+        public async Task<IActionResult> Update(int? ProjectID, int? LabourID)
         {
             if (ProjectID == null)
             {
                 return NotFound();
             }
 
-            var labour = await _context.Labours.Include(l => l.Task).FirstOrDefaultAsync(l => l.ID == LabourID);
+            var labour = await _context.Labours
+                .Include(l => l.Task)
+                .Include(l => l.Team).ThenInclude(t => t.Employee).ThenInclude(e => e.EmployeeType)
+                .FirstOrDefaultAsync(l => l.ID == LabourID);
             if (labour == null)
             {
                 return NotFound();
@@ -99,7 +107,7 @@ namespace NBDv2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int id, [Bind("ID,EstStartDate,StartDate,EstHours,Hours,TeamID,TaskID")] Labour labour)
+        public async Task<IActionResult> Update(int id, [Bind("ID,EstStartDate,EstHours,TeamID,TaskID")] Labour labour)
         {
             if (id != labour.ID)
             {
