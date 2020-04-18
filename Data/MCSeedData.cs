@@ -276,6 +276,74 @@ namespace NBDv2.Data
                             ClientID = context.Clients.FirstOrDefault(c => c.Name == "Fake Inc" && c.Province == "Ontario").ID,
                             DesignerID = context.Employees.FirstOrDefault(d => d.FirstName == "Cheryl" && d.LastName == "Poy").ID
 
+                        },
+                        new Project
+                        {
+                            Name = "Astor",
+                            Desc = "",
+                            EstCost = 10.00,
+                            BidDate = new DateTime(2019, 10, 10),
+                            EstStartDate = new DateTime(2019, 10, 10),
+                            EstFinishDate = new DateTime(2019, 10, 10),
+                            StartDate = new DateTime(2019, 10, 10),
+                            FinishDate = new DateTime(2019, 10, 10),
+                            Cost = 10.00,
+                            BidCustApproved = false,
+                            BidManagementApproved = true,
+                            ClientID = context.Clients.FirstOrDefault(c => c.Name == "Fake Inc" && c.Province == "Ontario").ID,
+                            DesignerID = context.Employees.FirstOrDefault(d => d.FirstName == "Cheryl" && d.LastName == "Poy").ID
+
+                        },
+                        new Project
+                        {
+                            Name = "Fremont",
+                            Desc = "",
+                            EstCost = 10.00,
+                            BidDate = new DateTime(2019, 10, 10),
+                            EstStartDate = new DateTime(2019, 10, 10),
+                            EstFinishDate = new DateTime(2019, 10, 10),
+                            StartDate = new DateTime(2019, 10, 10),
+                            FinishDate = new DateTime(2019, 10, 10),
+                            Cost = 10.00,
+                            BidCustApproved = false,
+                            BidManagementApproved = true,
+                            ClientID = context.Clients.FirstOrDefault(c => c.Name == "Fake Inc" && c.Province == "Ontario").ID,
+                            DesignerID = context.Employees.FirstOrDefault(d => d.FirstName == "Cheryl" && d.LastName == "Poy").ID
+
+                        },
+                        new Project
+                        {
+                            Name = "SJSU",
+                            Desc = "",
+                            EstCost = 10.00,
+                            BidDate = new DateTime(2019, 10, 10),
+                            EstStartDate = new DateTime(2019, 10, 10),
+                            EstFinishDate = new DateTime(2019, 10, 10),
+                            StartDate = new DateTime(2019, 10, 10),
+                            FinishDate = new DateTime(2019, 10, 10),
+                            Cost = 10.00,
+                            BidCustApproved = false,
+                            BidManagementApproved = true,
+                            ClientID = context.Clients.FirstOrDefault(c => c.Name == "Fake Inc" && c.Province == "Ontario").ID,
+                            DesignerID = context.Employees.FirstOrDefault(d => d.FirstName == "Cheryl" && d.LastName == "Poy").ID
+
+                        },
+                        new Project
+                        {
+                            Name = "IBM",
+                            Desc = "",
+                            EstCost = 10.00,
+                            BidDate = new DateTime(2019, 10, 10),
+                            EstStartDate = new DateTime(2019, 10, 10),
+                            EstFinishDate = new DateTime(2019, 10, 10),
+                            StartDate = new DateTime(2019, 10, 10),
+                            FinishDate = new DateTime(2019, 10, 10),
+                            Cost = 10.00,
+                            BidCustApproved = false,
+                            BidManagementApproved = true,
+                            ClientID = context.Clients.FirstOrDefault(c => c.Name == "Fake Inc" && c.Province == "Ontario").ID,
+                            DesignerID = context.Employees.FirstOrDefault(d => d.FirstName == "Cheryl" && d.LastName == "Poy").ID
+
                         });
                     context.SaveChanges();
                 }
@@ -622,43 +690,43 @@ namespace NBDv2.Data
                     context.SaveChanges();
                 }
 
-                //if (!context.BidReport.Any())
-                //{
-                //    context.BidReport.AddRange(
-                //        new BidReport
-                //        {
-                //            ProjectID = context.Projects.FirstOrDefault(p => p.Name == "Astor").ID,
-                //            EstBid = 13000,
-                //            ActlHours = 6,
-                //            EstHours = 20,
-                //            ActlCosts = 240,
-                //            EstCost = 800,
-                //            HoursRemaining = 14,
-                //            CostsRemaining = 660 
-                //        },
-                //    new BidReport
-                //    {
-                //        ProjectID = context.Projects.FirstOrDefault(p => p.Name == "Fremont").ID,
-                //        EstBid = 16250,
-                //        ActlHours = 9,
-                //        EstHours = 25,
-                //        ActlCosts = 360,
-                //        EstCost = 1000,
-                //        HoursRemaining = 16,
-                //        CostsRemaining = 640
-                //    },
-                //    new BidReport
-                //    {
-                //        ProjectID = context.Projects.FirstOrDefault(p => p.Name == "SJSU").ID,
-                //        EstBid = 5000,
-                //        ActlHours = 9,
-                //        EstHours = 8,
-                //        ActlCosts = 360,
-                //        EstCost = 320,
-                //        HoursRemaining = 1,
-                //        CostsRemaining = 40
-                //    });
-                //}
+                if (!context.BidReport.Any())
+                {
+                    context.BidReport.AddRange(
+                        new BidReport
+                        {
+                            ProjectID = context.Projects.FirstOrDefault(p => p.Name == "Astor").ID,
+                            EstBid = 13000,
+                            ActlHours = 6,
+                            EstHours = 20,
+                            ActlCosts = 240,
+                            EstCost = 800,
+                            HoursRemaining = 14,
+                            CostsRemaining = 660 
+                        },
+                    new BidReport
+                    {
+                        ProjectID = context.Projects.FirstOrDefault(p => p.Name == "Fremont").ID,
+                        EstBid = 16250,
+                        ActlHours = 9,
+                        EstHours = 25,
+                        ActlCosts = 360,
+                        EstCost = 1000,
+                        HoursRemaining = 16,
+                        CostsRemaining = 640
+                    },
+                    new BidReport
+                    {
+                        ProjectID = context.Projects.FirstOrDefault(p => p.Name == "SJSU").ID,
+                        EstBid = 5000,
+                        ActlHours = 9,
+                        EstHours = 8,
+                        ActlCosts = 360,
+                        EstCost = 320,
+                        HoursRemaining = 1,
+                        CostsRemaining = 40
+                    });
+                }
 
                 if (!context.ProductionReports.Any())
                 {
@@ -676,6 +744,7 @@ namespace NBDv2.Data
                             ActualDesignCost = 880,
                             EstDesignCost = 880
                         },
+                        
                     new ProductionReport
                     {
                         ProjectID = context.Projects.FirstOrDefault(p => p.Name == "IBM").ID,
@@ -688,7 +757,8 @@ namespace NBDv2.Data
                         EstLabourProdCost = 1440,
                         ActualDesignCost = 920,
                         EstDesignCost = 1000
-                    });
+                    }
+                    );
                 }
             }
         }
