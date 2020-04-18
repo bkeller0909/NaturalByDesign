@@ -54,6 +54,8 @@
                                 Reports@**@
                             </a>
                             <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
+                                <a class="nav-link" asp-area="" asp-controller="DesignBudgets" asp-action="Index">Design Budget Reports</a>
+                                <a class="nav-link" asp-area="" asp-controller="DesignDays" asp-action="Index">Design Daily Reports</a>
                                 <a class="nav-link" asp-area="" asp-controller="BidReports" asp-action="Index">Bid Stage Reports</a>
                                 <a class="nav-link" asp-area="" asp-controller="ProductionReports" asp-action="Index">Production Stage Reports</a>
                             </div>
@@ -64,6 +66,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Inventories" asp-action="Index">Inventory</a>
                         </li>
+                        @*admin authentication - Brandon*@
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">

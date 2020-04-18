@@ -22,13 +22,13 @@ namespace NBDv2.Models
         [Required(ErrorMessage = "You must enter a Time")]
         public int HoursTotal { get; set; }
 
-        [Display(Name = "SubmissionDate")]
+        [Display(Name = "Submission Date")]
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "You must enter a submission date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime SubmissionDate { get; set; }
 
-        [Display(Name = "Name")]
+        [Display(Name = "Submitter's Name")]
         [Required(ErrorMessage = "You cannot leave the name blank.")]
         [StringLength(50, ErrorMessage = "Last name cannot be more than 50 characters long.")]
         public string Submitter { get; set; }

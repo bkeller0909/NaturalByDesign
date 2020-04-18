@@ -4,16 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-// Created by Brandon
-
 namespace NBDv2.Models
 {
     public class ProductionWorkReport
     {
         public ProductionWorkReport()
         {
-            //Items = new HashSet<Item>();
-            //LabourUnits = new HashSet<LabourUnit>();
+
         }
 
         public int ID { get; set; }
@@ -28,10 +25,6 @@ namespace NBDv2.Models
         [Required(ErrorMessage = "You must enter a submission date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime SubmissionDate { get; set; }
-
-        //public ICollection<Item> Items { get; set; }
-
-        //public ICollection<LabourUnit> LabourUnits { get; set; }
 
         public int ProjectID { get; set; }
 

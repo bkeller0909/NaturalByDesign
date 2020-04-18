@@ -9,6 +9,7 @@ using NBDv2.Models;
 
 namespace NBDv2.Controllers
 {
+    // anyone can view the home page.
     [AllowAnonymous]
     public class HomeController : Controller
     {

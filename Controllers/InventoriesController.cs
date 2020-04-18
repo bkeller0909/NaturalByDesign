@@ -10,6 +10,7 @@ using NBDv2.Models;
 
 namespace NBDv2.Controllers
 {
+
     public class InventoriesController : Controller
     {
         private readonly NBDContext _context;

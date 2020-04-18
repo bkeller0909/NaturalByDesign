@@ -11,6 +11,8 @@ using NBDv2.Models;
 
 namespace NBDv2.Controllers
 {
+
+    // anyone can view the clients
     [AllowAnonymous]
     public class ClientsController : Controller
     {

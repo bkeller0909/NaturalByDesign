@@ -100,5 +100,9 @@ namespace NBDv2.Data
             modelBuilder.Entity<LabourSummary>()
                 .HasKey(t => new { t.ProjectID, t.EmployeeTypeID });
         }
+
+        public DbSet<NBDv2.Models.DesignBudget> DesignBudget { get; set; }
+
+        public DbSet<NBDv2.Models.DesignDay> DesignDay { get; set; }
     }
 }
