@@ -14,43 +14,43 @@ namespace NBDv2.Models
 
         [Display(Name = "Estimated Bid")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int EstBid { get; set; }
 
         [Display(Name = "Actual Design Hours")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int ActlHours { get; set; }
 
         [Display(Name = "Estimated Design Hours")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int EstHours { get; set; }
 
         [Display(Name = "Actual Design Cost")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int ActlCosts { get; set; }
 
         [Display(Name = "Estimated Design Cost")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int EstCost { get; set; }
 
         [Display(Name = "Hours Remaining")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int HoursRemaining { get; set; }
 
         [Display(Name = "Remaining Costs")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int CostsRemaining { get; set; }
 

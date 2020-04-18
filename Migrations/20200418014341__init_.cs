@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NBDv2.Migrations
 {
-    public partial class init : Migration
+    public partial class _init_ : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -103,29 +103,6 @@ namespace NBDv2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employees",
-                schema: "MC",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FirstName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: false),
-                    EmployeeTypeID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Employees", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Employees_EmployeeTypes_EmployeeTypeID",
-                        column: x => x.EmployeeTypeID,
-                        principalSchema: "MC",
-                        principalTable: "EmployeeTypes",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Inventories",
                 schema: "MC",
                 columns: table => new
@@ -149,6 +126,19 @@ namespace NBDv2.Migrations
                         principalTable: "Materials",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "InvBids",
+                schema: "MC",
+                columns: table => new
+                {
+                    BidID = table.Column<int>(nullable: false),
+                    ItemID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InvBids", x => new { x.BidID, x.ItemID });
                 });
 
             migrationBuilder.CreateTable(
@@ -181,13 +171,6 @@ namespace NBDv2.Migrations
                         column: x => x.ClientID,
                         principalSchema: "MC",
                         principalTable: "Clients",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Projects_Employees_DesignerID",
-                        column: x => x.DesignerID,
-                        principalSchema: "MC",
-                        principalTable: "Employees",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -227,7 +210,7 @@ namespace NBDv2.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BlueprintCode = table.Column<string>(maxLength: 12, nullable: false),
+                    BidID = table.Column<string>(maxLength: 12, nullable: false),
                     EstStart = table.Column<DateTime>(nullable: false),
                     EstEnd = table.Column<DateTime>(nullable: false),
                     Amount = table.Column<double>(nullable: false),
@@ -328,35 +311,6 @@ namespace NBDv2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProjectEmployees",
-                schema: "MC",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ProjectID = table.Column<int>(nullable: false),
-                    EmployeeID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProjectEmployees", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_ProjectEmployees_Employees_EmployeeID",
-                        column: x => x.EmployeeID,
-                        principalSchema: "MC",
-                        principalTable: "Employees",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProjectEmployees_Projects_ProjectID",
-                        column: x => x.ProjectID,
-                        principalSchema: "MC",
-                        principalTable: "Projects",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ProjectMaterials",
                 schema: "MC",
                 columns: table => new
@@ -388,21 +342,85 @@ namespace NBDv2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "InvBids",
+                name: "Teams",
                 schema: "MC",
                 columns: table => new
                 {
-                    BidID = table.Column<int>(nullable: false),
-                    ItemID = table.Column<int>(nullable: false)
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 100, nullable: false),
+                    DepartmentDescription = table.Column<string>(maxLength: 250, nullable: false),
+                    ProductionID = table.Column<int>(nullable: false),
+                    ProjectsID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InvBids", x => new { x.BidID, x.ItemID });
+                    table.PrimaryKey("PK_Teams", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_InvBids_Bids_BidID",
-                        column: x => x.BidID,
+                        name: "FK_Teams_Projects_ProjectsID",
+                        column: x => x.ProjectsID,
                         principalSchema: "MC",
-                        principalTable: "Bids",
+                        principalTable: "Projects",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Employees",
+                schema: "MC",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    EmployeeTypeID = table.Column<int>(nullable: false),
+                    TeamID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employees", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Employees_EmployeeTypes_EmployeeTypeID",
+                        column: x => x.EmployeeTypeID,
+                        principalSchema: "MC",
+                        principalTable: "EmployeeTypes",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Employees_Teams_TeamID",
+                        column: x => x.TeamID,
+                        principalSchema: "MC",
+                        principalTable: "Teams",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectEmployees",
+                schema: "MC",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ProjectID = table.Column<int>(nullable: false),
+                    EmployeeID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectEmployees", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_ProjectEmployees_Employees_EmployeeID",
+                        column: x => x.EmployeeID,
+                        principalSchema: "MC",
+                        principalTable: "Employees",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProjectEmployees_Projects_ProjectID",
+                        column: x => x.ProjectID,
+                        principalSchema: "MC",
+                        principalTable: "Projects",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -463,6 +481,12 @@ namespace NBDv2.Migrations
                 schema: "MC",
                 table: "Employees",
                 column: "EmployeeTypeID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_TeamID",
+                schema: "MC",
+                table: "Employees",
+                column: "TeamID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Inventories_MaterialID",
@@ -529,10 +553,41 @@ namespace NBDv2.Migrations
                 schema: "MC",
                 table: "Projects",
                 column: "DesignerID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teams_ProjectsID",
+                schema: "MC",
+                table: "Teams",
+                column: "ProjectsID");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_InvBids_Bids_BidID",
+                schema: "MC",
+                table: "InvBids",
+                column: "BidID",
+                principalSchema: "MC",
+                principalTable: "Bids",
+                principalColumn: "ID",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Projects_Employees_DesignerID",
+                schema: "MC",
+                table: "Projects",
+                column: "DesignerID",
+                principalSchema: "MC",
+                principalTable: "Employees",
+                principalColumn: "ID",
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Teams_Projects_ProjectsID",
+                schema: "MC",
+                table: "Teams");
+
             migrationBuilder.DropTable(
                 name: "BidReport",
                 schema: "MC");
@@ -578,11 +633,11 @@ namespace NBDv2.Migrations
                 schema: "MC");
 
             migrationBuilder.DropTable(
-                name: "Projects",
+                name: "Materials",
                 schema: "MC");
 
             migrationBuilder.DropTable(
-                name: "Materials",
+                name: "Projects",
                 schema: "MC");
 
             migrationBuilder.DropTable(
@@ -599,6 +654,10 @@ namespace NBDv2.Migrations
 
             migrationBuilder.DropTable(
                 name: "EmployeeTypes",
+                schema: "MC");
+
+            migrationBuilder.DropTable(
+                name: "Teams",
                 schema: "MC");
         }
     }

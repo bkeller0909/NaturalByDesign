@@ -18,7 +18,7 @@ namespace NBDv2.Models
         public int ID { get; set; }
 
         [Display(Name = "Bid")]
-        [Required(ErrorMessage = "You must enter a ID")]
+        [Required(ErrorMessage = "You must enter an ID")]
         [RegularExpression("^[A-Z\\d]{12}$", ErrorMessage = "Please enter all Capital letters.")]
         [StringLength(12, ErrorMessage = "Blueprint Code must be 12 Characters long")]
         public string BidID { get; set; }
@@ -31,18 +31,18 @@ namespace NBDv2.Models
 
         [Display(Name = "Estimated End Date")]
         [DataType(DataType.Date)]
-        [Required(ErrorMessage = "You must enter a end Date")]
+        [Required(ErrorMessage = "You must enter an end Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EstEnd { get; set; }
 
         [Display(Name = "Total Estimated Cost")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public double Amount { get; set; }
 
         [Display(Name = "Location")]
-        [RegularExpression("^[A-Za-z\\s\\d]+$", ErrorMessage = "Please enter valid amount.")]
+        [RegularExpression("^[A-Za-z\\s\\d]+$", ErrorMessage = "Please enter a valid amount.")]
         public string Location { get; set; }
 
         public ICollection<InventoryBid> InvBids { get; set; }
