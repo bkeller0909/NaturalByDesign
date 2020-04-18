@@ -110,18 +110,7 @@ namespace NBDv2.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
             }
-            catch (DbUpdateException dex)
-            {
-                if (dex.InnerException.Message.Contains("IX_Patients_OHIP"))
-                {
-                    ModelState.AddModelError("OHIP", "Unable to save changes. Remember, you cannot have duplicate OHIP numbers.");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-                }
-            }
-            catch (Exception e)
+            catch (Exception)
             {
                 ModelState.AddModelError("", "Unknown error!");
             }
@@ -366,6 +355,7 @@ namespace NBDv2.Controllers
                 {
                     ID = pot.ID,
                     DisplayText = pot.Material.Desc,
+                    Quantity = Qty,
                     Assigned = pInventory.Contains(pot.ID)
                 });
             }
@@ -382,6 +372,7 @@ namespace NBDv2.Controllers
                 {
                     ID = mat.ID,
                     DisplayText = mat.Material.Desc,
+                    Quantity = Qty,
                     Assigned = pInventory.Contains(mat.ID)
                 });
             }
