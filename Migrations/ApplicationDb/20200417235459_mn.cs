@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace NBDv2.Migrations
+namespace NBDv2.Migrations.ApplicationDb
 {
-    public partial class chungus : Migration
+    public partial class mn : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

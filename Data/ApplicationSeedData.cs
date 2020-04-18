@@ -88,6 +88,36 @@ namespace NBDv2.Data
                     userManager.AddToRoleAsync(user, "Worker").Wait();
                 }
             }
+            if (userManager.FindByEmailAsync("workmanager1@outlook.com").Result == null)
+            {
+                IdentityUser user = new IdentityUser
+                {
+                    UserName = "workmanager1@outlook.com",
+                    Email = "workmanager1@outlook.com"
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "password").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "Work Manager").Wait();
+                }
+            }
+            if (userManager.FindByEmailAsync("designmanager1@outlook.com").Result == null)
+            {
+                IdentityUser user = new IdentityUser
+                {
+                    UserName = "designmanager1@outlook.com",
+                    Email = "designmanager1@outlook.com"
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "password").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "Design Manager").Wait();
+                }
+            }
             if (userManager.FindByEmailAsync("user1@outlook.com").Result == null)
             {
                 IdentityUser user = new IdentityUser
