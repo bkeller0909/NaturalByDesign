@@ -81,6 +81,7 @@ namespace NBDv2.Data
             // model builder for inventory bid
             modelBuilder.Entity<InventoryBid>()
                 .HasKey(b => new { b.BidID, b.ItemID });
+                
 
             modelBuilder.Entity<ProjectEmployee>()
                 .HasMany<Labour>(c => c.Labours)

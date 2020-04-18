@@ -1,0 +1,113 @@
+﻿@model IEnumerable<NBDv2.Models.Labour>
+
+@{
+    ViewData["Title"] = "Index";
+    NBDv2.Models.Project project = (NBDv2.Models.Project)ViewBag.Projects;
+}
+
+<h1>Index</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-md-4">
+                @Html.DisplayNameFor(model => project.Name)
+            </dt>
+            <dd class="col-md-8">
+                @Html.DisplayFor(model => project.Name)
+            </dd>
+            <dt class="col-md-4">
+                @Html.DisplayNameFor(model => project.Desc)
+            </dt>
+            <dd class="col-md-8">
+                @Html.DisplayFor(model => project.Desc)
+            </dd>
+            <dt class="col-md-4">
+                First/Middle
+            </dt>
+            <dd class="col-md-8">
+                @Html.DisplayFor(model => project.Designer.FullName)
+            </dd>
+            <dt class="col-md-4">
+                Age (@Html.DisplayNameFor(model => project.Designer.FullName))
+            </dt>
+        </dl>
+    </div>
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-md-3">
+                @Html.DisplayNameFor(model => project.Client.Name)
+            </dt>
+            <dd class="col-md-9">
+                @Html.DisplayFor(model => project.Client.Name)
+            </dd>
+            <dt class="col-md-3">
+                @Html.DisplayNameFor(model => project.Client.Name)
+            </dt>
+            <dd class="col-md-9">
+                @Html.DisplayFor(model => project.Client.Name)
+            </dd>
+            <dt class="col-md-3">
+                @Html.DisplayNameFor(model => project.Client.Name)
+            </dt>
+            <dd class="col-md-9">
+                @Html.DisplayFor(model => project.Client.Name)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Task)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team.Employee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstHours)
+            </th>
+            <th>
+                <a asp-action="Add" asp-route-PatientID="@project.ID" class="btn btn-outline-success">
+                    <span class="btn btn-sm btn-outline-primary">Update;</span>
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @Html.DropDownList("TeamID", null, "All Employees", htmlAttributes: new { @class = "form-control" });
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Task.Desc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Team.Employee.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstHours)
+                </td>
+                <td>
+                    <a asp-action="Update" asp-route-PatientID="@project.ID" asp-route-LabourID="@item.ID" class="btn btn-outline-success">
+                        <span class="btn btn-sm btn-outline-primary">Update;</span>
+                    </a>
+                    <a asp-action="Remove" asp-route-PatientID="@project.ID" asp-route-LabourID="@item.ID" class="btn btn-outline-success">
+                        <span class="btn btn-sm btn-outline-primary">Remove;</span>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

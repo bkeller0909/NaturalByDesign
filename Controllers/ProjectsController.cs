@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
@@ -50,26 +51,19 @@ namespace NBDv2.Controllers
             return View(project);
         }
 
-        public async Task<IActionResult> DailyReport(int? id, DateTime? date)
+        public async Task<IActionResult> DailyReport(int? id, DateTime? FilterDate)
         {
+            DateTime date = new DateTime();
             if (id == null)
             {
                 return NotFound();
             }
+            date = PopulateDateDDL(id, FilterDate);
+            if (FilterDate != null)
+            {
+                date = FilterDate.Value;
+            }
 
-
-            var mat = from s in _context.ProjectMaterials.Include(p => p.Inventory).ThenInclude(i => i.Material)
-                        where s.ProjectID == id && s.MatInstall == date
-                        select s;
-
-            var lab = from s in _context.Labours
-                    .Include(l => l.Team).ThenInclude(t => t.Employees)
-                    .Include(l => l.Task)
-                        where s.Team.ProjectID == id && s.StartDate == date
-                        select s;
-
-            ViewData["Date"] = date;
-            
 
             var project = await _context.Projects.FirstOrDefaultAsync(m => m.ID == id);
 
@@ -77,8 +71,24 @@ namespace NBDv2.Controllers
             {
                 return NotFound();
             }
-            PopulateDateDDL(id);
-            return View(project);
+
+            var Materials = from s in _context.ProjectMaterials.Include(p => p.Inventory).ThenInclude(i => i.Material)
+                            where s.ProjectID == id && s.MatInstall == date.Date
+                            select s;
+
+            var Labours = from s in _context.Labours
+                     .Include(l => l.Team).ThenInclude(t => t.Employee)
+                     .Include(l => l.Task)
+                          where s.Team.ProjectID == id && s.StartDate == date.Date
+                          select s;
+
+            var model = new ProdReportVM();
+
+            model.Materials = await Materials.ToListAsync();
+
+            model.Labour = await Labours.ToListAsync();
+
+            return View(model);
         }
 
 
@@ -295,48 +305,43 @@ namespace NBDv2.Controllers
             }
         }
 
-        public PartialViewResult ProdReportMaterials(Project project, DateTime? filterDate)
+        public PartialViewResult ProdReportMaterials(IQueryable<ProjectMaterials> materials)
         {
-            var query = from s in _context.ProjectMaterials.Include(p => p.Inventory).ThenInclude(i => i.Material)
-
-                        select s;
-            if (filterDate != null)
-            {
-                query = from s in _context.ProjectMaterials.Include(p => p.Inventory).ThenInclude(i => i.Material)
-                            where s.ProjectID == project.ID && s.MatInstall == filterDate
-                            select s;
-            }
-            
-                
-            
-            
-            return PartialView("_ListOfMaterials", query.ToList());
+            return PartialView("_ListOfMaterials", materials.ToList());
         }
 
         public PartialViewResult ProdReportLabours(int id, DateTime filterDate)
         {
             var query = from s in _context.Labours
-                    .Include(l => l.Team).ThenInclude(t => t.Employees)
+                    .Include(l => l.Team).ThenInclude(t => t.Employee)
                     .Include(l => l.Task)
-                    where s.Team.ProjectID == id && s.StartDate == filterDate
-                    select s;
+                        where s.Team.ProjectID == id && s.StartDate == filterDate
+                        select s;
 
             return PartialView("_LabourList", query.ToList());
         }
 
-        private void PopulateDateDDL(int? id)
+        private DateTime PopulateDateDDL(int? id, DateTime? FilterDate)
         {
-           var a = from s in _context.Projects
-                              .Include(p => p.ProjectEmployees).ThenInclude(p => p.Labours)
-                              where s.ID == id
-                              select s.StartDate;
+            var a = from s in _context.ProjectEmployees
+                    where s.ProjectID == id
+                    select s.Labours;
+            
+
             Project project = _context.Projects.Include(p => p.ProjectEmployees).ThenInclude(pe => pe.Labours).FirstOrDefault(p => p.ID == id);
-            HashSet <DateTime> dates = new HashSet<DateTime>(project.ProjectMaterials.Select(pm => pm.MatInstall.Date));
-            foreach(DateTime d in a)
+            HashSet<DateTime> dates = new HashSet<DateTime>();
+            foreach (ICollection<Labour> l in a)
             {
-                dates.Add(d.Date);
+                foreach(Labour d in l)
+                {
+                    dates.Add(d.StartDate.Date);
+                }
             }
-            ViewData["Dates"] = new SelectList(dates.OrderBy(d => d.Date), dates.FirstOrDefault());
+            
+
+            ViewData["FilterDate"] = new SelectList(dates.OrderBy(d => d.Date), FilterDate ?? dates.FirstOrDefault());
+
+            return dates.FirstOrDefault();
         }
 
 
