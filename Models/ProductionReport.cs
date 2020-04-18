@@ -14,55 +14,55 @@ namespace NBDv2.Models
 
         [Display(Name = "Bid Cost")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int BidCost { get; set; }
 
         [Display(Name = "Estimated Production Plan Cost")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int EstCost { get; set; }
 
         [Display(Name = "Estimated Cost to Date")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int TotalCost { get; set; }
 
         [Display(Name = "Actual Mtl Cost")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int ActualMtlCost { get; set; }
 
         [Display(Name = "Estimated Mtl Cost")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int EstMtlCost { get; set; }
 
         [Display(Name = "Actual Labour Production Cost")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int ActualLabourProdCost { get; set; }
 
         [Display(Name = "Estimated Labour Production Cost")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int EstLabourProdCost { get; set; }
 
         [Display(Name = "Actual Design Cost")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int ActualDesignCost { get; set; }
 
         [Display(Name = "Estimated Design Cost")]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a amount")]
+        [Required(ErrorMessage = "You must enter an amount")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public int EstDesignCost { get; set; }
 
