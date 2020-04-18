@@ -10,8 +10,8 @@ using NBDv2.Data;
 namespace NBDv2.Migrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20200417235431_headache")]
-    partial class headache
+    [Migration("20200418014341__init_")]
+    partial class _init_
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -148,15 +148,11 @@ namespace NBDv2.Migrations
                     b.Property<string>("LastName")
                         .IsRequired();
 
-                    b.Property<int?>("ProjectEmployeeID");
-
                     b.Property<int?>("TeamID");
 
                     b.HasKey("ID");
 
                     b.HasIndex("EmployeeTypeID");
-
-                    b.HasIndex("ProjectEmployeeID");
 
                     b.HasIndex("TeamID");
 
@@ -489,10 +485,6 @@ namespace NBDv2.Migrations
                         .HasForeignKey("EmployeeTypeID")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("NBDv2.Models.ProjectEmployee")
-                        .WithMany("Employees")
-                        .HasForeignKey("ProjectEmployeeID");
-
                     b.HasOne("NBDv2.Models.Team")
                         .WithMany("Employees")
                         .HasForeignKey("TeamID");
@@ -572,7 +564,7 @@ namespace NBDv2.Migrations
             modelBuilder.Entity("NBDv2.Models.ProjectEmployee", b =>
                 {
                     b.HasOne("NBDv2.Models.Employee", "Employee")
-                        .WithMany()
+                        .WithMany("ProjectEmployees")
                         .HasForeignKey("EmployeeID")
                         .OnDelete(DeleteBehavior.Cascade);
 
